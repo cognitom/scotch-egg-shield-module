@@ -1,0 +1,30 @@
+# ZMK を動かすコンテナ。scripts/build.sh・test.sh は、ここの zmk サービスの
+# `west` を呼ぶ前提で書いてある (ホストで打った `west` がこのコンテナへ届くようにしておく)。
+#
+#   docker compose -f compose.agent.yaml up -d --wait
+#
+# 起動すると scripts/container/entrypoint.sh が .zmk/ に west の作業場所を作り、zmk と
+# zephyr などを取ってくる。初回は数分かかる。config/west.yml を変えたら起動し直す。
+
+services:
+  zmk:
+    # ZMK v0.3.0 は Zephyr 3.5 系。config/west.yml の zmk の revision と合わせて上げる
+    image: zmkfirmware/zmk-dev-arm:3.5
+    volumes:
+      # スクリプトはコンテナ側のこのパスで west へ渡す
+      - .:/scotch-egg
+    # west は作業場所 (.west/ のある .zmk/) の中で打たないと見つからない
+    working_dir: /scotch-egg/.zmk
+    environment:
+      # `west test` (ZMK の run-test.sh) にこのリポジトリをモジュールとして読ませる
+      ZMK_EXTRA_MODULES: /scotch-egg
+    labels:
+      polar.commands: "west"
+    command: bash /scotch-egg/scripts/container/entrypoint.sh
+    healthcheck:
+      # west update を終えたところで entrypoint.sh が置く
+      test: ["CMD", "test", "-f", "/scotch-egg/.zmk/.ready"]
+      interval: 5s
+      timeout: 3s
+      retries: 3
+      start_period: 30m

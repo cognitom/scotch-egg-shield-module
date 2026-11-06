@@ -1,3 +1,8 @@
 .DS_Store
 .vscode
 /kicad
+# west の取得物 (zmk, zephyr, modules など) とビルドの作業場所。compose.agent.yaml の
+# zmk サービスが作る
+/.zmk/
+# scripts/build.sh が出すファームウェア
+/output/

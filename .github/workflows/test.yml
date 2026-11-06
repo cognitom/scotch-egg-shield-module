@@ -1,0 +1,34 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Unit tests & build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      # 手元やエージェントと同じく、west は compose.agent.yaml のコンテナの中で動かし、
+      # scripts/bin/west でそこへ振り向ける。west update は起動時に済ませる
+      - name: Start ZMK container
+        run: docker compose -f compose.agent.yaml up -d --wait
+      - name: Show container logs
+        if: ${{ !cancelled() }}
+        run: docker compose -f compose.agent.yaml logs
+      - name: Put west on PATH
+        run: echo "$GITHUB_WORKSPACE/scripts/bin" >> "$GITHUB_PATH"
+      - name: Run tests
+        # run-test.sh は既定でビルドの出力を捨てる。CI では落ちた理由が見えるよう出す
+        env:
+          ZMK_TESTS_VERBOSE: "1"
+        run: bash scripts/test.sh
+      # Build ワークフローとは別に、手元と同じ scripts/build.sh が通ることも見ておく
+      - name: Run build
+        run: bash scripts/build.sh

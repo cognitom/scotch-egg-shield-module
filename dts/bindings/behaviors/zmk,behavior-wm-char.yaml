@@ -1,0 +1,5 @@
+description: windmill の文字キー。押した瞬間に押し離しを送り切る
+
+compatible: "zmk,behavior-wm-char"
+
+include: one_param.yaml

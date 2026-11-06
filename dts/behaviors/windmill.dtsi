@@ -1,0 +1,15 @@
+/*
+ * windmill の behavior の定義。キーマップから
+ * `#include <behaviors/windmill.dtsi>` で読み込む
+ */
+
+/ {
+    behaviors {
+        /* 参照しないキーマップでは Kconfig ごと無効にしたいので、未参照なら消す */
+        /omit-if-no-ref/ wm_char: wm_char {
+            compatible = "zmk,behavior-wm-char";
+            #binding-cells = <1>;
+            display-name = "Windmill Char";
+        };
+    };
+};
