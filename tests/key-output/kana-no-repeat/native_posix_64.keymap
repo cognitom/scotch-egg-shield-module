@@ -1,0 +1,13 @@
+#include "../../windmill.dtsi"
+
+/* 1キー1出力。押した瞬間に押し離しを送り切り、押し続けてもそれ以上は出ない
+ * (windmill の KeyOutput.kana_key_does_not_repeat)。重ねて押しても、それぞれ押した
+ * 時点で出る。離しても何も出ない */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(0,1,600)   /* ぬ。リピートが始まる程度に押し続ける */
+        ZMK_MOCK_PRESS(2,4,50)    /* は */
+        ZMK_MOCK_RELEASE(0,1,50)
+        ZMK_MOCK_RELEASE(2,4,50)
+    >;
+};

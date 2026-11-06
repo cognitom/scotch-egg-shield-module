@@ -1,0 +1,14 @@
+#include "../../windmill.dtsi"
+
+/* Shift 面のキーが Shift の要らないもの (「む」= JIS の ] のキー、NON_US_HASH) なら、
+ * 押されている Shift を隠して送り、戻す (ShiftPair.unshifted_pair_drops_and_restores_shift)。
+ * 戻したことがホストへ届く (show の後のレポートに右Shift が乗っている) こと。
+ * 送り終えた後に み を離せば、右Shift はきちんと外れる */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,6,150)
+        ZMK_MOCK_PRESS(1,4,120)  /* す の位置。Shift 面では む */
+        ZMK_MOCK_RELEASE(1,4,120)
+        ZMK_MOCK_RELEASE(3,6,120)
+    >;
+};

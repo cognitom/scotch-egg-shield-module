@@ -1,0 +1,30 @@
+#include "../../windmill.dtsi"
+
+/* 文字を送っている途中で押された素のキー (&kp) は、文字を追い越さない。
+ * windmill はその場で送り切るので追い越しは起きない。ここでは送出待ちの間に
+ * 外から来たキーのイベントを捕まえ (wm_output hold_back)、文字を送り終えてから
+ * 押された順に流す (wm_output release)。
+ *
+ * 1. 英数ベースで記号レイヤーの「!」(Shift を足して送る) を打ち、5ms 後に Enter。
+ *    Enter は「!」と、足した Shift を離した後に、Shift 無しで出る
+ * 2. かなベースで み (仮で右Shift + Shift 面) を押したまま ぬ (Shift を隠して送る) を打ち、
+ *    5ms 後に BSpc。BSpc は ぬ と右Shift を戻した後に出る。隠している間に Shift 抜けで
+ *    出ることは無い (み を押しているので、ホストには Shift + BSpc として届く) */
+&kscan {
+    events = <
+        TAP(3,0)                   /* 英数へ */
+        ZMK_MOCK_PRESS(3,4,250)    /* 記号レイヤー */
+        ZMK_MOCK_PRESS(1,1,5)      /* ! */
+        ZMK_MOCK_PRESS(0,11,5)     /* Enter */
+        ZMK_MOCK_RELEASE(0,11,5)
+        ZMK_MOCK_RELEASE(1,1,100)
+        ZMK_MOCK_RELEASE(3,4,100)
+        TAP(3,0)                   /* かなへ */
+        ZMK_MOCK_PRESS(3,6,250)    /* み */
+        ZMK_MOCK_PRESS(0,1,5)      /* ぬ */
+        ZMK_MOCK_PRESS(2,0,5)      /* BSpc */
+        ZMK_MOCK_RELEASE(2,0,5)
+        ZMK_MOCK_RELEASE(0,1,100)
+        ZMK_MOCK_RELEASE(3,6,100)
+    >;
+};

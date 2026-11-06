@@ -1,0 +1,11 @@
+pressed: usage_page 0x07 keycode 0xE5 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 16 key 57
+wm_output begin: output 0x00070032 alpha 0 held 0x20
+wm_output step: +11ms hide 0x20 mods 0x00
+wm_output step: +22ms press 0x00070032
+pressed: usage_page 0x07 keycode 0x32 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms release 0x00070032
+released: usage_page 0x07 keycode 0x32 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms show 0x20 mods 0x20
+wm_char released: position 16 key 57
+released: usage_page 0x07 keycode 0xE5 implicit_mods 0x00 explicit_mods 0x00

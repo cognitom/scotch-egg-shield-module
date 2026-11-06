@@ -1,44 +1,126 @@
+/*
+ * scotch-egg のキーマップ。windmill の technik (firmware/technik/keymaps/default/keymap.c)
+ * の6レイヤーを移したもの。
+ *
+ * 文字キー (かな、Shift 面、記号) は &wm_char で、ホストへ送るキーは出力表が決める。
+ * 英数レイヤーのキーと文字以外のキー (Enter や矢印など) は素のキー (&kp) のまま。
+ *
+ * 「仮」と書いたキーは、windmill の処理を後の issue で移すまでの代わり。
+ * - かなレイヤー最下段 (つ さ そ ひ こ み も ね) のタップ・ホールド: 6/9
+ * - 言語切替 (MY_LCTL)、英数の SandS と LT: 4/9
+ * - 左右の Fn と設定レイヤー: 5/9
+ * - MY_WIN / MY_ANDR / MY_JIS / MY_US: 3/9
+ * - MY_IME: 4/9
+ */
+
 #include <behaviors.dtsi>
+#include <behaviors/windmill.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/outputs.h>
 
 / {
+    macros {
+        /* 仮 (6/9 で こ / み のタップ・ホールドに置き換える)。押している間だけ Shift と
+         * かなの Shift 面を上げる。タップでは何も出ない。こ は左Shift、み は右Shift */
+        kana_shift_l: kana_shift_l {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            display-name = "Kana Shift L";
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings
+                = <&macro_press &kp LSHFT &mo LAYER_KANA_SHIFT>
+                , <&macro_pause_for_release>
+                , <&macro_release &mo LAYER_KANA_SHIFT &kp LSHFT>
+                ;
+        };
+
+        kana_shift_r: kana_shift_r {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            display-name = "Kana Shift R";
+            wait-ms = <0>;
+            tap-ms = <0>;
+            bindings
+                = <&macro_press &kp RSHFT &mo LAYER_KANA_SHIFT>
+                , <&macro_pause_for_release>
+                , <&macro_release &mo LAYER_KANA_SHIFT &kp RSHFT>
+                ;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
-        default_layer {
+        /* 最下段の左端は仮で、英数レイヤーのトグル (ホストの IME は切り替えない)。
+         * つ さ そ ひ こ み も ね は仮で、ホールドの役割だけを持ち、タップでは何も出ない */
+        kana_layer {
+            display-name = "Kana";
             bindings = <
-&kp TAB    &kp Q  &kp W     &kp E        &kp R     &kp T      &kp Y    &kp U     &kp I      &kp O     &kp P     &kp MINUS
-&kp LCTRL  &kp A  &kp S     &kp D        &kp F     &kp G      &kp H    &kp J     &kp K      &kp L     &kp SEMI  &kp SQT
-&kp LSHFT  &kp Z  &kp X     &kp C        &kp V     &kp B      &kp N    &kp M     &kp COMMA  &kp DOT   &kp FSLH  &kp RSHFT
-&none      &none  &kp LGUI  &kp LALT     &mo 1     &kp SPACE  &kp RET  &mo 2     &kp BSPC   &kp RGUI  &none     &none
+&kp ESC            &wm_char KN_NU   &wm_char KN_FU   &wm_char KN_A    &wm_char KN_U    &wm_char KN_E    &wm_char KN_O    &wm_char KN_YA   &wm_char KN_YU   &wm_char KN_YO   &wm_char KN_WA   &kp RET
+&kp TAB            &wm_char KN_TA   &wm_char KN_TE   &wm_char KN_I    &wm_char KN_SU   &wm_char KN_KA   &wm_char KN_N    &wm_char KN_NA   &wm_char KN_NI   &wm_char KN_RA   &wm_char KN_SE   &wm_char KN_DAKU
+&kp BSPC           &wm_char KN_CHI  &wm_char KN_TO   &wm_char KN_SHI  &wm_char KN_HA   &wm_char KN_KI   &wm_char KN_KU   &wm_char KN_MA   &wm_char KN_NO   &wm_char KN_RI   &wm_char KN_RE   &wm_char KN_KE
+&tog LAYER_ALPHA   &kp LGUI         &kp LALT         &mo LAYER_FN     &mo LAYER_SYM    &kana_shift_l    &kana_shift_r    &mo LAYER_SYM    &mo LAYER_FN     &wm_char KN_RU   &wm_char KN_ME   &wm_char KN_RO
             >;
         };
 
-        lower_layer {
+        /* 透過のキーは、下のかなを Shift を打ち消して出す。最下段の っ ？ 、 は仮で、
+         * タップだけを持つ (ホールドの役割は 6/9)。こ / み の位置 (空) は 7/9 */
+        kana_shift_layer {
+            display-name = "Kana Shift";
             bindings = <
-&kp ESC    &kp N1    &kp N2  &kp N3    &kp N4      &kp N5     &kp N6     &kp N7    &kp N8     &kp N9          &kp N0           &kp GRAVE
-&kp GRAVE  &kp EXCL  &kp AT  &kp HASH  &kp DOLLAR  &kp PRCNT  &kp CARET  &kp AMPS  &kp ASTRK  &kp LPAR        &kp RPAR         &kp TILDE
-&kp RET    &none     &none   &none     &none       &none      &none      &none     &none      &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp PIPE
-&none      &none     &none   &trans    &trans      &kp DEL    &trans     &mo 3     &none      &none           &none            &none
+&trans  &trans            &trans          &wm_char KN_XA   &wm_char KN_XU   &wm_char KN_XE   &wm_char KN_XO   &wm_char KN_XYA  &wm_char KN_XYU     &wm_char KN_XYO     &wm_char KN_WO        &trans
+&trans  &trans            &wm_char KN_HE  &wm_char KN_XI   &wm_char KN_MU   &trans           &trans           &wm_char KN_HO   &trans              &wm_char KN_LKAKKO  &wm_char KN_RKAKKO    &wm_char KN_HANDAKU
+&trans  &wm_char KN_XTSU  &trans          &trans           &trans           &trans           &trans           &trans           &wm_char KN_TOUTEN  &wm_char KN_KUTEN   &wm_char KN_NAKAGURO  &wm_char KN_CHOON
+&trans  &wm_char KB_XTSU  &trans          &trans           &trans           &trans           &trans           &wm_char KB_QUES &wm_char KB_TOUTEN  &wm_char KN_KUTEN   &wm_char KN_NAKAGURO  &trans
             >;
         };
 
-        raise_layer {
+        /* 最下段の左右の Fn、LT、SandS は仮。ZMK の既定の &mo / &lt / &mt を置いてある */
+        alpha_layer {
+            display-name = "Alpha";
             bindings = <
-&kp F1  &kp F2  &kp F3  &kp F4  &kp F5  &kp F6   &kp F7    &kp F8     &kp F9     &kp F10   &kp F11    &kp F12
-&none   &none   &none   &none   &none   &none    &none     &kp LEFT   &kp DOWN   &kp UP    &kp RIGHT  &none
-&none   &none   &none   &none   &none   &none    &kp PLUS  &kp MINUS  &kp EQUAL  &kp LBKT  &kp RBKT   &kp BSLH
-&none   &none   &none   &trans  &mo 3   &trans   &kp DEL   &trans     &trans     &trans    &none      &none
+&trans  &kp Q     &kp W     &kp E         &kp R                &kp T            &kp Y            &kp U                &kp I         &kp O      &kp P      &trans
+&trans  &kp A     &kp S     &kp D         &kp F                &kp G            &kp H            &kp J                &kp K         &kp L      &kp SEMI   &kp SQT
+&trans  &kp Z     &kp X     &kp C         &kp V                &kp B            &kp N            &kp M                &kp COMMA     &kp DOT    &kp UP     &kp RIGHT
+&trans  &kp LGUI  &kp LALT  &mo LAYER_FN  &lt LAYER_SYM BSLH   &mt LSHFT SPACE  &mt RSHFT SPACE  &lt LAYER_SYM FSLH   &mo LAYER_FN  &kp K_APP  &kp LEFT   &kp DOWN
             >;
         };
 
-        bt_layer {
+        sym_layer {
+            display-name = "Symbol";
             bindings = <
-&bt BT_CLR      &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4  &none  &none  &none  &none  &none  &none
-&studio_unlock  &none         &none         &none         &none         &none         &none  &none  &none  &none  &none  &none
-&none           &none         &none         &none         &none         &none         &none  &none  &none  &none  &none  &none
-&kp O           &kp M         &kp U         &none         &none         &none         &none  &none  &none  &kp K  &kp E  &kp N
+&trans  &wm_char SY_1     &wm_char SY_2     &wm_char SY_3     &wm_char SY_4     &wm_char SY_5     &wm_char SY_6     &wm_char SY_7     &wm_char SY_8     &wm_char SY_9     &wm_char SY_0     &trans
+&trans  &wm_char SY_EXLM  &wm_char SY_AT    &wm_char SY_HASH  &wm_char SY_DLR   &wm_char SY_PERC  &wm_char SY_CIRC  &wm_char SY_AMPR  &wm_char SY_ASTR  &wm_char SY_LPRN  &wm_char SY_RPRN  &wm_char SY_GRV
+&trans  &wm_char SY_EQL   &wm_char SY_PLUS  &wm_char SY_MINS  &wm_char SY_UNDS  &wm_char SY_LBRC  &wm_char SY_RBRC  &wm_char SY_TILD  &wm_char SY_LCBR  &wm_char SY_RCBR  &kp UP            &kp RIGHT
+&trans  &trans            &trans            &trans            &trans            &wm_char SY_PIPE  &wm_char SY_QUES  &trans            &trans            &trans            &kp LEFT          &kp DOWN
+            >;
+        };
+
+        /* 右上の MY_DARK (LED) は移さない。左下の MY_IME は仮で、何もしない。
+         * 最下段の左右の Fn の位置は仮で、片方の Fn を押したままもう片方を押すと設定
+         * レイヤーが上がる (windmill の set_fn() は 5/9) */
+        fn_layer {
+            display-name = "Fn";
+            bindings = <
+&trans     &kp F1     &kp F2   &kp F3          &kp F4   &kp F5        &kp F6        &kp F7      &kp F8          &kp F9        &kp F10    &none
+&kp CAPS   &kp F11    &kp F12  &none           &none    &none         &none         &none       &none           &none         &none      &none
+&kp DEL    &kp PSCRN  &none    &none           &none    &kp C_BRI_DN  &kp C_BRI_UP  &kp C_MUTE  &kp C_VOL_DN    &kp C_VOL_UP  &kp UP     &kp RIGHT
+&none      &trans     &trans   &mo LAYER_CONF  &trans   &trans        &trans        &trans      &mo LAYER_CONF  &trans        &kp LEFT   &kp DOWN
+            >;
+        };
+
+        /* MY_WIN / MY_ANDR / MY_JIS / MY_US の位置は仮で、何もしない (3/9)。
+         * 接続先の切替と &bt BT_CLR、&studio_unlock の位置は仮 (配置は 5/9 で windmill の
+         * geonix41 に揃える)。Fn の位置は透過にしておくこと */
+        conf_layer {
+            display-name = "Config";
+            bindings = <
+&out OUT_USB  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &none  &none  &none  &none   &none  &bt BT_CLR  &bootloader
+&none         &none         &none         &none         &none         &none  &none  &none  &none   &none  &none       &studio_unlock
+&none         &none         &none         &none         &none         &none  &none  &none  &none   &none  &none       &none
+&none         &none         &none         &trans        &none         &none  &none  &none  &trans  &none  &none       &none
             >;
         };
     };

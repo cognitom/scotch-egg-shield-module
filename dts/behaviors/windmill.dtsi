@@ -3,6 +3,9 @@
  * `#include <behaviors/windmill.dtsi>` で読み込む
  */
 
+#include <dt-bindings/windmill/keys.h>
+#include <dt-bindings/windmill/layers.h>
+
 / {
     behaviors {
         /* 参照しないキーマップでは Kconfig ごと無効にしたいので、未参照なら消す */

@@ -1,0 +1,17 @@
+#include "../../windmill.dtsi"
+
+/* windmill の issue #18 の再現手順 (ShiftPair.thumb_shift_keeps_held_shift_on_first_keypress)。
+ * み (仮で右Shift + Shift 面) を押しながら の を2回。Shift 面の「、」は Shift 付きだが、
+ * 押されている右Shift をそのまま使い、左Shift への付け替えのレポートを挟まない。
+ * 修正前の windmill では1打鍵目だけ右Shift を離して左Shift を押し直しており、
+ * そこで Shift が無視されて「ね」になっていた */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,6,150)
+        ZMK_MOCK_PRESS(2,8,120)
+        ZMK_MOCK_RELEASE(2,8,120)
+        ZMK_MOCK_PRESS(2,8,120)
+        ZMK_MOCK_RELEASE(2,8,120)
+        ZMK_MOCK_RELEASE(3,6,120)
+    >;
+};

@@ -1,0 +1,13 @@
+#include "../../windmill.dtsi"
+
+/* Shift 面のキーが Shift 付きのもの (「「」= JIS で Shift + ]) なら、押されている
+ * Shift をそのまま使い、修飾の付け外しを挟まない (ShiftPair.shifted_pair_reuses_held_shift)。
+ * 送る前後に wm_output step の hide / show が出ないこと */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,6,150)
+        ZMK_MOCK_PRESS(1,9,120)  /* ら の位置。Shift 面では「 */
+        ZMK_MOCK_RELEASE(1,9,120)
+        ZMK_MOCK_RELEASE(3,6,120)
+    >;
+};

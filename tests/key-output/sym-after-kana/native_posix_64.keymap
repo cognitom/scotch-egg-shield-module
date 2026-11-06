@@ -1,0 +1,17 @@
+#include "../../windmill.dtsi"
+
+/* windmill の issue #87 の再現手順 (KeyOutput.sym_after_kana_waits_between_shift_and_key)。
+ * かなを打ってから、ひ を押したまま こ の位置 (記号レイヤーでは「|」) を3回打つ。
+ *
+ * Windows 標準の IME は、かなを打った直後だと英数への切り替えが遅れ、Shift を押した
+ * 直後のキーで Shift を取りこぼしていた。英数への切り替え、Shift の押下、記号キー、
+ * Shift の解放、かなへの切り替えの間に IME_WAIT_MS (10ms) 以上あることを、
+ * wm_output step の時刻で固定する */
+&kscan {
+    events = <
+        TAP(0,1)                 /* ぬ */
+        ZMK_MOCK_PRESS(3,4,250)  /* ひ */
+        TAP(3,5) TAP(3,5) TAP(3,5)
+        ZMK_MOCK_RELEASE(3,4,300)
+    >;
+};

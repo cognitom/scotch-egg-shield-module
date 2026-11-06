@@ -1,0 +1,19 @@
+#include "../../windmill.dtsi"
+
+/* windmill の issue #36 の再現手順 (ShiftPair.unshifted_pair_waits_for_ime_on_first_keypress)。
+ * み を押しながら な を2回。Shift 面の「ほ」は Shift の要らないキー (JIS の -) で、
+ * 押されている右Shift を隠して送り、戻す。
+ *
+ * windmill の実機では1打鍵目だけ「ほ」ではなく「ー」になっていた。レポート列は
+ * 1打鍵目も2打鍵目も同じで、違うのは間隔だけだったので、wm_output step の時刻で
+ * 「Shift を隠す → キー → Shift を戻す」の間隔 (IME_WAIT_MS 以上) も固定する */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,6,150)
+        ZMK_MOCK_PRESS(1,7,120)
+        ZMK_MOCK_RELEASE(1,7,120)
+        ZMK_MOCK_PRESS(1,7,120)
+        ZMK_MOCK_RELEASE(1,7,120)
+        ZMK_MOCK_RELEASE(3,6,120)
+    >;
+};

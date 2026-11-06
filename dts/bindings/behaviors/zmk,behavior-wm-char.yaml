@@ -1,4 +1,6 @@
-description: windmill の文字キー。押した瞬間に押し離しを送り切る
+description: |
+  windmill の文字キー。引数は windmill のキー (dt-bindings/windmill/keys.h の
+  KN_* / SY_* / KB_*)。押した瞬間に押し離しを送り切り、リピートしない
 
 compatible: "zmk,behavior-wm-char"
 

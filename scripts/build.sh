@@ -19,11 +19,13 @@ if [ ! -f .zmk/.ready ]; then
 fi
 
 # このリポジトリをモジュールとして読ませる (windmill の behavior)。
-# Build ワークフローも zephyr/module.yml があれば同じように渡している
-west build -p -s "$root/.zmk/zmk/app" -d "$root/$build_dir" -b "$board" -S "$snippet" -- \
+# Build ワークフローも zephyr/module.yml があれば同じように渡している。
+# west は作業場所 (.zmk/) の中で呼ぶ。shim によってはホストの cwd をそのまま
+# コンテナへ持ち込むので、compose の working_dir に頼らない
+(cd .zmk && west build -p -s "$root/.zmk/zmk/app" -d "$root/$build_dir" -b "$board" -S "$snippet" -- \
   -DSHIELD="$shield" \
   -DZMK_CONFIG="$root/config" \
-  -DZMK_EXTRA_MODULES="$root"
+  -DZMK_EXTRA_MODULES="$root")
 
 # ビルドの出力はマウント越しにホストの .zmk/build/ にできるので、そこから拾う
 mkdir -p output
