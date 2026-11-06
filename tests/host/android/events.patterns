@@ -1,0 +1,4 @@
+s/.*hid_listener_keycode_//p
+s/.*on_wm_host_binding_\([a-z]*\): /wm_host \1: /p
+s/.*wm_host_set: /wm_host_set: /p
+s/.*on_wm_char_binding_\([a-z]*\): /wm_char \1: /p

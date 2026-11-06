@@ -1,0 +1,36 @@
+wm_host pressed: position 14 param 1
+wm_host_set: host 0 setting 0 value 1 config 0x00000001
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 21 key 59
+pressed: usage_page 0x07 keycode 0x30 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x30 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 21 key 59
+wm_char pressed: position 22 key 60
+pressed: usage_page 0x07 keycode 0x32 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x32 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 22 key 60
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_host pressed: position 26 param 3
+wm_host_set: host 0 setting 1 value 1 config 0x00000401
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 21 key 59
+pressed: usage_page 0x07 keycode 0x30 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x30 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 21 key 59
+wm_char pressed: position 22 key 60
+pressed: usage_page 0x07 keycode 0x31 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x31 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 22 key 60
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_host pressed: position 13 param 0
+wm_host_set: host 0 setting 0 value 0 config 0x00000400
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 21 key 59
+pressed: usage_page 0x07 keycode 0x2F implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x2F implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 21 key 59
+wm_char pressed: position 22 key 60
+pressed: usage_page 0x07 keycode 0x30 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x30 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 22 key 60
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
