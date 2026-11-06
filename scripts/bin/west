@@ -1,0 +1,12 @@
+#!/bin/sh
+# compose.agent.yaml の zmk サービスへ `west` を振り向けるラッパー。コマンドをコンテナへ
+# 振り向ける仕組み (shim) が無い環境 (CI や手元) で、このディレクトリを PATH に足して使う。
+# 先に `docker compose -f compose.agent.yaml up -d --wait` で zmk サービスを立てておく
+compose="$(dirname "$0")/../../compose.agent.yaml"
+
+# tty は stdin と stdout の両方が端末のときだけ取る。パイプ越しに取ると出力に CR が
+# 混ざり、test.sh のようにログを sed で絞るところが壊れる
+if [ -t 0 ] && [ -t 1 ]; then
+  exec docker compose -f "$compose" exec zmk west "$@"
+fi
+exec docker compose -f "$compose" exec -T zmk west "$@"

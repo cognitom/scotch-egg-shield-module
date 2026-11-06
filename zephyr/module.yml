@@ -1,3 +1,8 @@
+name: windmill
 build:
+  cmake: .
+  kconfig: Kconfig
   settings:
     board_root: .
+    # dts/bindings の DT バインディングと dts/behaviors の dtsi を見つけさせる
+    dts_root: .
