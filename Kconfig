@@ -5,8 +5,32 @@ config ZMK_BEHAVIOR_WM_CHAR
     bool
     default y
     depends on DT_HAS_ZMK_BEHAVIOR_WM_CHAR_ENABLED
+    select ZMK_WINDMILL
 
 config ZMK_BEHAVIOR_WM_HOST
     bool
     default y
     depends on DT_HAS_ZMK_BEHAVIOR_WM_HOST_ENABLED
+    select ZMK_WINDMILL
+
+config ZMK_BEHAVIOR_WM_LANG
+    bool
+    default y
+    depends on DT_HAS_ZMK_BEHAVIOR_WM_LANG_ENABLED
+    select ZMK_WINDMILL
+
+config ZMK_BEHAVIOR_WM_MOD
+    bool
+    default y
+    depends on DT_HAS_ZMK_BEHAVIOR_WM_MOD_ENABLED
+    select ZMK_WINDMILL
+
+config ZMK_BEHAVIOR_WM_ALPHA
+    bool
+    default y
+    depends on DT_HAS_ZMK_BEHAVIOR_WM_ALPHA_ENABLED
+    select ZMK_WINDMILL
+
+# behavior どうしで共有する処理 (CMakeLists.txt 参照)。どれか1つでも使えば入る
+config ZMK_WINDMILL
+    bool

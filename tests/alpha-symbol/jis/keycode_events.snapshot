@@ -1,0 +1,36 @@
+layer_changed: layer 2 state 1
+wm_alpha pressed: position 22 keycode 0x00070033 jis 1
+wm_output begin: output 0x00070033 alpha 0 held 0x00
+wm_output step: +0ms press 0x00070033
+pressed: usage_page 0x07 keycode 0x33 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070033
+released: usage_page 0x07 keycode 0x33 implicit_mods 0x00 explicit_mods 0x00
+wm_alpha released: position 22 keycode 0x00070033
+wm_alpha pressed: position 23 keycode 0x00070034 jis 1
+wm_output begin: output 0x02070024 alpha 0 held 0x00
+wm_output step: +11ms press 0x000700E1
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x00070024
+pressed: usage_page 0x07 keycode 0x24 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms release 0x00070024
+released: usage_page 0x07 keycode 0x24 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms release 0x000700E1
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_alpha released: position 23 keycode 0x00070034
+pressed: usage_page 0x07 keycode 0x36 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x36 implicit_mods 0x00 explicit_mods 0x00
+pressed: usage_page 0x07 keycode 0x37 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x37 implicit_mods 0x00 explicit_mods 0x00
+hold_tap 40 decided tap
+wm_alpha pressed: position 40 keycode 0x00070031 jis 1
+wm_alpha released: position 40 keycode 0x00070031
+wm_output begin: output 0x00070087 alpha 0 held 0x00
+wm_output step: +0ms press 0x00070087
+pressed: usage_page 0x07 keycode 0x87 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070087
+released: usage_page 0x07 keycode 0x87 implicit_mods 0x00 explicit_mods 0x00
+hold_tap 43 decided tap
+wm_alpha pressed: position 43 keycode 0x00070038 jis 1
+pressed: usage_page 0x07 keycode 0x38 implicit_mods 0x00 explicit_mods 0x00
+wm_alpha released: position 43 keycode 0x00070038
+released: usage_page 0x07 keycode 0x38 implicit_mods 0x00 explicit_mods 0x00

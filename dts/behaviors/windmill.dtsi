@@ -1,10 +1,12 @@
 /*
  * windmill の behavior の定義。キーマップから
- * `#include <behaviors/windmill.dtsi>` で読み込む
+ * `#include <behaviors/windmill.dtsi>` で読み込む。hold-tap が &kp と &mo を使うので、
+ * 先に <behaviors.dtsi> を読んでおくこと
  */
 
 #include <dt-bindings/windmill/host.h>
 #include <dt-bindings/windmill/keys.h>
+#include <dt-bindings/windmill/lang.h>
 #include <dt-bindings/windmill/layers.h>
 
 / {
@@ -20,6 +22,67 @@
             compatible = "zmk,behavior-wm-host";
             #binding-cells = <1>;
             display-name = "Windmill Host";
+        };
+
+        /omit-if-no-ref/ wm_lang: wm_lang {
+            compatible = "zmk,behavior-wm-lang";
+            #binding-cells = <1>;
+            display-name = "Windmill Lang";
+        };
+
+        /omit-if-no-ref/ wm_mod: wm_mod {
+            compatible = "zmk,behavior-wm-mod";
+            #binding-cells = <1>;
+            display-name = "Windmill Mod";
+        };
+
+        /omit-if-no-ref/ wm_alpha: wm_alpha {
+            compatible = "zmk,behavior-wm-alpha";
+            #binding-cells = <1>;
+            display-name = "Windmill Alpha";
+        };
+
+        /* 以下の hold-tap は、windmill (QMK) の TAPPING_TERM 200ms と
+         * HOLD_ON_OTHER_KEY_PRESS に揃える。ZMK の hold-preferred が同じ判定 */
+
+        /* MY_LCTL。`&wm_lctl LCTRL MY_LANG` で、タップで言語切替、ホールドで Ctrl +
+         * 英数レイヤー。
+         * quick-tap は付けない。QMK ではタップ直後に押し直すとタップの繰り返しになって
+         * Ctrl が取れず、windmill はそれを承知で残している。ここではわざわざ真似ない */
+        /omit-if-no-ref/ wm_lctl: wm_lctl {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            display-name = "Windmill Ctrl / Lang";
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&wm_mod>, <&wm_lang>;
+        };
+
+        /* 英数レイヤーの SandS (QMK の LSFT_T(KC_SPC) / RSFT_T(KC_SPC))。
+         * `&wm_sands LSHFT SPACE`。左右で修飾が別なので、持ち替えても Shift が途切れない。
+         * quick-tap は QMK の QUICK_TAP_TERM の既定 (TAPPING_TERM と同じ) に揃え、
+         * タップ直後に押し直せばスペースのリピートになる */
+        /omit-if-no-ref/ wm_sands: wm_sands {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            display-name = "Windmill SandS";
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            bindings = <&kp>, <&kp>;
+        };
+
+        /* 英数レイヤーの LT(LAYER_SYM, …)。`&wm_lt LAYER_SYM BSLH`。タップ側を &wm_alpha に
+         * するのは、JIS のとき「\」を横取りするため。ZMK の &lt は tap-preferred なので
+         * 使わない */
+        /omit-if-no-ref/ wm_lt: wm_lt {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            display-name = "Windmill Layer-Tap";
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <200>;
+            bindings = <&mo>, <&wm_alpha>;
         };
     };
 };

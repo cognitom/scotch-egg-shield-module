@@ -1,0 +1,20 @@
+#include "../../windmill.dtsi"
+
+/* Ctrl + Win の重ね押し。先に離したほうのぶんだけ下がる
+ * (windmill の HoldLayer.ctrl_and_gui_overlap_keeps_alpha)。
+ *
+ * Ctrl (MY_LCTL のホールド) が先に押されていると英数レイヤーが既に上がっているので、
+ * つ はかなレイヤーではなく英数レイヤーの &wm_mod LGUI として引かれる。そちらを数え
+ * 損ねると、Ctrl を離した時点でかなへ戻ってしまう。
+ * Ctrl を離した後の ぬ は Win+q、Win を離した後の ぬ はかなの 1 */
+&kscan {
+    events = <
+        TO_KANA
+        ZMK_MOCK_PRESS(3,0,250)
+        ZMK_MOCK_PRESS(3,1,250)
+        ZMK_MOCK_RELEASE(3,0,120)
+        TAP(0,1)
+        ZMK_MOCK_RELEASE(3,1,120)
+        TAP(0,1)
+    >;
+};

@@ -1,0 +1,15 @@
+layer_changed: layer 2 state 1
+hold_tap 36 decided tap
+wm_lang pressed: position 36 param 0
+wm_lang send: kana 1 keycode 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+layer_changed: layer 2 state 0
+hold_tap 36 decided tap
+wm_lang pressed: position 36 param 0
+wm_lang send: kana 0 keycode 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+layer_changed: layer 2 state 1
+pressed: usage_page 0x07 keycode 0x14 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x14 implicit_mods 0x00 explicit_mods 0x00

@@ -5,6 +5,7 @@
  * 時点で出る。離しても何も出ない */
 &kscan {
     events = <
+        TO_KANA
         ZMK_MOCK_PRESS(0,1,600)   /* ぬ。リピートが始まる程度に押し続ける */
         ZMK_MOCK_PRESS(2,4,50)    /* は */
         ZMK_MOCK_RELEASE(0,1,50)

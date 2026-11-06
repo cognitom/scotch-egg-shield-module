@@ -12,14 +12,13 @@
  *    出ることは無い (み を押しているので、ホストには Shift + BSpc として届く) */
 &kscan {
     events = <
-        TAP(3,0)                   /* 英数へ */
-        ZMK_MOCK_PRESS(3,4,250)    /* 記号レイヤー */
+        ZMK_MOCK_PRESS(3,4,250)    /* 起動直後の英数のまま、記号レイヤー */
         ZMK_MOCK_PRESS(1,1,5)      /* ! */
         ZMK_MOCK_PRESS(0,11,5)     /* Enter */
         ZMK_MOCK_RELEASE(0,11,5)
         ZMK_MOCK_RELEASE(1,1,100)
         ZMK_MOCK_RELEASE(3,4,100)
-        TAP(3,0)                   /* かなへ */
+        TO_KANA
         ZMK_MOCK_PRESS(3,6,250)    /* み */
         ZMK_MOCK_PRESS(0,1,5)      /* ぬ */
         ZMK_MOCK_PRESS(2,0,5)      /* BSpc */

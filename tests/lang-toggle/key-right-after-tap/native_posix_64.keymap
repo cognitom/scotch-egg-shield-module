@@ -1,0 +1,12 @@
+#include "../../windmill.dtsi"
+
+/* ダブルタップを待たないので、離した時点でトグルが決まる。間を空けずに押した次の
+ * キーも、切り替えた後のベース (かな) で引かれる
+ * (windmill の LangToggle.key_right_after_tap_resolves_on_new_layer) */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,0,50)
+        ZMK_MOCK_RELEASE(3,0,0)
+        TAP(0,1)
+    >;
+};

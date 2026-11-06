@@ -1,0 +1,16 @@
+#include "../../windmill.dtsi"
+
+/* かなベースで Ctrl を押している間は英数レイヤーが上がるが、ベースはかなのまま。
+ * 英数レイヤーの LT (ひ の位置) で記号レイヤーを上げて打つ数字は、かなベースの記号として
+ * 英数に切り替えて送り (LANG2)、かなに戻す (LANG1)。英数レイヤーが上がっているかで
+ * ベースを決めると、ここで切り替えずに送ってしまい、IME に全角で入る */
+&kscan {
+    events = <
+        TO_KANA
+        ZMK_MOCK_PRESS(3,0,250)
+        ZMK_MOCK_PRESS(3,4,250)
+        TAP(0,1)
+        ZMK_MOCK_RELEASE(3,4,120)
+        ZMK_MOCK_RELEASE(3,0,120)
+    >;
+};

@@ -1,0 +1,11 @@
+#include "../../windmill.dtsi"
+
+/* 接続先が US なら横取りせず、素のキーのまま押している間は押しっぱなし
+ * (windmill の KeyOutput.alpha_symbol_stays_down_while_held)。リピートはホストに任せる */
+&kscan {
+    events = <
+        CONF_TAP(2,2)
+        ZMK_MOCK_PRESS(1,10,600)
+        ZMK_MOCK_RELEASE(1,10,50)
+    >;
+};

@@ -1,0 +1,16 @@
+#include "../../windmill.dtsi"
+
+/* Win + Alt の重ね押しも同じ (windmill の HoldLayer.gui_and_alt_overlap_keeps_alpha)。
+ * Win を押すと英数レイヤーが上がり、さ は英数レイヤーの &wm_mod LALT として引かれる。
+ * Win を先に離しても Alt が残るので英数のまま */
+&kscan {
+    events = <
+        TO_KANA
+        ZMK_MOCK_PRESS(3,1,250)
+        ZMK_MOCK_PRESS(3,2,250)
+        ZMK_MOCK_RELEASE(3,1,120)
+        TAP(0,1)
+        ZMK_MOCK_RELEASE(3,2,120)
+        TAP(0,1)
+    >;
+};

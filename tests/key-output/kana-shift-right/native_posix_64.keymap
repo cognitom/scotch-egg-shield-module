@@ -9,6 +9,7 @@
  * 最下段の さ そ ひ は仮のホールドのキーなので叩かない */
 &kscan {
     events = <
+        TO_KANA
         ZMK_MOCK_PRESS(3,6,250)
         /* ぬ ふ ぁ ぅ ぇ ぉ ゃ ゅ ょ を */
         TAP(0,1) TAP(0,2) TAP(0,3) TAP(0,4) TAP(0,5) TAP(0,6) TAP(0,7) TAP(0,8) TAP(0,9) TAP(0,10)

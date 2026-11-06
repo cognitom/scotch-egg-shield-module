@@ -1,0 +1,13 @@
+#include "../../windmill.dtsi"
+
+/* 接続先が JIS (既定) のとき、英数レイヤーの ; ' \ は横取りして1キー1出力で送る
+ * (windmill の KeyOutputJis.alpha_symbols_without_shift、issue #80)。US のキーのままだと
+ * JIS では別の文字が出る (' のキーは「:」)。
+ *   ;  → JIS の ; (0x33)           '  → Shift+7 (0x24)
+ *   \  → ろ のキー (INT1 = 0x87)。LT (ひ の位置) のタップ
+ * , . / は素のキーのまま (/ は も の位置の LT のタップ) */
+&kscan {
+    events = <
+        TAP(1,10) TAP(1,11) TAP(2,8) TAP(2,9) TAP(3,4) TAP(3,7)
+    >;
+};

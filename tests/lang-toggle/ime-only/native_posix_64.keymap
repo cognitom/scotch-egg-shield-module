@@ -1,0 +1,16 @@
+#include "../../windmill.dtsi"
+
+/* Fn+Ctrl (MY_IME) は、今のベースに合わせたキーを IME へ送るだけで、ベースは動かさない
+ * (windmill の LangToggle.fn_ctrl_switches_host_only)。IME だけがずれたときに揃えるため。
+ *
+ * 英数のまま MY_IME → LANG2 を送り、ぬ は q のまま。MY_LCTL のタップでかなへ移り
+ * (LANG1)、MY_IME → もう一度 LANG1 を送り、ぬ は 1 のまま */
+&kscan {
+    events = <
+        FN_TAP(3,0)
+        TAP(0,1)
+        TAP(3,0)
+        FN_TAP(3,0)
+        TAP(0,1)
+    >;
+};

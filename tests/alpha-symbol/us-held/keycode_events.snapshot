@@ -1,0 +1,9 @@
+layer_changed: layer 2 state 1
+layer_changed: layer 4 state 1
+layer_changed: layer 5 state 1
+layer_changed: layer 5 state 0
+layer_changed: layer 4 state 0
+wm_alpha pressed: position 22 keycode 0x00070033 jis 0
+pressed: usage_page 0x07 keycode 0x33 implicit_mods 0x00 explicit_mods 0x00
+wm_alpha released: position 22 keycode 0x00070033
+released: usage_page 0x07 keycode 0x33 implicit_mods 0x00 explicit_mods 0x00

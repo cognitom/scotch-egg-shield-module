@@ -1,0 +1,15 @@
+#include "../../windmill.dtsi"
+
+/* ホールド (Ctrl) ではトグルを送らず、ベースも動かさない
+ * (windmill の LangToggle.hold_does_not_toggle)。ほかのキーを押した時点でホールドに
+ * 決まる経路 (QMK の HOLD_ON_OTHER_KEY_PRESS、ZMK の hold-preferred) で見る。
+ * Ctrl+q が出て、離した後も LANG1 は出ず、ぬ は英数の q のまま */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,0,1)
+        ZMK_MOCK_PRESS(0,1,120)
+        ZMK_MOCK_RELEASE(0,1,120)
+        ZMK_MOCK_RELEASE(3,0,400)
+        TAP(0,1)
+    >;
+};

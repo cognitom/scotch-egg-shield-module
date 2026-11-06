@@ -1,0 +1,11 @@
+#include "../../windmill.dtsi"
+
+/* 左の SandS でも同じ (windmill の KeyOutputJis.alpha_symbols_with_left_thumb_shift)。
+ * Shift の要る「"」「|」は押されている左Shift をそのまま使う */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,5,250)
+        TAP(1,10) TAP(1,11) TAP(3,4)
+        ZMK_MOCK_RELEASE(3,5,120)
+    >;
+};

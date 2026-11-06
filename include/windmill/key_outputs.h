@@ -33,6 +33,8 @@
 #define JP_BSLS INT1
 #define JP_YEN INT3
 #define JP_QUES LS(FSLH)
+#define JP_QUOT LS(N7)
+#define JP_DQUO LS(N2)
 #define JP_EXLM LS(N1)
 #define JP_HASH LS(N3)
 #define JP_DLR LS(N4)

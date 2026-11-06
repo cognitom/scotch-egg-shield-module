@@ -1,0 +1,17 @@
+#include "../../windmill.dtsi"
+
+/* 英数ベースで Ctrl / Win を押して離しても、英数レイヤーは下りない。
+ * ZMK では英数ベースもホールド中の英数も同じ英数レイヤーを上げていて、レイヤーは
+ * 参照カウントを持たない。ホールドの解放で下ろすと、英数ベースのまま かな が出てしまう。
+ * 離した後の ぬ は英数の q のまま */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,0,250)
+        TAP(0,1)
+        ZMK_MOCK_RELEASE(3,0,120)
+        TAP(0,1)
+        ZMK_MOCK_PRESS(3,1,120)
+        ZMK_MOCK_RELEASE(3,1,120)
+        TAP(0,1)
+    >;
+};

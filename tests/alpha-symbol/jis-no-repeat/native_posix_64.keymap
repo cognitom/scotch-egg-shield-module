@@ -1,0 +1,10 @@
+#include "../../windmill.dtsi"
+
+/* 横取りしたキーは、押し続けてもリピートしない (windmill の KeyOutputJis.alpha_symbol_does_not_repeat)。
+ * 押した時点で送り切り、離しても何も出ない。US では押しっぱなし (us-held) */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(1,10,600)
+        ZMK_MOCK_RELEASE(1,10,50)
+    >;
+};

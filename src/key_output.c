@@ -4,8 +4,6 @@
 
 #include <zephyr/kernel.h>
 
-#include <zmk/keymap.h>
-
 #include <windmill/windmill.h>
 #include <windmill/key_outputs.h>
 
@@ -80,16 +78,11 @@ uint32_t wm_key_output(uint32_t key) {
     return key_outputs[key - WM_KEY_FIRST];
 }
 
-/* windmill は「ベースレイヤーがかなか」を default_layer_state で見る。ZMK ではかなが
- * いちばん下のレイヤーで、英数はその上に重ねるので、英数が上がっていなければかなと
- * みなす。かな/英数の切り替えは 4/9 で入れる。
- * 4/9 では Ctrl / Win / Alt のホールド中にも英数レイヤーを上げるので、この判定では
- * かなベースのまま英数とみなしてしまう。そこで windmill と同じく、ベースがかなか英数かを
- * 状態として持つ形に置き換えること */
-static bool is_kana_base(void) { return !zmk_keymap_layer_active(LAYER_ALPHA); }
-
+/* windmill と同じく、英数レイヤーが上がっているかではなくベースで見る。Ctrl / Win / Alt の
+ * ホールド中はかなベースでも英数レイヤーが上がっていて、そこで打つ記号もかな入力の
+ * ままでは打てない */
 bool wm_is_alpha_output(uint32_t key) {
-    if (!is_kana_base()) {
+    if (!wm_is_kana_base()) {
         return false;
     }
     return (key >= SY_1 && key <= SY_QUES) || key == KB_QUES;

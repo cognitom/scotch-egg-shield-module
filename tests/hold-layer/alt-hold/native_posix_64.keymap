@@ -1,0 +1,13 @@
+#include "../../windmill.dtsi"
+
+/* Alt (さ、仮で &wm_mod LALT) も Win と同じ (windmill の HoldLayer.alt_hold_switches_to_alpha_and_back) */
+&kscan {
+    events = <
+        TO_KANA
+        ZMK_MOCK_PRESS(3,2,250)
+        ZMK_MOCK_PRESS(0,1,120)
+        ZMK_MOCK_RELEASE(0,1,120)
+        ZMK_MOCK_RELEASE(3,2,120)
+        TAP(0,1)
+    >;
+};

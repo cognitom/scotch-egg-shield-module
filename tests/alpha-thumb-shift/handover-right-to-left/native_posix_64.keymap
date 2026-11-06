@@ -1,0 +1,12 @@
+#include "../../windmill.dtsi"
+
+/* 右 → 左 の持ち替えも同じ (windmill の AlphaThumbShift.handover_right_to_left_keeps_shift) */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,6,250)
+        ZMK_MOCK_PRESS(3,5,250)
+        ZMK_MOCK_RELEASE(3,6,120)
+        TAP(0,1)
+        ZMK_MOCK_RELEASE(3,5,120)
+    >;
+};

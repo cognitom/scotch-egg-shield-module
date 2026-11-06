@@ -1,0 +1,15 @@
+#include "../../windmill.dtsi"
+
+/* Win を押してすぐ ぬ を押しても、ぬ は英数レイヤーで引かれる
+ * (windmill の HoldLayer.gui_hold_by_interrupt_resolves_on_alpha)。
+ * windmill では つ のタップ・ホールドの判定を待ってから ぬ を出す。その判定は 6/9 で、
+ * いまの つ は押した時点でホールドなので、ここでは押した直後でも英数になることを見る */
+&kscan {
+    events = <
+        TO_KANA
+        ZMK_MOCK_PRESS(3,1,1)
+        ZMK_MOCK_PRESS(0,1,120)
+        ZMK_MOCK_RELEASE(0,1,120)
+        ZMK_MOCK_RELEASE(3,1,120)
+    >;
+};

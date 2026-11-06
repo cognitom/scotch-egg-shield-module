@@ -1,0 +1,12 @@
+#include "../../windmill.dtsi"
+
+/* \ の位置 (&wm_lt LAYER_SYM BSLH) を長押しすれば、横取りせずに記号レイヤーになる
+ * (windmill の KeyOutputJis.backslash_key_hold_is_sym_layer)。記号レイヤーの @ が
+ * JIS の @ のキー (0x2F) で出る */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,4,250)
+        TAP(1,2)
+        ZMK_MOCK_RELEASE(3,4,120)
+    >;
+};

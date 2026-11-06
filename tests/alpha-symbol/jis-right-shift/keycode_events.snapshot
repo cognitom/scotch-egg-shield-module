@@ -1,0 +1,37 @@
+layer_changed: layer 2 state 1
+hold_tap 42 decided hold-timer
+pressed: usage_page 0x07 keycode 0xE5 implicit_mods 0x00 explicit_mods 0x00
+wm_alpha pressed: position 22 keycode 0x00070033 jis 1
+wm_output begin: output 0x00070034 alpha 0 held 0x20
+wm_output step: +11ms hide 0x20 mods 0x00
+wm_output step: +22ms press 0x00070034
+pressed: usage_page 0x07 keycode 0x34 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms release 0x00070034
+released: usage_page 0x07 keycode 0x34 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms show 0x20 mods 0x20
+wm_alpha released: position 22 keycode 0x00070033
+wm_alpha pressed: position 23 keycode 0x00070034 jis 1
+wm_output begin: output 0x0207001F alpha 0 held 0x20
+wm_output step: +0ms press 0x0007001F
+pressed: usage_page 0x07 keycode 0x1F implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x0007001F
+released: usage_page 0x07 keycode 0x1F implicit_mods 0x00 explicit_mods 0x00
+wm_alpha released: position 23 keycode 0x00070034
+pressed: usage_page 0x07 keycode 0x36 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x36 implicit_mods 0x00 explicit_mods 0x00
+pressed: usage_page 0x07 keycode 0x37 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x37 implicit_mods 0x00 explicit_mods 0x00
+hold_tap 40 decided tap
+wm_alpha pressed: position 40 keycode 0x00070031 jis 1
+wm_alpha released: position 40 keycode 0x00070031
+wm_output begin: output 0x02070089 alpha 0 held 0x20
+wm_output step: +0ms press 0x00070089
+pressed: usage_page 0x07 keycode 0x89 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070089
+released: usage_page 0x07 keycode 0x89 implicit_mods 0x00 explicit_mods 0x00
+hold_tap 43 decided tap
+wm_alpha pressed: position 43 keycode 0x00070038 jis 1
+pressed: usage_page 0x07 keycode 0x38 implicit_mods 0x00 explicit_mods 0x00
+wm_alpha released: position 43 keycode 0x00070038
+released: usage_page 0x07 keycode 0x38 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0xE5 implicit_mods 0x00 explicit_mods 0x00

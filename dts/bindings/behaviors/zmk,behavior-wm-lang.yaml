@@ -1,0 +1,8 @@
+description: |
+  windmill の言語切替のキー (MY_LCTL のタップ / MY_IME)。引数は
+  dt-bindings/windmill/lang.h の MY_*。MY_LANG はかな / 英数のベースを入れ替えて
+  ホストの IME も切り替え、MY_IME はホストの IME だけを今のベースの側へ切り替える
+
+compatible: "zmk,behavior-wm-lang"
+
+include: one_param.yaml

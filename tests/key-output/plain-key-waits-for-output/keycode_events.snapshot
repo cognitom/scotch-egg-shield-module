@@ -15,6 +15,8 @@ wm_output release: keycode 0x28 state 1
 pressed: usage_page 0x07 keycode 0x28 implicit_mods 0x00 explicit_mods 0x00
 wm_output release: keycode 0x28 state 0
 released: usage_page 0x07 keycode 0x28 implicit_mods 0x00 explicit_mods 0x00
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
 pressed: usage_page 0x07 keycode 0xE5 implicit_mods 0x00 explicit_mods 0x00
 wm_char pressed: position 1 key 12
 wm_output begin: output 0x0007001E alpha 0 held 0x20

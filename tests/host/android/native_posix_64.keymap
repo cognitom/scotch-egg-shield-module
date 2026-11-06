@@ -1,8 +1,8 @@
 #include "../../windmill.dtsi"
 
 /* MY_ANDR / MY_WIN で OS を選ぶ (windmill の HostOs)。windmill のテストは OS の違いを
- * 言語切替 (MY_LCTL) で見るが、言語切替は 4/9 なので、ここでは出力表の例外で見る
- * (言語切替のキーは tests/unit/host-config が見る)。
+ * 言語切替 (MY_LCTL) で見るが、ここでは出力表の例外で見る (言語切替は
+ * tests/lang-toggle/android-* が見る)。
  *
  * OS で変わるのは US 配列の「」だけ。Microsoft IME は Shift+[ と Shift+] (0x2F 0x30)、
  * Gboard (Android) は Shift+] と Shift+＼ (0x30 0x31)。JIS ではどちらも Shift+] と
@@ -14,6 +14,7 @@
 
 &kscan {
     events = <
+        TO_KANA
         CONF_TAP(1,2)
         KAKKO
         CONF_TAP(2,2)

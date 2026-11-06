@@ -6,6 +6,7 @@
  * 送り終えた後に み を離せば、右Shift はきちんと外れる */
 &kscan {
     events = <
+        TO_KANA
         ZMK_MOCK_PRESS(3,6,150)
         ZMK_MOCK_PRESS(1,4,120)  /* す の位置。Shift 面では む */
         ZMK_MOCK_RELEASE(1,4,120)
