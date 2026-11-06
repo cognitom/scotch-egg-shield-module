@@ -97,7 +97,10 @@ uint32_t wm_key_output(uint32_t key) {
 
 /* windmill は「ベースレイヤーがかなか」を default_layer_state で見る。ZMK ではかなが
  * いちばん下のレイヤーで、英数はその上に重ねるので、英数が上がっていなければかなと
- * みなす。かな/英数の切り替えは 4/9 で入れる */
+ * みなす。かな/英数の切り替えは 4/9 で入れる。
+ * 4/9 では Ctrl / Win / Alt のホールド中にも英数レイヤーを上げるので、この判定では
+ * かなベースのまま英数とみなしてしまう。そこで windmill と同じく、ベースがかなか英数かを
+ * 状態として持つ形に置き換えること */
 static bool is_kana_base(void) { return !zmk_keymap_layer_active(LAYER_ALPHA); }
 
 bool wm_is_alpha_output(uint32_t key) {

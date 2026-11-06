@@ -20,6 +20,7 @@
 #include <dt-bindings/zmk/modifiers.h>
 
 #include <zmk/endpoints.h>
+#include <zmk/event_manager.h>
 #include <zmk/events/keycode_state_changed.h>
 #include <zmk/hid.h>
 
@@ -140,6 +141,9 @@ static void wm_output_begin(uint32_t output, bool alpha) {
     LOG_DBG("output 0x%08X alpha %d held 0x%02X", output, alpha, held);
 }
 
+/* windmill 自身がキーのイベントを出している最中 */
+static bool raising;
+
 /* 1 手順を実行する。テストで送出の間隔を固定するため、送り始めからの時間と、
  * そのときホストへ出るレポートの修飾を残す */
 static void wm_output_step(const struct step *step) {
@@ -150,8 +154,11 @@ static void wm_output_step(const struct step *step) {
     case STEP_RELEASE:
         LOG_DBG("+%dms %s 0x%08X", elapsed, step->type == STEP_PRESS ? "press" : "release",
                 step->arg);
+        /* 目印。順番待ちの間に外から来たキーを捕まえる listener が、これは通す */
+        raising = true;
         raise_zmk_keycode_state_changed_from_encoded(step->arg, step->type == STEP_PRESS,
                                                      k_uptime_get());
+        raising = false;
         break;
     case STEP_HIDE_HELD:
     case STEP_SHOW_HELD:
@@ -170,15 +177,33 @@ static void wm_output_step(const struct step *step) {
 
 /*
  * 順番待ち
+ *
+ * windmill はその場で送り切るので、文字を送っている間に押された素のキー (&kp の
+ * Enter、BSpc、矢印、修飾) が文字を追い越すことは無い。ここでは待ちの間にも
+ * ほかのキーの処理が進むので、送出待ちがある間に windmill の外から来たキーの
+ * イベント (keycode_state_changed) は捕まえて文字と同じ列に並べ、押された順に出す。
+ * 捕まえずに通すと、かなを打ってすぐの Enter が先に確定したり、Shift を隠している
+ * 間のキーが Shift 抜けで出たりする
  */
 
+enum pending_type {
+    PENDING_OUTPUT, /* 文字 */
+    PENDING_EVENT,  /* 捕まえたキーのイベント */
+};
+
 struct pending {
-    uint32_t output;
-    bool alpha;
+    uint8_t type;
+    union {
+        struct {
+            uint32_t output;
+            bool alpha;
+        };
+        struct zmk_keycode_state_changed_event event;
+    };
 };
 
 /* 1文字ぶんは長くても 100ms ほどなので、両手で打っても溢れない */
-#define PENDING_SIZE 16
+#define PENDING_SIZE 32
 
 static struct pending pendings[PENDING_SIZE];
 static uint8_t pending_head;
@@ -188,15 +213,33 @@ static bool sending;
 static void run(struct k_work *work);
 static K_WORK_DELAYABLE_DEFINE(output_work, run);
 
+static struct pending *push_pending(void) {
+    if (pending_len >= PENDING_SIZE) {
+        return NULL;
+    }
+    return &pendings[(pending_head + pending_len++) % PENDING_SIZE];
+}
+
+/* 捕まえたイベントを、捕まえた listener の次から流し直す。こちらへは戻ってこない */
+static void wm_output_release(struct pending *pending) {
+    LOG_DBG("keycode 0x%02X state %d", pending->event.data.keycode, pending->event.data.state);
+    ZMK_EVENT_RELEASE(pending->event);
+}
+
 static void run(struct k_work *work) {
     for (;;) {
         if (!sending) {
             if (!pending_len) {
                 return;
             }
-            const struct pending next = pendings[pending_head];
+            struct pending next = pendings[pending_head];
             pending_head = (pending_head + 1) % PENDING_SIZE;
             pending_len--;
+
+            if (next.type == PENDING_EVENT) {
+                wm_output_release(&next);
+                continue;
+            }
             wm_output_begin(next.output, next.alpha);
             sending = true;
         }
@@ -214,18 +257,43 @@ static void run(struct k_work *work) {
 }
 
 int wm_send_output(uint32_t output, bool alpha) {
-    if (pending_len >= PENDING_SIZE) {
+    struct pending *pending = push_pending();
+    if (!pending) {
         LOG_WRN("windmill の送出待ちが溢れたので 0x%08X を捨てる", output);
         return -ENOMEM;
     }
-    pendings[(pending_head + pending_len) % PENDING_SIZE] = (struct pending){
+    *pending = (struct pending){
+        .type = PENDING_OUTPUT,
         .output = output,
         .alpha = alpha,
     };
-    pending_len++;
 
     /* 待ちの途中ならその遅延のまま (k_work_schedule は予約済みなら何もしない)。
      * 止まっていれば今すぐ送り始める */
     k_work_schedule(&output_work, K_NO_WAIT);
     return 0;
 }
+
+/* 送出待ちがある間だけ、windmill の外から来たキーのイベントを捕まえる。
+ * windmill 自身が出すイベント (raising の間) は通す */
+static int wm_output_hold_back(const zmk_event_t *eh) {
+    const struct zmk_keycode_state_changed *ev = as_zmk_keycode_state_changed(eh);
+    if (!ev || raising || (!sending && !pending_len)) {
+        return ZMK_EV_EVENT_BUBBLE;
+    }
+
+    struct pending *pending = push_pending();
+    if (!pending) {
+        /* 捨てると押しっぱなしや離し忘れになるので、順番が崩れても通す */
+        LOG_WRN("windmill の送出待ちが溢れたので、キーを待たせずに通す");
+        return ZMK_EV_EVENT_BUBBLE;
+    }
+    pending->type = PENDING_EVENT;
+    pending->event = copy_raised_zmk_keycode_state_changed(ev);
+
+    LOG_DBG("keycode 0x%02X state %d", ev->keycode, ev->state);
+    return ZMK_EV_EVENT_CAPTURED;
+}
+
+ZMK_LISTENER(windmill_output, wm_output_hold_back);
+ZMK_SUBSCRIPTION(windmill_output, zmk_keycode_state_changed);
