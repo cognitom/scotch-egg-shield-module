@@ -1,3 +1,5 @@
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
 wm_host pressed: position 14 param 1
 wm_host_set: host 0 setting 0 value 1 config 0x00000001
 pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00

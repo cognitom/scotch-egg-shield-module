@@ -1,0 +1,16 @@
+#include "../../windmill.dtsi"
+
+/* MY_LCTL のタップのたびに、ホストへ LANG1 (かな) / LANG2 (英数) を交互に送り、
+ * ベースも英数 → かな → 英数 と入れ替わる (windmill の LangToggle.tap_toggles_ime_and_base_layer)。
+ * キーボードは IME の状態を読めないので、ベースがずれるとかなのつもりで英字配列を打つ
+ * ことになる。ベースは ぬ の位置で見る (英数なら q = 0x14、かなら 1 = 0x1E)。
+ * 起動直後は英数 */
+&kscan {
+    events = <
+        TAP(0,1)
+        TAP(3,0)
+        TAP(0,1)
+        TAP(3,0)
+        TAP(0,1)
+    >;
+};

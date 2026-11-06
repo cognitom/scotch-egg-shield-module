@@ -9,6 +9,7 @@
  * wm_output step の時刻で固定する */
 &kscan {
     events = <
+        TO_KANA
         TAP(0,1)                 /* ぬ */
         ZMK_MOCK_PRESS(3,4,250)  /* ひ */
         TAP(3,5) TAP(3,5) TAP(3,5)

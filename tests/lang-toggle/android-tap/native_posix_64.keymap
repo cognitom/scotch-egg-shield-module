@@ -1,0 +1,15 @@
+#include "../../windmill.dtsi"
+
+/* MY_ANDR を押した後は、かなへは変換 (INT4 = 0x8A)、英数へは無変換 (INT5 = 0x8B) を
+ * 修飾なしの単独で送る (windmill の LangToggleAndroid.tap_sends_henkan_and_muhenkan)。
+ * cognitom/windmill-android のユーザー補助サービスが受けて IME を直接指定する。
+ * ベースの入れ替えは Windows と同じ */
+&kscan {
+    events = <
+        CONF_TAP(1,2)
+        TAP(3,0)
+        TAP(0,1)
+        TAP(3,0)
+        TAP(0,1)
+    >;
+};

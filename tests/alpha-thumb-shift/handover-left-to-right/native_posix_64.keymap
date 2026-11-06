@@ -1,0 +1,14 @@
+#include "../../windmill.dtsi"
+
+/* 英数レイヤーの SandS の持ち替え (windmill の AlphaThumbShift.handover_left_to_right_keeps_shift)。
+ * 左は &wm_sands LSHFT SPACE、右は &wm_sands RSHFT SPACE で、修飾が左右で別なので、
+ * 左を離しても右が押されている限り Shift は続く。起動直後の英数のまま打つ */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,5,250)
+        ZMK_MOCK_PRESS(3,6,250)
+        ZMK_MOCK_RELEASE(3,5,120)
+        TAP(0,1)
+        ZMK_MOCK_RELEASE(3,6,120)
+    >;
+};

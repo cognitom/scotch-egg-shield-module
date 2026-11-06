@@ -1,0 +1,28 @@
+layer_changed: layer 2 state 1
+layer_changed: layer 4 state 1
+wm_lang pressed: position 36 param 1
+wm_lang send: kana 0 keycode 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+layer_changed: layer 4 state 0
+pressed: usage_page 0x07 keycode 0x14 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x14 implicit_mods 0x00 explicit_mods 0x00
+hold_tap 36 decided tap
+wm_lang pressed: position 36 param 0
+wm_lang send: kana 1 keycode 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+layer_changed: layer 2 state 0
+layer_changed: layer 4 state 1
+wm_lang pressed: position 36 param 1
+wm_lang send: kana 1 keycode 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+layer_changed: layer 4 state 0
+wm_char pressed: position 1 key 12
+wm_output begin: output 0x0007001E alpha 0 held 0x00
+wm_output step: +0ms press 0x0007001E
+pressed: usage_page 0x07 keycode 0x1E implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x0007001E
+released: usage_page 0x07 keycode 0x1E implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 1 key 12

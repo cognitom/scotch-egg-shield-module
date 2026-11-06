@@ -1,0 +1,17 @@
+#include "../../windmill.dtsi"
+
+/* かなベースで Win (つ、仮で &wm_mod LGUI) を押している間は英数レイヤー。離せばかなへ
+ * 戻る (windmill の HoldLayer.gui_hold_switches_to_alpha_and_back)。かな中でも Win+V などが
+ * かな配列のまま引かれないようにするため (windmill の issue #34)。
+ * 戻るほうが壊しやすい (windmill の旧実装はここで英数に貼りついた)。
+ * ぬ の位置で見る (英数なら q = 0x14、かなら 1 = 0x1E) */
+&kscan {
+    events = <
+        TO_KANA
+        ZMK_MOCK_PRESS(3,1,250)
+        ZMK_MOCK_PRESS(0,1,120)
+        ZMK_MOCK_RELEASE(0,1,120)
+        ZMK_MOCK_RELEASE(3,1,120)
+        TAP(0,1)
+    >;
+};

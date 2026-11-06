@@ -5,6 +5,7 @@
  * 送る前後に wm_output step の hide / show が出ないこと */
 &kscan {
     events = <
+        TO_KANA
         ZMK_MOCK_PRESS(3,6,150)
         ZMK_MOCK_PRESS(1,9,120)  /* ら の位置。Shift 面では「 */
         ZMK_MOCK_RELEASE(1,9,120)

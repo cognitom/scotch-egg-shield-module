@@ -2,14 +2,17 @@
  * scotch-egg のキーマップ。windmill の technik (firmware/technik/keymaps/default/keymap.c)
  * の6レイヤーを移したもの。
  *
+ * かなと英数がベースで、左下の MY_LCTL (&wm_lctl) のタップで入れ替わる。起動のたびに
+ * 英数から始める。ZMK ではかながいちばん下のレイヤーで、英数ベースのときは英数レイヤーを
+ * 上げてある。Ctrl / Win / Alt (&wm_mod) のホールド中も英数レイヤーが上がる。
+ *
  * 文字キー (かな、Shift 面、記号) は &wm_char で、ホストへ送るキーは出力表が決める。
  * 英数レイヤーのキーと文字以外のキー (Enter や矢印など) は素のキー (&kp) のまま。
+ * ただし英数レイヤーの ; ' \ は &wm_alpha で、接続先が JIS のときだけ1キー1出力で送る。
  *
  * 「仮」と書いたキーは、windmill の処理を後の issue で移すまでの代わり。
  * - かなレイヤー最下段 (つ さ そ ひ こ み も ね) のタップ・ホールド: 6/9
- * - 言語切替 (MY_LCTL)、英数の SandS と LT: 4/9
  * - 左右の Fn と設定レイヤー: 5/9
- * - MY_IME: 4/9
  */
 
 #include <behaviors.dtsi>
@@ -52,15 +55,16 @@
     keymap {
         compatible = "zmk,keymap";
 
-        /* 最下段の左端は仮で、英数レイヤーのトグル (ホストの IME は切り替えない)。
-         * つ さ そ ひ こ み も ね は仮で、ホールドの役割だけを持ち、タップでは何も出ない */
+        /* 最下段の左端は MY_LCTL (タップで言語切替、ホールドで Ctrl + 英数レイヤー)。
+         * つ さ そ ひ こ み も ね は仮で、ホールドの役割だけを持ち、タップでは何も出ない。
+         * つ / さ (Win / Alt) は押している間、英数レイヤーを上げる */
         kana_layer {
             display-name = "Kana";
             bindings = <
-&kp ESC            &wm_char KN_NU   &wm_char KN_FU   &wm_char KN_A    &wm_char KN_U    &wm_char KN_E    &wm_char KN_O    &wm_char KN_YA   &wm_char KN_YU   &wm_char KN_YO   &wm_char KN_WA   &kp RET
-&kp TAB            &wm_char KN_TA   &wm_char KN_TE   &wm_char KN_I    &wm_char KN_SU   &wm_char KN_KA   &wm_char KN_N    &wm_char KN_NA   &wm_char KN_NI   &wm_char KN_RA   &wm_char KN_SE   &wm_char KN_DAKU
-&kp BSPC           &wm_char KN_CHI  &wm_char KN_TO   &wm_char KN_SHI  &wm_char KN_HA   &wm_char KN_KI   &wm_char KN_KU   &wm_char KN_MA   &wm_char KN_NO   &wm_char KN_RI   &wm_char KN_RE   &wm_char KN_KE
-&tog LAYER_ALPHA   &kp LGUI         &kp LALT         &mo LAYER_FN     &mo LAYER_SYM    &kana_shift_l    &kana_shift_r    &mo LAYER_SYM    &mo LAYER_FN     &wm_char KN_RU   &wm_char KN_ME   &wm_char KN_RO
+&kp ESC                 &wm_char KN_NU   &wm_char KN_FU   &wm_char KN_A    &wm_char KN_U    &wm_char KN_E    &wm_char KN_O    &wm_char KN_YA   &wm_char KN_YU   &wm_char KN_YO   &wm_char KN_WA   &kp RET
+&kp TAB                 &wm_char KN_TA   &wm_char KN_TE   &wm_char KN_I    &wm_char KN_SU   &wm_char KN_KA   &wm_char KN_N    &wm_char KN_NA   &wm_char KN_NI   &wm_char KN_RA   &wm_char KN_SE   &wm_char KN_DAKU
+&kp BSPC                &wm_char KN_CHI  &wm_char KN_TO   &wm_char KN_SHI  &wm_char KN_HA   &wm_char KN_KI   &wm_char KN_KU   &wm_char KN_MA   &wm_char KN_NO   &wm_char KN_RI   &wm_char KN_RE   &wm_char KN_KE
+&wm_lctl LCTRL MY_LANG  &wm_mod LGUI     &wm_mod LALT     &mo LAYER_FN     &mo LAYER_SYM    &kana_shift_l    &kana_shift_r    &mo LAYER_SYM    &mo LAYER_FN     &wm_char KN_RU   &wm_char KN_ME   &wm_char KN_RO
             >;
         };
 
@@ -76,14 +80,16 @@
             >;
         };
 
-        /* 最下段の左右の Fn、LT、SandS は仮。ZMK の既定の &mo / &lt / &mt を置いてある */
+        /* 最下段の左右の Fn は仮。ZMK の既定の &mo を置いてある。
+         * Win / Alt は、Ctrl のホールドで英数レイヤーが上がったときにここで引かれる。
+         * そこでも数えないと、Ctrl を先に離した時点でかなへ落ちるので &wm_mod にする */
         alpha_layer {
             display-name = "Alpha";
             bindings = <
-&trans  &kp Q     &kp W     &kp E         &kp R                &kp T            &kp Y            &kp U                &kp I         &kp O      &kp P      &trans
-&trans  &kp A     &kp S     &kp D         &kp F                &kp G            &kp H            &kp J                &kp K         &kp L      &kp SEMI   &kp SQT
-&trans  &kp Z     &kp X     &kp C         &kp V                &kp B            &kp N            &kp M                &kp COMMA     &kp DOT    &kp UP     &kp RIGHT
-&trans  &kp LGUI  &kp LALT  &mo LAYER_FN  &lt LAYER_SYM BSLH   &mt LSHFT SPACE  &mt RSHFT SPACE  &lt LAYER_SYM FSLH   &mo LAYER_FN  &kp K_APP  &kp LEFT   &kp DOWN
+&trans  &kp Q         &kp W         &kp E         &kp R                  &kp T                  &kp Y                  &kp U                  &kp I         &kp O      &kp P            &trans
+&trans  &kp A         &kp S         &kp D         &kp F                  &kp G                  &kp H                  &kp J                  &kp K         &kp L      &wm_alpha SEMI   &wm_alpha SQT
+&trans  &kp Z         &kp X         &kp C         &kp V                  &kp B                  &kp N                  &kp M                  &kp COMMA     &kp DOT    &kp UP           &kp RIGHT
+&trans  &wm_mod LGUI  &wm_mod LALT  &mo LAYER_FN  &wm_lt LAYER_SYM BSLH  &wm_sands LSHFT SPACE  &wm_sands RSHFT SPACE  &wm_lt LAYER_SYM FSLH  &mo LAYER_FN  &kp K_APP  &kp LEFT         &kp DOWN
             >;
         };
 
@@ -97,16 +103,17 @@
             >;
         };
 
-        /* 右上の MY_DARK (LED) は移さない。左下の MY_IME は仮で、何もしない。
+        /* 右上の MY_DARK (LED) は移さない。左下は MY_IME (Fn+Ctrl) で、ホストの IME だけを
+         * 今のベースの側へ切り替える。
          * 最下段の左右の Fn の位置は仮で、片方の Fn を押したままもう片方を押すと設定
          * レイヤーが上がる (windmill の set_fn() は 5/9) */
         fn_layer {
             display-name = "Fn";
             bindings = <
-&trans     &kp F1     &kp F2   &kp F3          &kp F4   &kp F5        &kp F6        &kp F7      &kp F8          &kp F9        &kp F10    &none
-&kp CAPS   &kp F11    &kp F12  &none           &none    &none         &none         &none       &none           &none         &none      &none
-&kp DEL    &kp PSCRN  &none    &none           &none    &kp C_BRI_DN  &kp C_BRI_UP  &kp C_MUTE  &kp C_VOL_DN    &kp C_VOL_UP  &kp UP     &kp RIGHT
-&none      &trans     &trans   &mo LAYER_CONF  &trans   &trans        &trans        &trans      &mo LAYER_CONF  &trans        &kp LEFT   &kp DOWN
+&trans           &kp F1     &kp F2   &kp F3          &kp F4   &kp F5        &kp F6        &kp F7      &kp F8          &kp F9        &kp F10    &none
+&kp CAPS         &kp F11    &kp F12  &none           &none    &none         &none         &none       &none           &none         &none      &none
+&kp DEL          &kp PSCRN  &none    &none           &none    &kp C_BRI_DN  &kp C_BRI_UP  &kp C_MUTE  &kp C_VOL_DN    &kp C_VOL_UP  &kp UP     &kp RIGHT
+&wm_lang MY_IME  &trans     &trans   &mo LAYER_CONF  &trans   &trans        &trans        &trans      &mo LAYER_CONF  &trans        &kp LEFT   &kp DOWN
             >;
         };
 

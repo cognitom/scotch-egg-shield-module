@@ -1,0 +1,13 @@
+#include "../../windmill.dtsi"
+
+/* 両方離せば Shift も落ちる (windmill の AlphaThumbShift.both_released_clears_shift)。
+ * 持ち替えの後始末が残っていないこと。後の q に Shift が乗らない */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,5,250)
+        ZMK_MOCK_PRESS(3,6,250)
+        ZMK_MOCK_RELEASE(3,5,120)
+        ZMK_MOCK_RELEASE(3,6,120)
+        TAP(0,1)
+    >;
+};

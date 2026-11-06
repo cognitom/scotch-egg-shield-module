@@ -1,0 +1,12 @@
+#include "../../windmill.dtsi"
+
+/* 右をホールドして左をタップしても同じで、乗るのは右Shift
+ * (windmill の AlphaThumbShift.hold_right_tap_left_sends_shift_space) */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,6,250)
+        ZMK_MOCK_PRESS(3,5,120)
+        ZMK_MOCK_RELEASE(3,5,120)
+        ZMK_MOCK_RELEASE(3,6,120)
+    >;
+};

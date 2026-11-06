@@ -6,7 +6,6 @@
  * 足して送る。続く「-」(Shift 無し) に Shift が漏れて「=」に化けることも無い */
 &kscan {
     events = <
-        TAP(3,0)
         ZMK_MOCK_PRESS(3,4,250)
         ZMK_MOCK_PRESS(1,1,30)   /* ! */
         ZMK_MOCK_PRESS(2,1,30)   /* = */

@@ -1,0 +1,8 @@
+description: |
+  windmill の、ホールド中は英数レイヤーを上げる修飾キー (Ctrl / Win / Alt)。引数は
+  修飾のキー (LCTRL / LGUI / LALT など)。修飾は &kp と同じく押し離しを流し、かなベースの
+  ときだけ押している間は英数レイヤーを上げる
+
+compatible: "zmk,behavior-wm-mod"
+
+include: one_param.yaml

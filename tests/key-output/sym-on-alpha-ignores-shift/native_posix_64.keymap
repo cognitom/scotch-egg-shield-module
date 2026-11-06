@@ -1,12 +1,11 @@
 #include "../../windmill.dtsi"
 
 /* 記号レイヤーでは Shift が効かない (windmill の KeyOutputJis.sym_layer_on_alpha_ignores_shift)。
- * 英数ベースで右の SandS (仮の &mt RSHFT SPACE) を押していても同じ文字が出る。
+ * 英数ベースで右の SandS を押していても同じ文字が出る。
  * Shift の要らない数字などは右Shift を隠して送り、要るものは右Shift をそのまま使う。
  * 右の親指の位置 (記号レイヤーでは「?」) は押したままなので叩かない */
 &kscan {
     events = <
-        TAP(3,0)
         ZMK_MOCK_PRESS(3,6,250)
         ZMK_MOCK_PRESS(3,4,250)
         /* 1 2 3 4 5 6 7 8 9 0 */

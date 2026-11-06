@@ -1,0 +1,12 @@
+#include "../../windmill.dtsi"
+
+/* 素早い2回タップも2回のトグル (windmill の LangToggle.quick_double_tap_toggles_twice)。
+ * 以前の windmill のようにダブルタップで「かな」を意味することはなく、英数 → かな →
+ * 英数 と戻ってくる。間は 50ms (以前の TD_DTAP_TERM の 180ms 未満) */
+&kscan {
+    events = <
+        TAP(3,0)
+        TAP(3,0)
+        TAP(0,1)
+    >;
+};

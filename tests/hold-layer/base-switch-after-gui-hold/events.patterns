@@ -1,0 +1,6 @@
+s/.*hid_listener_keycode_//p
+s/.*layer_changed: /layer_changed: /p
+s/.*: \([0-9]*\) decided \([a-z-]*\) .*/hold_tap \1 decided \2/p
+s/.*on_wm_\(char\|lang\|mod\|alpha\)_binding_\([a-z]*\): /wm_\1 \2: /p
+s/.*send_lang_to_host: /wm_lang send: /p
+s/.*wm_output_\(begin\|step\): /wm_output \1: /p

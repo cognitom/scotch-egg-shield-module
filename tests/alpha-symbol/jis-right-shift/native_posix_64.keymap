@@ -1,0 +1,15 @@
+#include "../../windmill.dtsi"
+
+/* 右の SandS を押したまま (windmill の KeyOutputJis.alpha_symbols_with_thumb_shift)。
+ * 横取りした3キーは押されている Shift で送るものを決める。
+ *   ;  → :  JIS では Shift 無しのキー (0x34) なので、右Shift を隠して送る
+ *   '  → "  Shift+2 (0x1F)。押されている右Shift をそのまま使う
+ *   \  → |  Shift+¥ (INT3 = 0x89)。同じく右Shift をそのまま使う
+ * , . / は素のまま右Shift が乗る。左Shift への付け替えは挟まらない */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,6,250)
+        TAP(1,10) TAP(1,11) TAP(2,8) TAP(2,9) TAP(3,4) TAP(3,7)
+        ZMK_MOCK_RELEASE(3,6,120)
+    >;
+};

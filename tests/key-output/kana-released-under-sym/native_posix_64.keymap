@@ -6,6 +6,7 @@
  * 押しっぱなしのキーも残らない */
 &kscan {
     events = <
+        TO_KANA
         ZMK_MOCK_PRESS(0,1,50)   /* ぬ */
         ZMK_MOCK_PRESS(3,4,250)  /* ひ */
         ZMK_MOCK_RELEASE(0,1,50)

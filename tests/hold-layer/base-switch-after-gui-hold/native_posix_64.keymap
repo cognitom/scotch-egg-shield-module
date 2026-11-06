@@ -1,0 +1,17 @@
+#include "../../windmill.dtsi"
+
+/* Win のホールドの後も MY_LCTL の英数/かなの切り替えが効く
+ * (windmill の HoldLayer.base_layer_switch_works_after_gui_hold)。
+ * 英数レイヤーが上がりっぱなしになると、ベースをかなへ戻しても上から潰されて
+ * 症状が出ない。英数へ (LANG2) 移って ぬ は q、かなへ (LANG1) 戻って ぬ は 1 */
+&kscan {
+    events = <
+        TO_KANA
+        ZMK_MOCK_PRESS(3,1,250)
+        ZMK_MOCK_RELEASE(3,1,120)
+        TAP(3,0)
+        TAP(0,1)
+        TAP(3,0)
+        TAP(0,1)
+    >;
+};

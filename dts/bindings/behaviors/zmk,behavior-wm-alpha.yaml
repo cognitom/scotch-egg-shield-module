@@ -1,0 +1,8 @@
+description: |
+  windmill の英数レイヤーの記号キー。引数は US 配列のキー。接続先が JIS のとき、
+  ; ' \ だけは押されている Shift で送るものを決めて1キー1出力で送る。それ以外は
+  &kp と同じく押し離しを流す
+
+compatible: "zmk,behavior-wm-alpha"
+
+include: one_param.yaml

@@ -12,6 +12,7 @@
 
 &kscan {
     events = <
+        TO_KANA
         CONF_TAP(2,2)
         AT KAKKO
         CONF_TAP(2,1)

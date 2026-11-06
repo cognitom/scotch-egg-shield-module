@@ -1,3 +1,5 @@
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
 pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
 wm_char pressed: position 1 key 67
 wm_output begin: output 0x0007001E alpha 1 held 0x02

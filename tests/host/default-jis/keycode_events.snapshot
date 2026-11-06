@@ -2,6 +2,8 @@ wm_host pressed: position 25 param 2
 wm_host_set: host 0 setting 1 value 0 config 0x00000000
 wm_host pressed: position 13 param 0
 wm_host_set: host 0 setting 0 value 0 config 0x00000000
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
 wm_char pressed: position 14 key 78
 pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
 released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00

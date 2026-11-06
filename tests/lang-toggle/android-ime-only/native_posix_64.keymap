@@ -1,0 +1,16 @@
+#include "../../windmill.dtsi"
+
+/* Android でも Fn+Ctrl (MY_IME) は IME だけを今のベースの側へ指定し直す
+ * (windmill の LangToggleAndroid.fn_ctrl_specifies_host_only)。直接指定なので、
+ * 揃っているときに押しても逆にずれない。
+ * 英数のまま MY_IME → INT5、ぬ は q。かなへ移って (INT4) MY_IME → INT4、ぬ は 1 */
+&kscan {
+    events = <
+        CONF_TAP(1,2)
+        FN_TAP(3,0)
+        TAP(0,1)
+        TAP(3,0)
+        FN_TAP(3,0)
+        TAP(0,1)
+    >;
+};

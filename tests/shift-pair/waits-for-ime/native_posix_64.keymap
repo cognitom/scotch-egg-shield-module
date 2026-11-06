@@ -9,6 +9,7 @@
  * 「Shift を隠す → キー → Shift を戻す」の間隔 (IME_WAIT_MS 以上) も固定する */
 &kscan {
     events = <
+        TO_KANA
         ZMK_MOCK_PRESS(3,6,150)
         ZMK_MOCK_PRESS(1,7,120)
         ZMK_MOCK_RELEASE(1,7,120)

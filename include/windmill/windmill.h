@@ -27,6 +27,22 @@ void wm_host_set(uint8_t setting, uint8_t value);
  * いま繋がっている接続先の OS で決まる */
 uint32_t wm_lang_key(bool kana);
 
+/* ベースがかなか。起動のたびに英数から始める (windmill の reset_default_layer())。
+ * 英数レイヤーが上がっているかとは別で、Ctrl / Win / Alt のホールド中に英数レイヤーが
+ * 上がっていても、ベースはかなのまま */
+bool wm_is_kana_base(void);
+
+/* かな / 英数のベースを入れ替え、ホストの IME もそちらへ切り替える (MY_LCTL のタップ) */
+void wm_switch_lang(void);
+
+/* ホストの IME だけを今のベースの側へ切り替える (MY_IME) */
+void wm_send_lang(void);
+
+/* 修飾 (MOD_* のビット) のホールド中だけ英数レイヤーを上げる / 下ろす。
+ * 上げている修飾を1ビットずつ覚え、全部離れたら下ろす */
+void wm_hold_layer_on(uint8_t mod);
+void wm_hold_layer_off(uint8_t mod);
+
 /* 出力表で引くキー (WM_KEY_FIRST 〜 WM_KEY_LAST) なら true */
 bool wm_is_key(uint32_t key);
 

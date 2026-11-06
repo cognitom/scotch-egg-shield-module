@@ -10,6 +10,7 @@
     events = <
         CONF_TAP(2,1)
         CONF_TAP(1,1)
+        TO_KANA
         ZMK_MOCK_PRESS(3,4,250) TAP(1,2) ZMK_MOCK_RELEASE(3,4,250)
         ZMK_MOCK_PRESS(3,5,250) TAP(1,9) TAP(1,10) ZMK_MOCK_RELEASE(3,5,250)
     >;
