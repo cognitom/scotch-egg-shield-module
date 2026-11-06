@@ -15,9 +15,6 @@ services:
       - .:/scotch-egg
     # west は作業場所 (.west/ のある .zmk/) の中で打たないと見つからない
     working_dir: /scotch-egg/.zmk
-    environment:
-      # `west test` (ZMK の run-test.sh) にこのリポジトリをモジュールとして読ませる
-      ZMK_EXTRA_MODULES: /scotch-egg
     labels:
       polar.commands: "west"
     command: bash /scotch-egg/scripts/container/entrypoint.sh

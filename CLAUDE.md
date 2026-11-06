@@ -44,10 +44,14 @@ bash scripts/build.sh   # seeeduino_xiao_ble + scotch_egg を output/ に出す
   取ってくる `zephyr/` とぶつかるため。**`config/west.yml` を変えたらコンテナを起動し直す**
 - `west` はコンテナの中で動くので、スクリプトからはコンテナ側のパス (`/scotch-egg/...`)
   で渡す
-- テストが落ちたら差分が出る。ログは `.zmk/zmk/app/build/tests/<テスト>/` の下
-  (`keycode_events_full.log` が全部、`keycode_events.log` が patterns を通した後)。
-  `ZMK_TESTS_VERBOSE=1` でビルドの出力も出る。`scripts/bin/west` 経由なら
-  `ZMK_TESTS_AUTO_ACCEPT=1` で snapshot を書き換えられるが、書き換えた中身は必ず読む
+- `test.sh` は ZMK の `app/run-test.sh` と同じ手順 (native_posix_64 でビルドして動かし、
+  `events.patterns` で絞って `keycode_events.snapshot` と比べる) を、`west build` と
+  `west build -t run` で回す。コンテナへ届くのは `west` だけで、`west test` は ZMK の
+  west-commands が import 越しに載らず使えないため。絞り込みと比較はホスト側でやる
+- `bash scripts/test.sh wm-char` で `tests/wm-char` の下だけ回せる
+- テストが落ちたら差分が出る。ログは `output/tests/<テスト>/` の下
+  (`build.log`、`keycode_events_full.log` が全部、`keycode_events.log` が patterns を通した後)。
+  `--accept` で snapshot を出た列に書き換えられるが、書き換えた中身は必ず読む
 
 **コードを触ったら `scripts/test.sh` を通す。** キーマップやシールドを触ったときは
 `scripts/build.sh` も通す。PR を出せば Test ワークフロー (`.github/workflows/test.yml`)

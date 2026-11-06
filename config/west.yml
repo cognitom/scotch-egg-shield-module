@@ -10,8 +10,5 @@ manifest:
       # .github/workflows/build.yml の build-user-config.yml@ と揃える
       revision: v0.3.0
       import: app/west.yml
-      # import 越しには ZMK の west-commands が載らないので、`west test` (scripts/test.sh
-      # が使う) のために名指しする
-      west-commands: app/scripts/west-commands.yml
   self:
     path: config

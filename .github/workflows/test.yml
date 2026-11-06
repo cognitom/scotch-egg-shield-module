@@ -25,10 +25,13 @@ jobs:
       - name: Put west on PATH
         run: echo "$GITHUB_WORKSPACE/scripts/bin" >> "$GITHUB_PATH"
       - name: Run tests
-        # run-test.sh は既定でビルドの出力を捨てる。CI では落ちた理由が見えるよう出す
-        env:
-          ZMK_TESTS_VERBOSE: "1"
         run: bash scripts/test.sh
       # Build ワークフローとは別に、手元と同じ scripts/build.sh が通ることも見ておく
       - name: Run build
         run: bash scripts/build.sh
+      - name: Upload test logs
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-logs
+          path: output/tests/
