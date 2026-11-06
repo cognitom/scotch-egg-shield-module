@@ -1,0 +1,21 @@
+#include "../../windmill.dtsi"
+
+/* かなベースでも Fn レイヤーは同じ (windmill の
+ * FnLayer.function_keys_follow_number_row_on_kana)。かなレイヤーの Fn は そ / ね の位置。
+ * 透過の Esc はかなレイヤーまで落ちても Esc で、「そ」「ね」も出ない。
+ * そ / ね のタップ・ホールドは 6/9 で、いまはホールドの役割 (&wm_mo) だけを持つ */
+#define FN_KEYS                                                                                    \
+    TAP(0, 0) TAP(0, 1) TAP(0, 2) TAP(0, 3) TAP(0, 4) TAP(0, 5) TAP(0, 6) TAP(0, 7) TAP(0, 8)       \
+        TAP(0, 9) TAP(0, 10) TAP(1, 0) TAP(1, 1) TAP(1, 2)
+
+&kscan {
+    events = <
+        TO_KANA
+        ZMK_MOCK_PRESS(3,3,250)
+        FN_KEYS
+        ZMK_MOCK_RELEASE(3,3,120)
+        ZMK_MOCK_PRESS(3,8,250)
+        FN_KEYS
+        ZMK_MOCK_RELEASE(3,8,120)
+    >;
+};

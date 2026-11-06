@@ -1,0 +1,19 @@
+#include "../../windmill.dtsi"
+
+/* かなベースでは Fn が そ / ね の位置のキーになる。片方を離しても Fn レイヤーに残り、
+ * 残りを離せばかなへ戻る (windmill の ConfLayer.releasing_one_fn_on_kana_returns_to_fn_layer)。
+ *
+ * MY_WIN の位置を叩く。設定レイヤーでは何も出ず、Fn レイヤーでは F11 (0x44)、
+ * かなでは た (q の位置、0x14) */
+&kscan {
+    events = <
+        TO_KANA
+        ZMK_MOCK_PRESS(3,3,10)
+        ZMK_MOCK_PRESS(3,8,250)
+        TAP(1,1)
+        ZMK_MOCK_RELEASE(3,3,50)
+        TAP(1,1)
+        ZMK_MOCK_RELEASE(3,8,50)
+        TAP(1,1)
+    >;
+};

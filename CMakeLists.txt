@@ -11,6 +11,7 @@ if(CONFIG_ZMK_WINDMILL)
     src/host_config.c
     src/key_output.c
     src/lang.c
+    src/layer.c
     src/output.c
   )
 endif()
@@ -33,4 +34,12 @@ endif()
 
 if(CONFIG_ZMK_BEHAVIOR_WM_ALPHA)
   target_sources(app PRIVATE src/behaviors/behavior_wm_alpha.c)
+endif()
+
+if(CONFIG_ZMK_BEHAVIOR_WM_MO)
+  target_sources(app PRIVATE src/behaviors/behavior_wm_mo.c)
+endif()
+
+if(CONFIG_ZMK_BEHAVIOR_WM_OUT)
+  target_sources(app PRIVATE src/behaviors/behavior_wm_out.c)
 endif()

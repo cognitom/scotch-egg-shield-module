@@ -1,0 +1,3 @@
+s/.*hid_listener_keycode_//p
+s/.*layer_changed: /layer_changed: /p
+s/.*on_wm_mo_binding_\([a-z]*\): /wm_mo \1: /p

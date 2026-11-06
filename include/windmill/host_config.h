@@ -42,6 +42,10 @@
 /* 選ばれている endpoint の接続先。範囲外の BLE プロファイルは USB とみなす */
 uint8_t wm_host_from_endpoint(struct zmk_endpoint_instance endpoint);
 
+/* 接続先 host の endpoint (wm_host_from_endpoint() の逆)。&wm_out が送り先を切り替えるのに
+ * 使う。範囲外の host は USB */
+struct zmk_endpoint_instance wm_host_endpoint(uint8_t host);
+
 /* config の中の、host の OS (WM_OS_*) と配列 (WM_LAYOUT_*)。予約の値は既定に倒す。
  * 範囲外の host は USB として読む */
 uint8_t wm_host_config_os(uint32_t config, uint8_t host);

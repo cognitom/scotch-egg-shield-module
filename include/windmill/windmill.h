@@ -43,6 +43,19 @@ void wm_send_lang(void);
 void wm_hold_layer_on(uint8_t mod);
 void wm_hold_layer_off(uint8_t mod);
 
+/* 左右の Fn / 記号のどちらか */
+#define WM_SIDE_L 1
+#define WM_SIDE_R 2
+#define WM_SIDE_BOTH (WM_SIDE_L | WM_SIDE_R)
+
+/* side (WM_SIDE_*) の Fn を押した / 離した。Fn レイヤーはどちらかを押している間、
+ * 設定レイヤーは両方を押している間だけ上がる (windmill の set_fn()) */
+void wm_fn_set(uint8_t side, bool on);
+
+/* side の記号を押した / 離した。両方離れるまで記号レイヤーを下ろさない
+ * (windmill の set_sym()) */
+void wm_sym_set(uint8_t side, bool on);
+
 /* 出力表で引くキー (WM_KEY_FIRST 〜 WM_KEY_LAST) なら true */
 bool wm_is_key(uint32_t key);
 

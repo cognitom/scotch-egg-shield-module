@@ -1,0 +1,21 @@
+#include "../../windmill.dtsi"
+
+/* 右の Fn を先に離しても Fn レイヤーへ戻る。離したほうを押し直せば、また設定レイヤーへ
+ * 入る (windmill の ConfLayer.releasing_right_fn_returns_to_fn_layer_and_back)。
+ * 設定レイヤーの Fn の位置が透過なので、押し直した右は下のレイヤーの Fn として押せる。
+ *
+ * MY_WIN の位置を叩く。Fn レイヤーでは F11 (0x44)、設定レイヤーでは何も出ず、
+ * 両方離した後の英数では a (0x04) */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,3,10)
+        ZMK_MOCK_PRESS(3,8,50)
+        ZMK_MOCK_RELEASE(3,8,50)
+        TAP(1,1)
+        ZMK_MOCK_PRESS(3,8,50)
+        TAP(1,1)
+        ZMK_MOCK_RELEASE(3,8,10)
+        ZMK_MOCK_RELEASE(3,3,50)
+        TAP(1,1)
+    >;
+};

@@ -27,6 +27,16 @@ uint8_t wm_host_from_endpoint(struct zmk_endpoint_instance endpoint) {
     return WM_HOST_BLE_FIRST + endpoint.ble.profile_index;
 }
 
+struct zmk_endpoint_instance wm_host_endpoint(uint8_t host) {
+    if (host < WM_HOST_BLE_FIRST || host >= WM_HOST_COUNT) {
+        return (struct zmk_endpoint_instance){.transport = ZMK_TRANSPORT_USB};
+    }
+    return (struct zmk_endpoint_instance){
+        .transport = ZMK_TRANSPORT_BLE,
+        .ble = {.profile_index = host - WM_HOST_BLE_FIRST},
+    };
+}
+
 static uint8_t host_shift(uint8_t setting, uint8_t host) {
     if (host >= WM_HOST_COUNT) {
         host = WM_HOST_USB;

@@ -1,0 +1,19 @@
+layer_changed: layer 2 state 1
+wm_lang send: kana 1 keycode 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+layer_changed: layer 2 state 0
+wm_mo pressed: position 39 param 0
+layer_changed: layer 4 state 1
+wm_mo pressed: position 44 param 1
+layer_changed: layer 5 state 1
+wm_host pressed: position 14 param 1
+wm_host_set: host 0 setting 0 value 1 config 0x00000001
+wm_mo released: position 44 param 1
+layer_changed: layer 5 state 0
+wm_mo released: position 39 param 0
+layer_changed: layer 4 state 0
+wm_lang send: kana 0 keycode 0x0007008B
+pressed: usage_page 0x07 keycode 0x8B implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x8B implicit_mods 0x00 explicit_mods 0x00
+layer_changed: layer 2 state 1

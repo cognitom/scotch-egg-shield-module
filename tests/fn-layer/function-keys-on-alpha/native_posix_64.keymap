@@ -1,0 +1,22 @@
+#include "../../windmill.dtsi"
+
+/* Fn レイヤーのファンクションキーは数字キーに準じた位置に置く (windmill の
+ * FnLayer.function_keys_follow_number_row_on_alpha)。F1〜F10 は最上段の「1」〜「0」の
+ * 位置、F11 / F12 は2段目の先頭2つ。最左列の Esc は透過で、Fn を押したままでも出る。
+ * その下の Tab の位置は Caps Lock。
+ *
+ * 英数ベース (&wm_mo WM_FN_L / WM_FN_R)。左の Fn、右の Fn の順に、同じ列を叩く */
+#define FN_KEYS                                                                                    \
+    TAP(0, 0) TAP(0, 1) TAP(0, 2) TAP(0, 3) TAP(0, 4) TAP(0, 5) TAP(0, 6) TAP(0, 7) TAP(0, 8)       \
+        TAP(0, 9) TAP(0, 10) TAP(1, 0) TAP(1, 1) TAP(1, 2)
+
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,3,250)
+        FN_KEYS
+        ZMK_MOCK_RELEASE(3,3,120)
+        ZMK_MOCK_PRESS(3,8,250)
+        FN_KEYS
+        ZMK_MOCK_RELEASE(3,8,120)
+    >;
+};
