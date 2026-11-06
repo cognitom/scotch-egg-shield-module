@@ -12,6 +12,8 @@
  *   最下段  3,0 英数のトグル (仮)  3,4 ひ = 記号 (仮)  3,5 こ = 左Shift + Shift 面 (仮)
  *           3,6 み = 右Shift + Shift 面 (仮)
  *   英数    3,6 右の SandS (仮の &mt RSHFT SPACE)
+ *   設定    1,1 MY_WIN  1,2 MY_ANDR  2,1 MY_JIS  2,2 MY_US
+ *           (3,3 で Fn を上げたまま 3,8 を押すと上がる。CONF_TAP を使う)
  */
 
 #include <behaviors.dtsi>
@@ -27,6 +29,12 @@
 /* 50ms 押して離し、50ms 置く (windmill のテストの tap_all と同じ叩き方)。1文字の送出は
  * 長くても 100ms ほどなので、続けて叩くと前の文字の送出と重なることがある */
 #define TAP(row, col) ZMK_MOCK_PRESS(row, col, 50) ZMK_MOCK_RELEASE(row, col, 50)
+
+/* 設定レイヤーのキーを叩く (windmill のテストの tap_on_conf と同じく、左右の Fn を
+ * 押してから叩き、逆の順で離す) */
+#define CONF_TAP(row, col)                                                                         \
+    ZMK_MOCK_PRESS(3, 3, 50) ZMK_MOCK_PRESS(3, 8, 50) TAP(row, col) ZMK_MOCK_RELEASE(3, 8, 50)    \
+        ZMK_MOCK_RELEASE(3, 3, 50)
 
 / {
     macros {
@@ -105,10 +113,10 @@
 
         conf_layer {
             bindings = <
-&none  &none  &none  &none   &none  &none  &none  &none  &none   &none  &none  &none
-&none  &none  &none  &none   &none  &none  &none  &none  &none   &none  &none  &none
-&none  &none  &none  &none   &none  &none  &none  &none  &none   &none  &none  &none
-&none  &none  &none  &trans  &none  &none  &none  &none  &trans  &none  &none  &none
+&none  &none            &none             &none   &none  &none  &none  &none  &none   &none  &none  &none
+&none  &wm_host MY_WIN  &wm_host MY_ANDR  &none   &none  &none  &none  &none  &none   &none  &none  &none
+&none  &wm_host MY_JIS  &wm_host MY_US    &none   &none  &none  &none  &none  &none   &none  &none  &none
+&none  &none            &none             &trans  &none  &none  &none  &none  &trans  &none  &none  &none
             >;
         };
     };

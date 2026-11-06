@@ -1,0 +1,16 @@
+#include "../../windmill.dtsi"
+
+/* 何も選んでいなければ Windows + JIS (windmill の HostLayout.default_is_jis)。
+ * 既定のまま MY_JIS と MY_WIN を押しても設定は変わらず、ホストへも何も出ない。
+ *
+ * 配列は記号レイヤーの「@」で見る。JIS では単独の [ のキー (0x2F)。
+ * OS は「」で見る。US 配列でしか OS で変わらないので、JIS ではどちらも同じ
+ * (Shift+] と Shift+＼(0x32))。こ (仮の左Shift + Shift 面) をホールドする */
+&kscan {
+    events = <
+        CONF_TAP(2,1)
+        CONF_TAP(1,1)
+        ZMK_MOCK_PRESS(3,4,250) TAP(1,2) ZMK_MOCK_RELEASE(3,4,250)
+        ZMK_MOCK_PRESS(3,5,250) TAP(1,9) TAP(1,10) ZMK_MOCK_RELEASE(3,5,250)
+    >;
+};

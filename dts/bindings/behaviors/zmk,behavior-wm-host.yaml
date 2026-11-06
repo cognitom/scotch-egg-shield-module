@@ -1,0 +1,8 @@
+description: |
+  windmill の接続先の設定のキー (MY_WIN / MY_ANDR / MY_JIS / MY_US)。引数は
+  dt-bindings/windmill/host.h の MY_*。いま繋がっている接続先の OS か配列を選んで
+  保存する。ホストへは何も送らない
+
+compatible: "zmk,behavior-wm-host"
+
+include: one_param.yaml

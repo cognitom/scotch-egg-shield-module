@@ -9,10 +9,23 @@
 
 #include <dt-bindings/windmill/keys.h>
 #include <dt-bindings/windmill/layers.h>
+#include <windmill/host_config.h>
 
 /* IME は修飾の上げ下げも英数/かなの切り替えも非同期に処理するので、レポートを続けて
  * 送ると前のぶんを取りこぼす (windmill の issue #36)。効かなければ増やし、もたつくなら減らす */
 #define IME_WAIT_MS 10
+
+/* いま繋がっている接続先 (USB か、BLE のアクティブなプロファイル) の OS (WM_OS_*) と
+ * 配列 (WM_LAYOUT_*)。接続先の切り替えを追わずに済むよう、呼ぶたびに引く */
+uint8_t wm_host_os(void);
+uint8_t wm_host_layout(void);
+
+/* いま繋がっている接続先の setting (WM_SETTING_*) を value にして保存する */
+void wm_host_set(uint8_t setting, uint8_t value);
+
+/* ホストの IME を、kana ならかな入力へ、そうでなければ英数へ切り替えるキー。
+ * いま繋がっている接続先の OS で決まる */
+uint32_t wm_lang_key(bool kana);
 
 /* 出力表で引くキー (WM_KEY_FIRST 〜 WM_KEY_LAST) なら true */
 bool wm_is_key(uint32_t key);

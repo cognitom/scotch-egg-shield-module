@@ -9,24 +9,8 @@
 #include <windmill/windmill.h>
 #include <windmill/key_outputs.h>
 
-/*
- * 接続先の設定
- *
- * 接続先ごとの OS と配列は 3/9 で入れる。それまでは windmill の既定 (Windows + JIS) に
- * 固定して引く。例外の表 (key_output_exceptions[]) は先に移しておき、引き方だけ
- * 後から差し替える
- */
-
-#define OS_WIN 0  /* Windows/デスクトップ */
-#define OS_ANDR 1 /* Android */
+/* key_output_exceptions[] で、どの OS にも当てる行 */
 #define OS_ANY 0xFF
-
-#define LAYOUT_JIS 0 /* 日本語 (JIS) */
-#define LAYOUT_US 1  /* English (US) */
-
-static uint8_t host_os(void) { return OS_WIN; }
-
-static uint8_t host_layout(void) { return LAYOUT_JIS; }
 
 /*
  * 出力表
@@ -47,41 +31,42 @@ BUILD_ASSERT(ARRAY_SIZE(key_outputs) == WM_KEY_COUNT,
  * Gboard は ] \ の Shift で出る */
 static const struct {
     uint8_t key;
-    uint8_t layout; /* LAYOUT_* */
-    uint8_t os;     /* OS_* か OS_ANY */
+    uint8_t layout; /* WM_LAYOUT_* */
+    uint8_t os;     /* WM_OS_* か OS_ANY */
     uint32_t output;
 } key_output_exceptions[] = {
-    {KN_LKAKKO, LAYOUT_US, OS_ANDR, LS(RBKT)}, /* 「 */
-    {KN_RKAKKO, LAYOUT_US, OS_ANDR, LS(BSLH)}, /* 」 */
-    {KN_LKAKKO, LAYOUT_US, OS_ANY, LS(LBKT)},
-    {KN_RKAKKO, LAYOUT_US, OS_ANY, LS(RBKT)},
-    {KN_HE, LAYOUT_US, OS_ANY, LS(EQUAL)},   /* へ */
-    {KN_MU, LAYOUT_US, OS_ANY, BSLH},        /* む */
-    {KN_CHOON, LAYOUT_US, OS_ANY, LS(MINUS)}, /* ー */
-    {KN_RO, LAYOUT_US, OS_ANY, GRAVE},       /* ろ */
-    {SY_AT, LAYOUT_US, OS_ANY, LS(N2)},
-    {SY_CIRC, LAYOUT_US, OS_ANY, LS(N6)},
-    {SY_AMPR, LAYOUT_US, OS_ANY, LS(N7)},
-    {SY_ASTR, LAYOUT_US, OS_ANY, LS(N8)},
-    {SY_LPRN, LAYOUT_US, OS_ANY, LS(N9)},
-    {SY_RPRN, LAYOUT_US, OS_ANY, LS(N0)},
-    {SY_GRV, LAYOUT_US, OS_ANY, GRAVE},
-    {SY_EQL, LAYOUT_US, OS_ANY, EQUAL},
-    {SY_PLUS, LAYOUT_US, OS_ANY, LS(EQUAL)},
-    {SY_UNDS, LAYOUT_US, OS_ANY, LS(MINUS)},
-    {SY_LBRC, LAYOUT_US, OS_ANY, LBKT},
-    {SY_RBRC, LAYOUT_US, OS_ANY, RBKT},
-    {SY_TILD, LAYOUT_US, OS_ANY, LS(GRAVE)},
-    {SY_LCBR, LAYOUT_US, OS_ANY, LS(LBKT)},
-    {SY_RCBR, LAYOUT_US, OS_ANY, LS(RBKT)},
-    {SY_PIPE, LAYOUT_US, OS_ANY, LS(BSLH)},
+    {KN_LKAKKO, WM_LAYOUT_US,WM_OS_ANDR, LS(RBKT)}, /* 「 */
+    {KN_RKAKKO, WM_LAYOUT_US,WM_OS_ANDR, LS(BSLH)}, /* 」 */
+    {KN_LKAKKO, WM_LAYOUT_US,OS_ANY, LS(LBKT)},
+    {KN_RKAKKO, WM_LAYOUT_US,OS_ANY, LS(RBKT)},
+    {KN_HE, WM_LAYOUT_US,OS_ANY, LS(EQUAL)},   /* へ */
+    {KN_MU, WM_LAYOUT_US,OS_ANY, BSLH},        /* む */
+    {KN_CHOON, WM_LAYOUT_US,OS_ANY, LS(MINUS)}, /* ー */
+    {KN_RO, WM_LAYOUT_US,OS_ANY, GRAVE},       /* ろ */
+    {SY_AT, WM_LAYOUT_US,OS_ANY, LS(N2)},
+    {SY_CIRC, WM_LAYOUT_US,OS_ANY, LS(N6)},
+    {SY_AMPR, WM_LAYOUT_US,OS_ANY, LS(N7)},
+    {SY_ASTR, WM_LAYOUT_US,OS_ANY, LS(N8)},
+    {SY_LPRN, WM_LAYOUT_US,OS_ANY, LS(N9)},
+    {SY_RPRN, WM_LAYOUT_US,OS_ANY, LS(N0)},
+    {SY_GRV, WM_LAYOUT_US,OS_ANY, GRAVE},
+    {SY_EQL, WM_LAYOUT_US,OS_ANY, EQUAL},
+    {SY_PLUS, WM_LAYOUT_US,OS_ANY, LS(EQUAL)},
+    {SY_UNDS, WM_LAYOUT_US,OS_ANY, LS(MINUS)},
+    {SY_LBRC, WM_LAYOUT_US,OS_ANY, LBKT},
+    {SY_RBRC, WM_LAYOUT_US,OS_ANY, RBKT},
+    {SY_TILD, WM_LAYOUT_US,OS_ANY, LS(GRAVE)},
+    {SY_LCBR, WM_LAYOUT_US,OS_ANY, LS(LBKT)},
+    {SY_RCBR, WM_LAYOUT_US,OS_ANY, LS(RBKT)},
+    {SY_PIPE, WM_LAYOUT_US,OS_ANY, LS(BSLH)},
 };
 
 bool wm_is_key(uint32_t key) { return key >= WM_KEY_FIRST && key <= WM_KEY_LAST; }
 
 uint32_t wm_key_output(uint32_t key) {
-    const uint8_t layout = host_layout();
-    const uint8_t os = host_os();
+    /* 接続先を切り替えたら次の文字からその接続先の設定で出すよう、押すたびに引く */
+    const uint8_t layout = wm_host_layout();
+    const uint8_t os = wm_host_os();
 
     for (size_t i = 0; i < ARRAY_SIZE(key_output_exceptions); ++i) {
         if (key_output_exceptions[i].key != key || key_output_exceptions[i].layout != layout) {

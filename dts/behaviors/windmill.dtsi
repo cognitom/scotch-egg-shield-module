@@ -3,6 +3,7 @@
  * `#include <behaviors/windmill.dtsi>` で読み込む
  */
 
+#include <dt-bindings/windmill/host.h>
 #include <dt-bindings/windmill/keys.h>
 #include <dt-bindings/windmill/layers.h>
 
@@ -13,6 +14,12 @@
             compatible = "zmk,behavior-wm-char";
             #binding-cells = <1>;
             display-name = "Windmill Char";
+        };
+
+        /omit-if-no-ref/ wm_host: wm_host {
+            compatible = "zmk,behavior-wm-host";
+            #binding-cells = <1>;
+            display-name = "Windmill Host";
         };
     };
 };

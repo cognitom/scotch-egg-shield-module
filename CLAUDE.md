@@ -20,7 +20,11 @@ scotch-egg (Seeed XIAO nRF52840、4x12 のオーソ配列、LED なし) の ZMK 
 | `dts/bindings/behaviors/` | behavior の DT バインディング |
 | `dts/behaviors/windmill.dtsi` | behavior のノード (`&wm_char` など)。キーマップから `#include <behaviors/windmill.dtsi>` |
 | `src/behaviors/` | behavior の実装 |
+| `src/` | behavior から呼ぶ windmill の処理 (出力表の引き方、文字の送り方、接続先ごとの設定) |
+| `include/` | windmill のキーとレイヤーの番号 (`dt-bindings/windmill/`、キーマップからも読む)、出力表と behavior どうしで共有する宣言 (`windmill/`) |
 | `tests/` | ZMK 形式のテスト。1件1ディレクトリで `native_posix_64.keymap` `events.patterns` `keycode_events.snapshot` |
+| `tests/windmill.dtsi` | テスト用のキーマップ。`config/scotch_egg.keymap` と同じ並びを native_posix_64 で動かせる形で持ち、各テストが `#include` する |
+| `tests/unit/` | ztest の単体テスト (`prj.conf` のあるディレクトリ)。native_posix の ZMK で回せないもの (BLE のプロファイルの切り替え) を、切り出した関数で見る |
 | `compose.agent.yaml` | ZMK を動かすコンテナ (`zmkfirmware/zmk-dev-arm:3.5`)。`zmk` サービスが常駐する |
 | `scripts/` | ビルド (`build.sh`) とテスト (`test.sh`)。`container/entrypoint.sh` はコンテナの起動処理、`bin/west` は shim が無い環境向けのラッパー |
 
@@ -44,11 +48,15 @@ bash scripts/build.sh   # seeeduino_xiao_ble + scotch_egg を output/ に出す
   取ってくる `zephyr/` とぶつかるため。**`config/west.yml` を変えたらコンテナを起動し直す**
 - `west` はコンテナの中で動くので、スクリプトからはコンテナ側のパス (`/scotch-egg/...`)
   で渡す
+- スクリプトは `west` を呼ぶ前に `.zmk/` へ移る。polar の shim はホストの cwd をそのまま
+  コンテナへ持ち込むので、compose の `working_dir` に頼ると作業場所の外で呼んでしまう
 - `test.sh` は ZMK の `app/run-test.sh` と同じ手順 (native_posix_64 でビルドして動かし、
   `events.patterns` で絞って `keycode_events.snapshot` と比べる) を、`west build` と
   `west build -t run` で回す。コンテナへ届くのは `west` だけで、`west test` は ZMK の
   west-commands が import 越しに載らず使えないため。絞り込みと比較はホスト側でやる
-- `bash scripts/test.sh wm-char` で `tests/wm-char` の下だけ回せる
+- `bash scripts/test.sh key-output` で `tests/key-output` の下だけ回せる
+- `tests/unit/` の下の単体テストは ztest で、ZMK を通さず native_posix_64 でビルドして
+  動かす。snapshot は無く、ztest の結果 (`output/tests/unit/<テスト>/run.log`) で判定する
 - テストが落ちたら差分が出る。ログは `output/tests/<テスト>/` の下
   (`build.log`、`keycode_events_full.log` が全部、`keycode_events.log` が patterns を通した後)。
   `--accept` で snapshot を出た列に書き換えられるが、書き換えた中身は必ず読む

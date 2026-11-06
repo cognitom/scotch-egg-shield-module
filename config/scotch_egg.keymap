@@ -9,7 +9,6 @@
  * - かなレイヤー最下段 (つ さ そ ひ こ み も ね) のタップ・ホールド: 6/9
  * - 言語切替 (MY_LCTL)、英数の SandS と LT: 4/9
  * - 左右の Fn と設定レイヤー: 5/9
- * - MY_WIN / MY_ANDR / MY_JIS / MY_US: 3/9
  * - MY_IME: 4/9
  */
 
@@ -111,16 +110,17 @@
             >;
         };
 
-        /* MY_WIN / MY_ANDR / MY_JIS / MY_US の位置は仮で、何もしない (3/9)。
+        /* MY_WIN / MY_ANDR / MY_JIS / MY_US (&wm_host) は technik と同じ位置。いま
+         * 繋がっている接続先 (USB か、BLE のアクティブなプロファイル) のぶんだけを選ぶ。
          * 接続先の切替と &bt BT_CLR、&studio_unlock の位置は仮 (配置は 5/9 で windmill の
          * geonix41 に揃える)。Fn の位置は透過にしておくこと */
         conf_layer {
             display-name = "Config";
             bindings = <
-&out OUT_USB  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &none  &none  &none  &none   &none  &bt BT_CLR  &bootloader
-&none         &none         &none         &none         &none         &none  &none  &none  &none   &none  &none       &studio_unlock
-&none         &none         &none         &none         &none         &none  &none  &none  &none   &none  &none       &none
-&none         &none         &none         &trans        &none         &none  &none  &none  &trans  &none  &none       &none
+&out OUT_USB  &bt BT_SEL 0     &bt BT_SEL 1      &bt BT_SEL 2  &bt BT_SEL 3  &none  &none  &none  &none   &none  &bt BT_CLR  &bootloader
+&none         &wm_host MY_WIN  &wm_host MY_ANDR  &none         &none         &none  &none  &none  &none   &none  &none       &studio_unlock
+&none         &wm_host MY_JIS  &wm_host MY_US    &none         &none         &none  &none  &none  &none   &none  &none       &none
+&none         &none            &none             &trans        &none         &none  &none  &none  &trans  &none  &none       &none
             >;
         };
     };
