@@ -1,0 +1,19 @@
+#include "../../windmill.dtsi"
+
+/* 記号を続けて打つと、前のキーを離す前に次のキーを押すことがある
+ * (windmill の KeyOutput.sym_roll_over_does_not_leak_shift)。「!」(Shift+1) を送っている
+ * 途中で「=」(JIS では Shift+-) を押しても、「=」は「!」を送り終えてから、自分の Shift を
+ * 足して送る。続く「-」(Shift 無し) に Shift が漏れて「=」に化けることも無い */
+&kscan {
+    events = <
+        TAP(3,0)
+        ZMK_MOCK_PRESS(3,4,250)
+        ZMK_MOCK_PRESS(1,1,30)   /* ! */
+        ZMK_MOCK_PRESS(2,1,30)   /* = */
+        ZMK_MOCK_RELEASE(1,1,30)
+        ZMK_MOCK_RELEASE(2,1,30)
+        ZMK_MOCK_PRESS(2,3,30)   /* - Shift 無し */
+        ZMK_MOCK_RELEASE(2,3,30)
+        ZMK_MOCK_RELEASE(3,4,200)
+    >;
+};

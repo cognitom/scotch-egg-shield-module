@@ -1,0 +1,14 @@
+#include "../../windmill.dtsi"
+
+/* かなのキーを押したまま記号レイヤーを上げ、それからかなのキーを離す
+ * (windmill の KeyOutput.kana_key_released_under_sym_layer_is_not_stuck)。
+ * 「ぬ」は押した時点で送り切っているので、離したときに何も出ず、ホストに
+ * 押しっぱなしのキーも残らない */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(0,1,50)   /* ぬ */
+        ZMK_MOCK_PRESS(3,4,250)  /* ひ */
+        ZMK_MOCK_RELEASE(0,1,50)
+        ZMK_MOCK_RELEASE(3,4,100)
+    >;
+};

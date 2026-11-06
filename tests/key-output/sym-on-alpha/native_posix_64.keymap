@@ -1,0 +1,20 @@
+#include "../../windmill.dtsi"
+
+/* 英数ベースで記号レイヤーのキーを全部叩く (windmill の KeyOutputJis.sym_layer_on_alpha)。
+ * 英数ベースでは IME を切り替えずにそのまま送る。左端の仮のトグルで英数へ移り、
+ * ひ の位置 (英数では仮の &lt LAYER_SYM BSLH) をホールドする */
+&kscan {
+    events = <
+        TAP(3,0)
+        ZMK_MOCK_PRESS(3,4,250)
+        /* 1 2 3 4 5 6 7 8 9 0 */
+        TAP(0,1) TAP(0,2) TAP(0,3) TAP(0,4) TAP(0,5) TAP(0,6) TAP(0,7) TAP(0,8) TAP(0,9) TAP(0,10)
+        /* ! @ # $ % ^ & * ( ) ` */
+        TAP(1,1) TAP(1,2) TAP(1,3) TAP(1,4) TAP(1,5) TAP(1,6) TAP(1,7) TAP(1,8) TAP(1,9) TAP(1,10) TAP(1,11)
+        /* = + - _ [ ] ~ { } */
+        TAP(2,1) TAP(2,2) TAP(2,3) TAP(2,4) TAP(2,5) TAP(2,6) TAP(2,7) TAP(2,8) TAP(2,9)
+        /* | ? */
+        TAP(3,5) TAP(3,6)
+        ZMK_MOCK_RELEASE(3,4,200)
+    >;
+};

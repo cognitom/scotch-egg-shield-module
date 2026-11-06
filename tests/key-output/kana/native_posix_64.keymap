@@ -1,0 +1,18 @@
+#include "../../windmill.dtsi"
+
+/* かなレイヤーの文字キーを、Shift 無しで全部叩く (windmill の
+ * KeyOutputJis.kana_keys_without_shift)。出力表の行を書き漏らすと、そのキーが何も
+ * 出さなくなるだけでビルドは通るので、位置ごとに固定する。
+ * 最下段のタップ (つ さ そ ひ こ み も ね) は 6/9 で入れるので、ここでは叩かない */
+&kscan {
+    events = <
+        /* ぬ ふ あ う え お や ゆ よ わ */
+        TAP(0,1) TAP(0,2) TAP(0,3) TAP(0,4) TAP(0,5) TAP(0,6) TAP(0,7) TAP(0,8) TAP(0,9) TAP(0,10)
+        /* た て い す か ん な に ら せ ゛ */
+        TAP(1,1) TAP(1,2) TAP(1,3) TAP(1,4) TAP(1,5) TAP(1,6) TAP(1,7) TAP(1,8) TAP(1,9) TAP(1,10) TAP(1,11)
+        /* ち と し は き く ま の り れ け */
+        TAP(2,1) TAP(2,2) TAP(2,3) TAP(2,4) TAP(2,5) TAP(2,6) TAP(2,7) TAP(2,8) TAP(2,9) TAP(2,10) TAP(2,11)
+        /* る め ろ */
+        TAP(3,9) TAP(3,10) TAP(3,11)
+    >;
+};

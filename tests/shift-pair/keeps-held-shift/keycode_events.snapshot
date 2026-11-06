@@ -1,0 +1,16 @@
+pressed: usage_page 0x07 keycode 0xE5 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 32 key 63
+wm_output begin: output 0x02070036 alpha 0 held 0x20
+wm_output step: +0ms press 0x00070036
+pressed: usage_page 0x07 keycode 0x36 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070036
+released: usage_page 0x07 keycode 0x36 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 32 key 63
+wm_char pressed: position 32 key 63
+wm_output begin: output 0x02070036 alpha 0 held 0x20
+wm_output step: +0ms press 0x00070036
+pressed: usage_page 0x07 keycode 0x36 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070036
+released: usage_page 0x07 keycode 0x36 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 32 key 63
+released: usage_page 0x07 keycode 0xE5 implicit_mods 0x00 explicit_mods 0x00

@@ -1,0 +1,20 @@
+#include "../../windmill.dtsi"
+
+/* かなベースで記号レイヤーのキーを全部叩く (windmill の
+ * KeyOutputJis.sym_layer_on_kana_wraps_with_ime_switch)。かな入力のままでは打てないので、
+ * 1打鍵ごとに英数 (LANG2) へ切り替えて送り、かな (LANG1) へ戻す。
+ * ひ (仮の &mo LAYER_SYM) をホールドする */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,4,250)
+        /* 1 2 3 4 5 6 7 8 9 0 */
+        TAP(0,1) TAP(0,2) TAP(0,3) TAP(0,4) TAP(0,5) TAP(0,6) TAP(0,7) TAP(0,8) TAP(0,9) TAP(0,10)
+        /* ! @ # $ % ^ & * ( ) ` */
+        TAP(1,1) TAP(1,2) TAP(1,3) TAP(1,4) TAP(1,5) TAP(1,6) TAP(1,7) TAP(1,8) TAP(1,9) TAP(1,10) TAP(1,11)
+        /* = + - _ [ ] ~ { } */
+        TAP(2,1) TAP(2,2) TAP(2,3) TAP(2,4) TAP(2,5) TAP(2,6) TAP(2,7) TAP(2,8) TAP(2,9)
+        /* | ? */
+        TAP(3,5) TAP(3,6)
+        ZMK_MOCK_RELEASE(3,4,1500)
+    >;
+};

@@ -1,2 +1,3 @@
 s/.*hid_listener_keycode_//p
 s/.*on_wm_char_binding_\([a-z]*\): /wm_char \1: /p
+s/.*wm_output_\(begin\|step\): /wm_output \1: /p

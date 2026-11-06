@@ -1,0 +1,548 @@
+wm_char pressed: position 1 key 67
+wm_output begin: output 0x0007001E alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms press 0x0007001E
+pressed: usage_page 0x07 keycode 0x1E implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms release 0x0007001E
+released: usage_page 0x07 keycode 0x1E implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 1 key 67
+wm_char pressed: position 2 key 68
+wm_output begin: output 0x0007001F alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms press 0x0007001F
+pressed: usage_page 0x07 keycode 0x1F implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms release 0x0007001F
+released: usage_page 0x07 keycode 0x1F implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 2 key 68
+wm_char pressed: position 3 key 69
+wm_output begin: output 0x00070020 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms press 0x00070020
+pressed: usage_page 0x07 keycode 0x20 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms release 0x00070020
+released: usage_page 0x07 keycode 0x20 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 3 key 69
+wm_char pressed: position 4 key 70
+wm_output begin: output 0x00070021 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms press 0x00070021
+pressed: usage_page 0x07 keycode 0x21 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms release 0x00070021
+released: usage_page 0x07 keycode 0x21 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 4 key 70
+wm_char pressed: position 5 key 71
+wm_output begin: output 0x00070022 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms press 0x00070022
+pressed: usage_page 0x07 keycode 0x22 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms release 0x00070022
+released: usage_page 0x07 keycode 0x22 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 5 key 71
+wm_char pressed: position 6 key 72
+wm_output begin: output 0x00070023 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms press 0x00070023
+pressed: usage_page 0x07 keycode 0x23 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms release 0x00070023
+released: usage_page 0x07 keycode 0x23 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 6 key 72
+wm_char pressed: position 7 key 73
+wm_output begin: output 0x00070024 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms press 0x00070024
+pressed: usage_page 0x07 keycode 0x24 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms release 0x00070024
+released: usage_page 0x07 keycode 0x24 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 7 key 73
+wm_char pressed: position 8 key 74
+wm_output begin: output 0x00070025 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms press 0x00070025
+pressed: usage_page 0x07 keycode 0x25 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms release 0x00070025
+released: usage_page 0x07 keycode 0x25 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 8 key 74
+wm_char pressed: position 9 key 75
+wm_output begin: output 0x00070026 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms press 0x00070026
+pressed: usage_page 0x07 keycode 0x26 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms release 0x00070026
+released: usage_page 0x07 keycode 0x26 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 9 key 75
+wm_char pressed: position 10 key 76
+wm_output begin: output 0x00070027 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms press 0x00070027
+pressed: usage_page 0x07 keycode 0x27 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms release 0x00070027
+released: usage_page 0x07 keycode 0x27 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 10 key 76
+wm_char pressed: position 13 key 77
+wm_output begin: output 0x0207001E alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x000700E1
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms press 0x0007001E
+pressed: usage_page 0x07 keycode 0x1E implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms release 0x0007001E
+released: usage_page 0x07 keycode 0x1E implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +44ms release 0x000700E1
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 13 key 77
+wm_output step: +66ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +66ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 14 key 78
+wm_output begin: output 0x0007002F alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms press 0x0007002F
+pressed: usage_page 0x07 keycode 0x2F implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms release 0x0007002F
+released: usage_page 0x07 keycode 0x2F implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 14 key 78
+wm_char pressed: position 15 key 79
+wm_output begin: output 0x02070020 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x000700E1
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms press 0x00070020
+pressed: usage_page 0x07 keycode 0x20 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms release 0x00070020
+released: usage_page 0x07 keycode 0x20 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +44ms release 0x000700E1
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 15 key 79
+wm_output step: +66ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +66ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 16 key 80
+wm_output begin: output 0x02070021 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x000700E1
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms press 0x00070021
+pressed: usage_page 0x07 keycode 0x21 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms release 0x00070021
+released: usage_page 0x07 keycode 0x21 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +44ms release 0x000700E1
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 16 key 80
+wm_output step: +66ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +66ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 17 key 81
+wm_output begin: output 0x02070022 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x000700E1
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms press 0x00070022
+pressed: usage_page 0x07 keycode 0x22 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms release 0x00070022
+released: usage_page 0x07 keycode 0x22 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +44ms release 0x000700E1
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 17 key 81
+wm_output step: +66ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +66ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 18 key 82
+wm_output begin: output 0x0007002E alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms press 0x0007002E
+pressed: usage_page 0x07 keycode 0x2E implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms release 0x0007002E
+released: usage_page 0x07 keycode 0x2E implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 18 key 82
+wm_char pressed: position 19 key 83
+wm_output begin: output 0x02070023 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x000700E1
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms press 0x00070023
+pressed: usage_page 0x07 keycode 0x23 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms release 0x00070023
+released: usage_page 0x07 keycode 0x23 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +44ms release 0x000700E1
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 19 key 83
+wm_output step: +66ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +66ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 20 key 84
+wm_output begin: output 0x02070034 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x000700E1
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms press 0x00070034
+pressed: usage_page 0x07 keycode 0x34 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms release 0x00070034
+released: usage_page 0x07 keycode 0x34 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +44ms release 0x000700E1
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 20 key 84
+wm_output step: +66ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +66ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 21 key 85
+wm_output begin: output 0x02070025 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x000700E1
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms press 0x00070025
+pressed: usage_page 0x07 keycode 0x25 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms release 0x00070025
+released: usage_page 0x07 keycode 0x25 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +44ms release 0x000700E1
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 21 key 85
+wm_output step: +66ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +66ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 22 key 86
+wm_output begin: output 0x02070026 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x000700E1
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms press 0x00070026
+pressed: usage_page 0x07 keycode 0x26 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms release 0x00070026
+released: usage_page 0x07 keycode 0x26 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +44ms release 0x000700E1
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 22 key 86
+wm_output step: +66ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +66ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 23 key 87
+wm_output begin: output 0x0207002F alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x000700E1
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms press 0x0007002F
+pressed: usage_page 0x07 keycode 0x2F implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms release 0x0007002F
+released: usage_page 0x07 keycode 0x2F implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +44ms release 0x000700E1
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 23 key 87
+wm_output step: +66ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +66ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 25 key 88
+wm_output begin: output 0x0207002D alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x000700E1
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms press 0x0007002D
+pressed: usage_page 0x07 keycode 0x2D implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms release 0x0007002D
+released: usage_page 0x07 keycode 0x2D implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +44ms release 0x000700E1
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 25 key 88
+wm_output step: +66ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +66ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 26 key 89
+wm_output begin: output 0x02070033 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x000700E1
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms press 0x00070033
+pressed: usage_page 0x07 keycode 0x33 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms release 0x00070033
+released: usage_page 0x07 keycode 0x33 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +44ms release 0x000700E1
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 26 key 89
+wm_output step: +66ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +66ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 27 key 90
+wm_output begin: output 0x0007002D alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms press 0x0007002D
+pressed: usage_page 0x07 keycode 0x2D implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms release 0x0007002D
+released: usage_page 0x07 keycode 0x2D implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 27 key 90
+wm_char pressed: position 28 key 91
+wm_output begin: output 0x02070087 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x000700E1
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms press 0x00070087
+pressed: usage_page 0x07 keycode 0x87 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms release 0x00070087
+released: usage_page 0x07 keycode 0x87 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +44ms release 0x000700E1
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 28 key 91
+wm_output step: +66ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +66ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 29 key 92
+wm_output begin: output 0x00070030 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms press 0x00070030
+pressed: usage_page 0x07 keycode 0x30 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms release 0x00070030
+released: usage_page 0x07 keycode 0x30 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 29 key 92
+wm_char pressed: position 30 key 93
+wm_output begin: output 0x00070032 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms press 0x00070032
+pressed: usage_page 0x07 keycode 0x32 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +11ms release 0x00070032
+released: usage_page 0x07 keycode 0x32 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 30 key 93
+wm_char pressed: position 31 key 94
+wm_output begin: output 0x0207002E alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x000700E1
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms press 0x0007002E
+pressed: usage_page 0x07 keycode 0x2E implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms release 0x0007002E
+released: usage_page 0x07 keycode 0x2E implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +44ms release 0x000700E1
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 31 key 94
+wm_output step: +66ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +66ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 32 key 95
+wm_output begin: output 0x02070030 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x000700E1
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms press 0x00070030
+pressed: usage_page 0x07 keycode 0x30 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms release 0x00070030
+released: usage_page 0x07 keycode 0x30 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +44ms release 0x000700E1
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 32 key 95
+wm_output step: +66ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +66ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 33 key 96
+wm_output begin: output 0x02070032 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x000700E1
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms press 0x00070032
+pressed: usage_page 0x07 keycode 0x32 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms release 0x00070032
+released: usage_page 0x07 keycode 0x32 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +44ms release 0x000700E1
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 33 key 96
+wm_output step: +66ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +66ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 41 key 97
+wm_output begin: output 0x02070089 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x000700E1
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms press 0x00070089
+pressed: usage_page 0x07 keycode 0x89 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms release 0x00070089
+released: usage_page 0x07 keycode 0x89 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +44ms release 0x000700E1
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 41 key 97
+wm_output step: +66ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +66ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_char pressed: position 42 key 98
+wm_output begin: output 0x02070038 alpha 1 held 0x00
+wm_output step: +0ms press 0x00070091
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070091
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +22ms press 0x000700E1
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms press 0x00070038
+pressed: usage_page 0x07 keycode 0x38 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +33ms release 0x00070038
+released: usage_page 0x07 keycode 0x38 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +44ms release 0x000700E1
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_char released: position 42 key 98
+wm_output step: +66ms press 0x00070090
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +66ms release 0x00070090
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
