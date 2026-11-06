@@ -16,6 +16,13 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 root=/scotch-egg
 
+# west は作業場所 (.zmk/) の中で呼ばないと build などのコマンドが見つからない。
+# shim によってはホストの cwd をそのままコンテナへ持ち込むので、compose の
+# working_dir に頼らず、呼ぶたびに .zmk/ へ移る。パスはコンテナ側の絶対パスで渡す
+zwest() {
+  (cd .zmk && west "$@")
+}
+
 accept=
 filter=tests
 for arg in "$@"; do
@@ -46,7 +53,7 @@ for dir in "${cases[@]}"; do
   mkdir -p "$out"
 
   # ビルドの出力は多いので、落ちたときだけ見せる
-  if ! west build -p -s "$root/.zmk/zmk/app" -d "$root/$build" -b native_posix_64 -- \
+  if ! zwest build -p -s "$root/.zmk/zmk/app" -d "$root/$build" -b native_posix_64 -- \
       -DCONFIG_ASSERT=y \
       -DZMK_CONFIG="$root/$dir" \
       -DZMK_EXTRA_MODULES="$root" >"$out/build.log" 2>&1; then
@@ -58,7 +65,7 @@ for dir in "${cases[@]}"; do
 
   # native_posix の zmk.exe を west 経由で動かす。kscan のモックが exit-after で
   # 終わらせる。ログの "<dbg> " までを落とすのは run-test.sh と同じ
-  if ! west build -d "$root/$build" -t run 2>&1 |
+  if ! zwest build -d "$root/$build" -t run 2>&1 |
       sed -e "s/.*> //" |
       tee "$out/keycode_events_full.log" |
       sed -n -f "$dir/events.patterns" >"$out/keycode_events.log"; then
