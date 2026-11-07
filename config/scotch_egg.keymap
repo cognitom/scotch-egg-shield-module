@@ -9,6 +9,8 @@
  * 文字キー (かな、Shift 面、記号) は &wm_char で、ホストへ送るキーは出力表が決める。
  * 英数レイヤーのキーと文字以外のキー (Enter や矢印など) は素のキー (&kp) のまま。
  * ただし英数レイヤーの ; ' \ は &wm_alpha で、接続先が JIS のときだけ1キー1出力で送る。
+ * ピリオドも &wm_alpha で、接続先が Android のとき Win+. を Alt+. に読み替える。
+ * Android では Win と Alt を重ねて出さない (&wm_mod と つ / さ のホールド)。
  *
  * かなレイヤー最下段 (つ さ そ ひ こ み も ね) は &wm_bottom で、タップで かな、ホールドで
  * Win / Alt / Fn / 記号 / Shift になる。150ms 未満で離せばタップ、250ms でホールド、
@@ -63,7 +65,7 @@
             bindings = <
 &trans  &kp Q         &kp W         &kp E           &kp R                  &kp T                  &kp Y                  &kp U                  &kp I           &kp O      &kp P            &trans
 &trans  &kp A         &kp S         &kp D           &kp F                  &kp G                  &kp H                  &kp J                  &kp K           &kp L      &wm_alpha SEMI   &wm_alpha SQT
-&trans  &kp Z         &kp X         &kp C           &kp V                  &kp B                  &kp N                  &kp M                  &kp COMMA       &kp DOT    &kp UP           &kp RIGHT
+&trans  &kp Z         &kp X         &kp C           &kp V                  &kp B                  &kp N                  &kp M                  &kp COMMA       &wm_alpha DOT  &kp UP       &kp RIGHT
 &trans  &wm_mod LGUI  &wm_mod LALT  &wm_mo WM_FN_L  &wm_lt LAYER_SYM BSLH  &wm_sands LSHFT SPACE  &wm_sands RSHFT SPACE  &wm_lt LAYER_SYM FSLH  &wm_mo WM_FN_R  &kp K_APP  &kp LEFT         &kp DOWN
             >;
         };

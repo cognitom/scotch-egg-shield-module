@@ -43,6 +43,15 @@ void wm_send_lang(void);
 void wm_hold_layer_on(uint8_t mod);
 void wm_hold_layer_off(uint8_t mod);
 
+/* 接続先が Android で、mod (MOD_* のビット) が Win なら Alt、Alt なら Win が押されて
+ * いるとき true。Android は Win と Alt を重ねると Caps Lock を切り替えるので、後から
+ * 押したほうを出さない (src/android.c)。Win / Alt 以外は false */
+bool wm_android_blocks_mod(uint8_t mod);
+
+/* 接続先が Android で Win が押されていれば、ピリオドを Alt+. に読み替えて押し離しまで
+ * 送り切り、true を返す。そうでなければ何もせず false */
+bool wm_android_gui_dot(void);
+
 /* 左右の Fn / 記号のどちらか */
 #define WM_SIDE_L 1
 #define WM_SIDE_R 2

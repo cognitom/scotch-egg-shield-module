@@ -455,6 +455,12 @@ static void apply_hold(uint8_t i) {
     const struct bottom_key *key = &bottom_keys[i];
     switch (key->hold) {
     case HOLD_OS_MOD:
+        /* Android では、つ / さ を重ねて長押ししたとき後から決まったほうを出さない
+         * (src/android.c)。bottom_held に入れないので、解放でも何も出さない */
+        if (wm_android_blocks_mod(key->arg)) {
+            LOG_DBG("%s blocked", bottom_names[i]);
+            return;
+        }
         raise_mod(key->keycode, true);
         /* &wm_mod と同じく、かなベースのときだけ英数レイヤーを上げる。最下段のキーは
          * かなレイヤーにしか無いので、いまは常にかなベース */
@@ -481,7 +487,7 @@ static void apply_hold(uint8_t i) {
 
 static void release_hold(uint8_t i) {
     if (!(bottom_held & BIT(i))) {
-        return; /* タップだった */
+        return; /* タップだった、または握りつぶした */
     }
     bottom_held &= ~BIT(i);
 

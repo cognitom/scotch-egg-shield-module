@@ -1,0 +1,15 @@
+#include "../../windmill.dtsi"
+
+/* Android では、Win を押している間の Alt は出さない。Alt を離しても何も出ず、
+ * Win のショートカットはそのまま打てる (windmill の AndroidMods.alt_after_gui_is_not_sent)。
+ * 英数レイヤーの 3,1 が Win、3,2 が Alt、0,1 が Q */
+&kscan {
+    events = <
+        CONF_TAP(1,2)
+        ZMK_MOCK_PRESS(3,1,10)
+        ZMK_MOCK_PRESS(3,2,50)
+        TAP(0,1)
+        ZMK_MOCK_RELEASE(3,2,50)
+        ZMK_MOCK_RELEASE(3,1,120)
+    >;
+};

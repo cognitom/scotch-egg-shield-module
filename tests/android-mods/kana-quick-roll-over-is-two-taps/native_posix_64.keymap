@@ -1,0 +1,15 @@
+#include "../../windmill.dtsi"
+
+/* つ さ を続けてすばやく打てば、どちらも 150ms 未満で離れるのでタップ。Win も Alt も
+ * 出ないので、Caps Lock の切り替えもアプリ一覧も起きない
+ * (windmill の AndroidMods.kana_quick_roll_over_is_two_taps) */
+&kscan {
+    events = <
+        CONF_TAP(1,2)
+        TO_KANA
+        ZMK_MOCK_PRESS(3,1,20)
+        ZMK_MOCK_PRESS(3,2,40)
+        ZMK_MOCK_RELEASE(3,1,20)
+        ZMK_MOCK_RELEASE(3,2,120)
+    >;
+};

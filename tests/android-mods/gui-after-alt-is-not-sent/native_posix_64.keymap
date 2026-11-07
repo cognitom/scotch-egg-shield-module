@@ -1,0 +1,15 @@
+#include "../../windmill.dtsi"
+
+/* 逆順も同じ。先に押した Alt だけが出る。先に押したほうを離しても、握りつぶした Win が
+ * 遅れて出ることはなく、Win を押したままでも素の Q
+ * (windmill の AndroidMods.gui_after_alt_is_not_sent) */
+&kscan {
+    events = <
+        CONF_TAP(1,2)
+        ZMK_MOCK_PRESS(3,2,10)
+        ZMK_MOCK_PRESS(3,1,50)
+        ZMK_MOCK_RELEASE(3,2,50)
+        TAP(0,1)
+        ZMK_MOCK_RELEASE(3,1,120)
+    >;
+};

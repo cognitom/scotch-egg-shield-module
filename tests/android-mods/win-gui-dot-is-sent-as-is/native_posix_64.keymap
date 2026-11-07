@@ -1,0 +1,11 @@
+#include "../../windmill.dtsi"
+
+/* Windows では Win+. はそのまま (windmill の WinMods.gui_dot_is_sent_as_is)。
+ * 英数レイヤーの 3,1 が Win、2,9 がピリオド */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,1,10)
+        TAP(2,9)
+        ZMK_MOCK_RELEASE(3,1,120)
+    >;
+};

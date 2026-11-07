@@ -1,0 +1,15 @@
+#include "../../windmill.dtsi"
+
+/* 握りつぶしは押している間だけ。離せば次からは普通に出る
+ * (windmill の AndroidMods.blocked_mod_works_again_after_release) */
+&kscan {
+    events = <
+        CONF_TAP(1,2)
+        ZMK_MOCK_PRESS(3,1,10)
+        ZMK_MOCK_PRESS(3,2,50)
+        ZMK_MOCK_RELEASE(3,2,10)
+        ZMK_MOCK_RELEASE(3,1,120)
+        ZMK_MOCK_PRESS(3,2,50)
+        ZMK_MOCK_RELEASE(3,2,120)
+    >;
+};

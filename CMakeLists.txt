@@ -7,6 +7,7 @@ if(CONFIG_ZMK_WINDMILL)
   # behavior どうしで共有する処理。接続先ごとの設定、かな / 英数のベース、出力表と
   # 文字の送り方は、どの behavior からも引くので分けない
   target_sources(app PRIVATE
+    src/android.c
     src/host.c
     src/host_config.c
     src/key_output.c

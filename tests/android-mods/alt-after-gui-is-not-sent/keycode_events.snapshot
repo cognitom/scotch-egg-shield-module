@@ -1,0 +1,14 @@
+layer_changed: layer 2 state 1
+layer_changed: layer 4 state 1
+layer_changed: layer 5 state 1
+layer_changed: layer 5 state 0
+layer_changed: layer 4 state 0
+wm_mod pressed: position 37 keycode 0x000700E3 kana 0
+pressed: usage_page 0x07 keycode 0xE3 implicit_mods 0x00 explicit_mods 0x00
+wm_mod pressed: position 38 keycode 0x000700E2 kana 0
+wm_android blocks_mod: mod 0x04 explicit 0x08
+pressed: usage_page 0x07 keycode 0x14 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x14 implicit_mods 0x00 explicit_mods 0x00
+wm_mod released: position 38 keycode 0x000700E2
+wm_mod released: position 37 keycode 0x000700E3
+released: usage_page 0x07 keycode 0xE3 implicit_mods 0x00 explicit_mods 0x00

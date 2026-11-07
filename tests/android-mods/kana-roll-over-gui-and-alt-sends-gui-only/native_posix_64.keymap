@@ -1,0 +1,23 @@
+#include "../../windmill.dtsi"
+
+/* かなレイヤーで つ さ を重ねて長押しする。windmill の issue #57 の元になった打ち方
+ * (windmill の AndroidMods.kana_roll_over_gui_and_alt_sends_gui_only)。
+ *
+ * 最下段のキーの押下では先のキーが決まらないので、つ さ はどちらも未判定のまま並び、
+ * それぞれ 250ms でホールドに決まる。後から決まった さ の Alt を握りつぶす。握りつぶした
+ * Alt はホストへ出ないので、英数レイヤーを上げた数に入れてしまうと下ろす機会が無くなる。
+ * 離したあとにかなへ戻っていることを ぬ (0,1。かなでは 1、英数では Q) で見る。
+ *
+ * 設定レイヤーは英数ベースのうちに叩く。かなでは 3,3 / 3,8 が最下段のキーになる */
+&kscan {
+    events = <
+        CONF_TAP(1,2)
+        TO_KANA
+        ZMK_MOCK_PRESS(3,1,20)
+        ZMK_MOCK_PRESS(3,2,300)
+        ZMK_MOCK_RELEASE(3,1,50)
+        TAP(0,1)
+        ZMK_MOCK_RELEASE(3,2,120)
+        TAP(0,1)
+    >;
+};

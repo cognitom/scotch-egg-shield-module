@@ -1,0 +1,6 @@
+s/.*hid_listener_keycode_//p
+s/.*layer_changed: /layer_changed: /p
+s/.*wm_bottom_decide: /decide: /p
+s/.*apply_hold: /wm_bottom hold: /p
+s/.*on_wm_\(mod\|alpha\)_binding_\([a-z]*\): /wm_\1 \2: /p
+s/.*wm_android_\([a-z_]*\): /wm_android \1: /p
