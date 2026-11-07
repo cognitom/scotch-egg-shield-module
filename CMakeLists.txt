@@ -44,7 +44,11 @@ endif()
 # ZMK の listener は .event_subscription セクションの並びで呼ばれ、その並びはリンクする
 # オブジェクトの順で決まる。このファイルは ZMK の app の CMakeLists.txt より先に読まれ、
 # ここで target_sources すると ZMK のどのソースよりも前 (hold-tap より前) に並ぶ。
-# そこで app の CMakeLists.txt を読み終えてから、ソースの並びの keymap.c の直前へ差し込む
+# そこで app の CMakeLists.txt を読み終えてから、ソースの並びの keymap.c の直前へ差し込む。
+#
+# この並べ替えは ZMK の app/CMakeLists.txt の作り (app に target_sources で src/keymap.c を
+# 足し、hold-tap がそれより前に並ぶこと) に頼っている。ZMK を上げたら
+# tests/bottom-row/ctrl-then-thumb-is-ctrl-space で並びを確かめること
 if(CONFIG_ZMK_BEHAVIOR_WM_BOTTOM)
   function(wm_place_bottom_listener source)
     get_target_property(sources app SOURCES)
