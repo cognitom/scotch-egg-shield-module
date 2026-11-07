@@ -1,6 +1,6 @@
 /*
  * かなレイヤー最下段のタップ・ホールド (&wm_bottom)。windmill.c の process_bottom_row()
- * 一式を移したもの。親指の組 (こ / み の半角スペース) は 7/9 で足す。
+ * 一式と、親指の組 (こ / み の半角スペース。settle_thumb_pair() など) を移したもの。
  *
  * 引数は dt-bindings/windmill/keys.h の KB_*。かなレイヤーには つ さ そ ひ こ み も ね
  * (KB_TSU 〜 KB_NE)、Shift 面には っ 空 ？ 、 (KB_XTSU 〜 KB_TOUTEN) を置く。
@@ -108,17 +108,18 @@ struct bottom_key {
     uint8_t hold;     /* HOLD_* */
     uint32_t keycode; /* HOLD_OS_MOD / HOLD_SHIFT: 押す修飾のキー */
     uint8_t arg;      /* HOLD_OS_MOD: 英数レイヤーを上げる MOD_*。HOLD_FN / HOLD_SYM: WM_SIDE_* */
+    uint8_t partner;  /* 同じ役割の相方。NO_BOTTOM なら無し */
 };
 
 static const struct bottom_key bottom_keys[] = {
-    [BOTTOM(KB_TSU)] = {HOLD_OS_MOD, LGUI, MOD_LGUI},
-    [BOTTOM(KB_SA)] = {HOLD_OS_MOD, LALT, MOD_LALT},
-    [BOTTOM(KB_SO)] = {HOLD_FN, 0, WM_SIDE_L},
-    [BOTTOM(KB_HI)] = {HOLD_SYM, 0, WM_SIDE_L},
-    [BOTTOM(KB_KO)] = {HOLD_SHIFT, LSHIFT, 0},
-    [BOTTOM(KB_MI)] = {HOLD_SHIFT, RSHIFT, 0},
-    [BOTTOM(KB_MO)] = {HOLD_SYM, 0, WM_SIDE_R},
-    [BOTTOM(KB_NE)] = {HOLD_FN, 0, WM_SIDE_R},
+    [BOTTOM(KB_TSU)] = {HOLD_OS_MOD, LGUI, MOD_LGUI, NO_BOTTOM},
+    [BOTTOM(KB_SA)] = {HOLD_OS_MOD, LALT, MOD_LALT, NO_BOTTOM},
+    [BOTTOM(KB_SO)] = {HOLD_FN, 0, WM_SIDE_L, BOTTOM(KB_NE)},
+    [BOTTOM(KB_HI)] = {HOLD_SYM, 0, WM_SIDE_L, BOTTOM(KB_MO)},
+    [BOTTOM(KB_KO)] = {HOLD_SHIFT, LSHIFT, 0, BOTTOM(KB_MI)},
+    [BOTTOM(KB_MI)] = {HOLD_SHIFT, RSHIFT, 0, BOTTOM(KB_KO)},
+    [BOTTOM(KB_MO)] = {HOLD_SYM, 0, WM_SIDE_R, BOTTOM(KB_HI)},
+    [BOTTOM(KB_NE)] = {HOLD_FN, 0, WM_SIDE_R, BOTTOM(KB_SO)},
 };
 BUILD_ASSERT(ARRAY_SIZE(bottom_keys) == BOTTOM_COUNT,
              "bottom_keys[] の行が最下段のキーの数と合っていない");
@@ -136,9 +137,11 @@ enum {
     BOTTOM_UNDECIDED,
     BOTTOM_TAP,
     BOTTOM_HOLD,
+    BOTTOM_SPACE,   /* こ / み の組の半角スペース */
+    BOTTOM_NOTHING, /* 何も出さない (組のスペースを相方が出す) */
 };
 
-static const char *const decision_names[] = {"undecided", "tap", "hold"};
+static const char *const decision_names[] = {"undecided", "tap", "hold", "space", "nothing"};
 
 /* キーごとの、いちばん新しい押下の状態 */
 struct bottom_state {
@@ -148,11 +151,17 @@ struct bottom_state {
     uint8_t decision; /* BOTTOM_* */
     bool pressed;     /* 物理的に押されている */
     bool interrupted; /* 押してから、最下段以外のキーが押された */
+    bool used;        /* ホールドとして他のキーにかかった */
 };
 
 static struct bottom_state bottom_states[BOTTOM_COUNT];
 static uint8_t bottom_seq;
 static uint8_t bottom_held; /* ホールドを出しているキー (1 << 番号) */
+
+static uint8_t thumb_pair_y = NO_BOTTOM; /* 親指の組の、後から押したほう (settle_thumb_pair()) */
+static bool thumb_pair_ready; /* Y を離した時点で、X も Y もシフトとしてかかっていなかった */
+static bool thumb_pair_chord; /* 組が同時押しの規則で成り立っている (judge_thumb_chord()) */
+static bool thumb_chord_off;  /* 同時押しにしない。相方が押されていない状態で親指を押すと下ろす */
 
 /* 待たせているイベント。押した順に並ぶ */
 enum {
@@ -297,17 +306,138 @@ static void decide_tap(uint8_t i, int64_t now) {
             continue;
         }
         wm_bottom_decide(k, BOTTOM_HOLD, now);
+        bottom_states[k].used = true;
     }
+}
+
+/*
+ * 親指の組 (こ / み)
+ *
+ * 先に押したほうを X、X を押している間に押した相方を Y とする。Y のタップごとに、
+ * 次をすべて満たすと半角スペースを1つ出す。
+ *
+ * - X を BOTTOM_INTERRUPT_MS 以上押している (離したなら、押下から解放までが以上)
+ * - Y の押下から解放までが BOTTOM_HOLD_MS 未満
+ * - Y の解放の時点で、X と Y のどちらも他のキーにシフトとしてかかっていない
+ *
+ * スペースは、Y の解放と、X が BOTTOM_INTERRUPT_MS に達した時点 (先に離したなら X の
+ * 解放) の遅い方で決まり、後から X がかかっても取り消さない。そのとき X を押していれば
+ * X はホールドになり、続けて打つキーに Shift として乗る。
+ *
+ * 満たさなくなった時点で組は解け、それぞれ通常の判定に戻る (thumb_pair_fail())。
+ *
+ * ただし両方を素早く打つと X が BOTTOM_INTERRUPT_MS に届かないので、同時押しの規則を
+ * 別に持つ。「こみ」と続けて打つロールと分けるため、最初の解放の時点で次を比べる。
+ *
+ * - X の押下から最初の解放までが BOTTOM_INTERRUPT_MS 未満
+ * - Y の押下から最初の解放まで (重なり) が、X の押下から Y の押下まで (時間差) 以上
+ * - 最初の解放より前に、組以外のキーが押されていない
+ *
+ * Y を先に離したら、その時点でスペースに決まる。X を先に離したら Y の結果を待ち、Y が
+ * BOTTOM_HOLD_MS に達するか、Y の解放より前に組以外のキーが押されれば不成立。X は
+ * タップになり、Y は通常の判定に戻る。
+ */
+
+static bool is_thumb_key(uint8_t i) {
+    return i == BOTTOM(KB_KO) || i == BOTTOM(KB_MI);
+}
+
+static bool in_thumb_pair(uint8_t i) {
+    return thumb_pair_y != NO_BOTTOM && (i == thumb_pair_y || i == bottom_keys[thumb_pair_y].partner);
+}
+
+/* 組を解いて、離れたまま待っていたほうを通常の判定に戻す */
+static void thumb_pair_fail(int64_t now) {
+    const uint8_t y = thumb_pair_y;
+    const uint8_t x = bottom_keys[y].partner;
+    thumb_pair_y = NO_BOTTOM;
+    thumb_pair_chord = false;
+    LOG_DBG("%s %s", bottom_names[x], bottom_names[y]);
+
+    if (bottom_states[x].decision == BOTTOM_UNDECIDED && !bottom_states[x].pressed) {
+        decide_tap(x, now);
+    }
+    if (bottom_states[y].decision == BOTTOM_UNDECIDED && !bottom_states[y].pressed) {
+        decide_tap(y, now);
+    }
+}
+
+/* 組の最初の解放で、同時押しかを決める。外れたら、残ったキーを離すまでは押し直しでも
+ * 同時押しにしない。最初の解放が過ぎたのに、新しい組として数え直さないため。
+ * テストで境界を固定するため、時間差と重なりを残す */
+static void judge_thumb_chord(int64_t now) {
+    const struct bottom_state *ys = &bottom_states[thumb_pair_y];
+    const struct bottom_state *xs = &bottom_states[bottom_keys[thumb_pair_y].partner];
+
+    const int64_t lag = ys->pressed_at - xs->pressed_at;
+    const int64_t overlap = now - ys->pressed_at;
+
+    thumb_pair_chord = xs->decision == BOTTOM_UNDECIDED && !thumb_chord_off &&
+                       bottom_age(xs, now) < BOTTOM_INTERRUPT_MS && overlap >= lag;
+    LOG_DBG("lag %d overlap %d chord %d", (int)lag, (int)overlap, thumb_pair_chord);
+    if (!thumb_pair_chord) {
+        thumb_chord_off = true;
+    }
+}
+
+static void settle_thumb_pair(int64_t now) {
+    if (thumb_pair_y == NO_BOTTOM) {
+        return;
+    }
+
+    const uint8_t y = thumb_pair_y;
+    const uint8_t x = bottom_keys[y].partner;
+    const struct bottom_state *xs = &bottom_states[x];
+    const struct bottom_state *ys = &bottom_states[y];
+
+    /* Y がホールドになった (他のキーにかかった場合を含む) / X を短く離してタップに決まった */
+    const bool x_tapped = xs->decision != BOTTOM_UNDECIDED && xs->decision != BOTTOM_HOLD;
+    if (ys->decision == BOTTOM_HOLD || x_tapped) {
+        thumb_pair_fail(now);
+        return;
+    }
+    if (thumb_pair_chord && thumb_chord_off) {
+        thumb_pair_fail(now); /* X を先に離して Y を待つ間に、組以外のキーが押された */
+        return;
+    }
+    if (ys->pressed) {
+        return; /* Y の解放を待つ */
+    }
+    if (!thumb_pair_ready) {
+        thumb_pair_fail(now); /* Y の解放の時点で、どちらかがシフトとしてかかっていた */
+        return;
+    }
+    if (!thumb_pair_chord && xs->decision == BOTTOM_UNDECIDED && xs->pressed &&
+        bottom_age(xs, now) < BOTTOM_INTERRUPT_MS) {
+        return; /* X が BOTTOM_INTERRUPT_MS に達するか、離すのを待つ (schedule_tick()) */
+    }
+
+    /* 成立。スペースは出力が先に並んでいるほうで出す */
+    thumb_pair_y = NO_BOTTOM;
+    thumb_pair_chord = false;
+    if (xs->decision == BOTTOM_UNDECIDED && !xs->pressed) {
+        wm_bottom_decide(x, BOTTOM_SPACE, now); /* 離したまま Y を待っていた */
+        wm_bottom_decide(y, BOTTOM_NOTHING, now);
+        return;
+    }
+    if (xs->decision == BOTTOM_UNDECIDED) {
+        wm_bottom_decide(x, BOTTOM_HOLD, now); /* 押したままなら Shift として残す */
+    }
+    wm_bottom_decide(y, BOTTOM_SPACE, now);
 }
 
 /* 未判定のキーを今すぐ決める。待たせる列が溢れそうなときと、同じキーが押し直された
  * ときに使う。押していればホールド、離していればタップ */
 static void force_decision(uint8_t i, int64_t now) {
+    if (in_thumb_pair(i)) {
+        thumb_pair_fail(now);
+    }
     if (bottom_states[i].decision != BOTTOM_UNDECIDED) {
         return;
     }
     if (bottom_states[i].pressed) {
         wm_bottom_decide(i, BOTTOM_HOLD, now);
+        bottom_states[i].used = true; /* 後ろに待っているキーにかかる */
     } else {
         decide_tap(i, now);
     }
@@ -410,6 +540,27 @@ static void send_tap(uint8_t i, const struct bottom_entry *entry) {
     wm_send_output(wm_key_output(key), wm_is_alpha_output(key));
 }
 
+/* 親指の組の半角スペース。組のキーで離れているほうのホールドの Shift はここで下ろす
+ * (後から届く解放では何もしない)。下ろした Shift のレポートとスペースの間にも
+ * IME_WAIT_MS を挟む (送出の Shift の上げ下げと同じ理由)。windmill は wait_ms() で
+ * その場で待つが、ここでは送出の順番待ちの中で待つ。Shift の解放は送出中なら
+ * 順番待ちに並ぶので、待つのはその解放が出た後になる */
+static void send_thumb_space(void) {
+    bool dropped = false;
+    const uint8_t thumbs[] = {BOTTOM(KB_KO), BOTTOM(KB_MI)};
+    for (size_t n = 0; n < ARRAY_SIZE(thumbs); ++n) {
+        const uint8_t k = thumbs[n];
+        if (!bottom_states[k].pressed && (bottom_held & BIT(k))) {
+            release_hold(k);
+            dropped = true;
+        }
+    }
+
+    /* まだ押している親指の Shift は、送出が外して戻す */
+    const bool shift_gone = dropped && !(bottom_held & SHIFT_HELD);
+    wm_send_output_after_wait(wm_key_output(KB_SPC), false, shift_gone ? IME_WAIT_MS : 0);
+}
+
 /* 先頭から、決まっているものを順に出す。未判定の押下に当たったら止まる */
 static void bottom_flush(void) {
     while (bottom_queue_len) {
@@ -425,10 +576,16 @@ static void bottom_flush(void) {
 
         switch (entry.type) {
         case ENTRY_PRESS:
-            if (decision == BOTTOM_TAP) {
+            switch (decision) {
+            case BOTTOM_TAP:
                 send_tap(entry.index, &entry);
-            } else {
+                break;
+            case BOTTOM_HOLD:
                 apply_hold(entry.index);
+                break;
+            case BOTTOM_SPACE:
+                send_thumb_space();
+                break;
             }
             break;
         case ENTRY_RELEASE:
@@ -446,6 +603,7 @@ static void bottom_push(uint8_t type, uint8_t index,
     while (bottom_queue_len >= BOTTOM_QUEUE_SIZE) {
         /* 先頭は未判定の押下 (決まっていれば bottom_flush() が出している) */
         force_decision(bottom_queue[0].index, event->timestamp);
+        settle_thumb_pair(event->timestamp);
         bottom_flush();
     }
 
@@ -473,10 +631,14 @@ static void bottom_tick(int64_t now) {
         }
 
         const int64_t age = bottom_age(state, now);
-        if (age >= BOTTOM_HOLD_MS || (age >= BOTTOM_INTERRUPT_MS && state->interrupted)) {
+        if (age >= BOTTOM_HOLD_MS) {
             wm_bottom_decide(i, BOTTOM_HOLD, now);
+        } else if (age >= BOTTOM_INTERRUPT_MS && state->interrupted) {
+            wm_bottom_decide(i, BOTTOM_HOLD, now);
+            bottom_states[i].used = true; /* 割り込んだキーは、このホールドの下で出る */
         }
     }
+    settle_thumb_pair(now);
     bottom_flush();
 }
 
@@ -490,6 +652,16 @@ static void schedule_tick(void) {
         const int64_t at =
             state->pressed_at + (state->interrupted ? BOTTOM_INTERRUPT_MS : BOTTOM_HOLD_MS);
         next = MIN(next, at);
+    }
+
+    /* 親指の組で、Y を離して X が BOTTOM_INTERRUPT_MS に達するのを待っている
+     * (settle_thumb_pair())。この状態は直前の settle_thumb_pair() が待つと決めたときだけ
+     * なので、時刻は先にある。過ぎた時刻を掛けると、すぐ発火して回り続ける */
+    if (thumb_pair_y != NO_BOTTOM && !bottom_states[thumb_pair_y].pressed) {
+        const struct bottom_state *xs = &bottom_states[bottom_keys[thumb_pair_y].partner];
+        if (xs->pressed && xs->decision == BOTTOM_UNDECIDED) {
+            next = MIN(next, xs->pressed_at + BOTTOM_INTERRUPT_MS);
+        }
     }
 
     if (next == INT64_MAX) {
@@ -526,6 +698,17 @@ static void bottom_press(uint8_t i, const struct zmk_position_state_changed *eve
     };
     LOG_DBG("%s position %d", bottom_names[i], event->position);
 
+    if (!is_thumb_key(i)) {
+        /* 最下段のキーどうしは判定に影響しないが、同時押しの「ほかのキー」には数える */
+        thumb_chord_off = true;
+    } else if (bottom_states[bottom_keys[i].partner].pressed) {
+        thumb_pair_y = i;
+        thumb_pair_ready = false;
+        thumb_pair_chord = false;
+    } else {
+        thumb_chord_off = false;
+    }
+
     bottom_push(ENTRY_PRESS, i, event);
 }
 
@@ -535,7 +718,24 @@ static void bottom_release(uint8_t i, const struct zmk_position_state_changed *e
     state->pressed = false;
 
     if (state->decision == BOTTOM_UNDECIDED) {
-        decide_tap(i, now);
+        if (!in_thumb_pair(i)) {
+            decide_tap(i, now);
+        } else {
+            const uint8_t partner = bottom_keys[i].partner;
+            /* 相方がまだ押されていれば、これが組の最初の解放 */
+            if (bottom_states[partner].pressed) {
+                judge_thumb_chord(now);
+            }
+
+            if (i == thumb_pair_y) {
+                /* シフトとしてかかったかは、Y を離したこの時点で見る。結果は
+                 * settle_thumb_pair() で決まる */
+                thumb_pair_ready = !bottom_states[partner].used;
+            } else if (!thumb_pair_chord && bottom_age(state, now) < BOTTOM_INTERRUPT_MS) {
+                decide_tap(i, now); /* X を短く離した。組は settle_thumb_pair() で解ける */
+            }
+            /* それ以外の X は、Y の結果を待つ */
+        }
     }
 
     if (bottom_queue_len) {
@@ -549,7 +749,14 @@ static void bottom_release(uint8_t i, const struct zmk_position_state_changed *e
 static void bottom_interrupt(int64_t now) {
     for (uint8_t i = 0; i < BOTTOM_COUNT; ++i) {
         struct bottom_state *state = &bottom_states[i];
-        if (!state->pressed || state->decision != BOTTOM_UNDECIDED) {
+        if (!state->pressed) {
+            continue;
+        }
+        if (state->decision == BOTTOM_HOLD) {
+            state->used = true;
+            continue;
+        }
+        if (state->decision != BOTTOM_UNDECIDED) {
             continue;
         }
 
@@ -557,8 +764,12 @@ static void bottom_interrupt(int64_t now) {
         if (age < 0) {
             continue; /* このキーより前の押下 (hold-tap で遅れて届いた MY_LCTL など) */
         }
+        if (is_thumb_key(i)) {
+            thumb_chord_off = true;
+        }
         if (age >= BOTTOM_INTERRUPT_MS) {
             wm_bottom_decide(i, BOTTOM_HOLD, now);
+            state->used = true;
         } else {
             state->interrupted = true;
         }
@@ -600,6 +811,7 @@ static int wm_bottom_listener(const zmk_event_t *eh) {
             consumed = false;
         }
     }
+    settle_thumb_pair(now);
     bottom_flush();
     schedule_tick();
 

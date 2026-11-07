@@ -108,14 +108,21 @@ static void add_tap(uint32_t keycode) {
  * (前の文字を送り終えた後) のものを見る。
  *
  * alpha なら英数に切り替えて送り、かなに戻す。切り替えのキーに Shift が乗っていると
- * IME が英数/かなキーとして受け取らないので、その間は押されている Shift も外す */
-static void wm_output_begin(uint32_t output, bool alpha) {
+ * IME が英数/かなキーとして受け取らないので、その間は押されている Shift も外す。
+ *
+ * wait_first は送り始める前に待つ ms (wm_send_output_after_wait())。送出の手順に
+ * 入れておくと、送り始めからの時間として間隔がログに残る */
+static void wm_output_begin(uint32_t output, bool alpha, uint8_t wait_first) {
     const uint8_t held = zmk_hid_get_explicit_mods() & SHIFT_MODS;
     const bool needs_shift = SELECT_MODS(output) & MOD_LSFT;
     const uint32_t keycode = STRIP_MODS(output);
 
     step_count = 0;
     step_index = 0;
+
+    if (wait_first) {
+        add_step(STEP_WAIT, wait_first);
+    }
 
     if (alpha) {
         add_set_shift(held, false, held);
@@ -197,6 +204,7 @@ struct pending {
         struct {
             uint32_t output;
             bool alpha;
+            uint8_t wait_first;
         };
         struct zmk_keycode_state_changed_event event;
     };
@@ -240,7 +248,7 @@ static void run(struct k_work *work) {
                 wm_output_release(&next);
                 continue;
             }
-            wm_output_begin(next.output, next.alpha);
+            wm_output_begin(next.output, next.alpha, next.wait_first);
             sending = true;
         }
 
@@ -257,6 +265,10 @@ static void run(struct k_work *work) {
 }
 
 int wm_send_output(uint32_t output, bool alpha) {
+    return wm_send_output_after_wait(output, alpha, 0);
+}
+
+int wm_send_output_after_wait(uint32_t output, bool alpha, uint8_t wait_ms) {
     struct pending *pending = push_pending();
     if (!pending) {
         LOG_WRN("windmill の送出待ちが溢れたので 0x%08X を捨てる", output);
@@ -266,6 +278,7 @@ int wm_send_output(uint32_t output, bool alpha) {
         .type = PENDING_OUTPUT,
         .output = output,
         .alpha = alpha,
+        .wait_first = wait_ms,
     };
 
     /* 待ちの途中ならその遅延のまま (k_work_schedule は予約済みなら何もしない)。

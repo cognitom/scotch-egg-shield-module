@@ -1,0 +1,23 @@
+#include "../../windmill.dtsi"
+
+/* X↓0 Y↓20 ひ↓30 ひ↑40 Y↑70 X↑80 → X Y ひ (windmill の
+ * ThumbChordTest.other_bottom_key_before_first_release_is_not_chord)。最下段のキーも
+ * 同時押しの「ほかのキー」に数える。こ→み と み→こ を続けて流す */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,20)
+        DN_GAP(3,6,10)
+        DN_GAP(3,4,10)
+        UP_GAP(3,4,30)
+        UP_GAP(3,6,10)
+        UP_GAP(3,5,300)
+
+        DN_GAP(3,6,20)
+        DN_GAP(3,5,10)
+        DN_GAP(3,4,10)
+        UP_GAP(3,4,30)
+        UP_GAP(3,5,10)
+        UP_GAP(3,6,300)
+    >;
+};

@@ -1,0 +1,32 @@
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+chord: lag 20 overlap 50 chord 1
+decide: こ hold age 70
+decide: み space age 50
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output +11ms hide 0x02 mods 0x00
+wm_output +22ms press 0x0007002C
+pressed: usage_page 0x07 keycode 0x2C implicit_mods 0x00 explicit_mods 0x00
+wm_output +22ms release 0x0007002C
+released: usage_page 0x07 keycode 0x2C implicit_mods 0x00 explicit_mods 0x00
+wm_output +33ms show 0x02 mods 0x02
+wm_output +0ms press 0x00070027
+pressed: usage_page 0x07 keycode 0x27 implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms release 0x00070027
+released: usage_page 0x07 keycode 0x27 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+chord: lag 20 overlap 50 chord 1
+decide: み hold age 70
+decide: こ space age 50
+pressed: usage_page 0x07 keycode 0xE5 implicit_mods 0x00 explicit_mods 0x00
+wm_output +11ms hide 0x20 mods 0x00
+wm_output +22ms press 0x0007002C
+pressed: usage_page 0x07 keycode 0x2C implicit_mods 0x00 explicit_mods 0x00
+wm_output +22ms release 0x0007002C
+released: usage_page 0x07 keycode 0x2C implicit_mods 0x00 explicit_mods 0x00
+wm_output +33ms show 0x20 mods 0x20
+wm_output +0ms press 0x00070027
+pressed: usage_page 0x07 keycode 0x27 implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms release 0x00070027
+released: usage_page 0x07 keycode 0x27 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0xE5 implicit_mods 0x00 explicit_mods 0x00

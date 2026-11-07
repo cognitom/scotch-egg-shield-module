@@ -1,0 +1,16 @@
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+decide: こ hold age 200
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms press 0x00070020
+pressed: usage_page 0x07 keycode 0x20 implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms release 0x00070020
+released: usage_page 0x07 keycode 0x20 implicit_mods 0x00 explicit_mods 0x00
+decide: み hold age 150
+pressed: usage_page 0x07 keycode 0xE5 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms press 0x00070027
+pressed: usage_page 0x07 keycode 0x27 implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms release 0x00070027
+released: usage_page 0x07 keycode 0x27 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0xE5 implicit_mods 0x00 explicit_mods 0x00

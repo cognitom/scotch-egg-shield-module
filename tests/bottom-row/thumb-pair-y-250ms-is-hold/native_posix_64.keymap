@@ -1,0 +1,13 @@
+#include "../../windmill.dtsi"
+
+/* こ↓0 み↓100 こ↑200 み↑350 → こ (windmill の BottomRow.thumb_pair_y_250ms_is_hold)。
+ * み が 250ms ちょうどでホールドに決まり、先に離れて待っていた こ はタップ */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,100)
+        DN_GAP(3,6,100)
+        UP_GAP(3,5,150)
+        UP_GAP(3,6,300)
+    >;
+};

@@ -1,0 +1,15 @@
+#include "../../windmill.dtsi"
+
+/* p: こ↓0 み↓200 こ↑300 み↑400 → 半角スペース (windmill の
+ * BottomRow.p_space_x_released_first_after_250ms)。こ は 250ms でホールドになって左Shift
+ * が一度出る。み を離した時点で組が決まり、離れている こ の Shift を下ろしてから
+ * IME_WAIT_MS 空けてスペースを送る (wm_output の +ms) */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,200)
+        DN_GAP(3,6,100)
+        UP_GAP(3,5,100)
+        UP_GAP(3,6,300)
+    >;
+};

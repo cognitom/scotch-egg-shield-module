@@ -1,0 +1,14 @@
+#include "../../windmill.dtsi"
+
+/* w: こ↓0 み↓100 こ↑160 み↑400 → こ (windmill の BottomRow.w_x_waits_for_y_then_tap)。
+ * こ は 150〜250ms で離したので み の結果を待ち、み が 250ms でホールドに決まった
+ * 350ms の時点で組が解けて こ がタップに決まる (decide の こ tap age 350) */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,100)
+        DN_GAP(3,6,60)
+        UP_GAP(3,5,240)
+        UP_GAP(3,6,300)
+    >;
+};

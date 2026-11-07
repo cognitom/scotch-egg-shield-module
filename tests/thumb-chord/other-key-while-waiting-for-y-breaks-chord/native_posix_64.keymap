@@ -1,0 +1,24 @@
+#include "../../windmill.dtsi"
+
+/* X↓0 Y↓50 X↑100 わ↓120 わ↑130 Y↑140 → X Y わ (windmill の
+ * ThumbChordTest.other_key_while_waiting_for_y_breaks_chord)。X を先に離して Y を待つ
+ * 間にほかのキーを押すと不成立。X はタップになり、Y は通常の判定へ戻る。
+ * こ→み と み→こ を続けて流す */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,50)
+        DN_GAP(3,6,50)
+        UP_GAP(3,5,20)
+        DN_GAP(0,10,10)
+        UP_GAP(0,10,10)
+        UP_GAP(3,6,300)
+
+        DN_GAP(3,6,50)
+        DN_GAP(3,5,50)
+        UP_GAP(3,6,20)
+        DN_GAP(0,10,10)
+        UP_GAP(0,10,10)
+        UP_GAP(3,5,300)
+    >;
+};

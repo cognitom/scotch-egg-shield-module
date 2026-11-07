@@ -1,0 +1,16 @@
+#include "../../windmill.dtsi"
+
+/* aa: こ↓0 み↓200 み↑230 み↓300 み↑330 こ↑400 → 半角スペース2つ (windmill の
+ * BottomRow.aa_each_partner_tap_is_space)。こ を押したままの み のタップごとに
+ * スペースを1つ出す */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,200)
+        DN_GAP(3,6,30)
+        UP_GAP(3,6,70)
+        DN_GAP(3,6,30)
+        UP_GAP(3,6,70)
+        UP_GAP(3,5,300)
+    >;
+};

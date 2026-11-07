@@ -1,0 +1,18 @@
+#include "../../windmill.dtsi"
+
+/* こ を離した後に組が決まったときは、半角スペースの後に Shift は戻らない (windmill の
+ * ThumbShift.no_shift_left_after_space)。こ↓0 み↓200 こ↑300 み↑350 は↓470 は↑520。
+ * こ は 250ms でホールドになって左Shift が出る。み の解放で組が決まり、離れている こ の
+ * Shift を下ろしてから IME_WAIT_MS 空けてスペースを送る (wm_output の +ms の press)。
+ * その後の は は素のまま */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,200)
+        DN_GAP(3,6,100)
+        UP_GAP(3,5,50)
+        UP_GAP(3,6,120)
+        DN_GAP(2,4,50)
+        UP_GAP(2,4,300)
+    >;
+};

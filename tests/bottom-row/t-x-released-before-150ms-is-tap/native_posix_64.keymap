@@ -1,0 +1,14 @@
+#include "../../windmill.dtsi"
+
+/* t: こ↓0 み↓100 こ↑130 み↑200 → こみ (windmill の
+ * BottomRow.t_x_released_before_150ms_is_tap)。重なり (30ms) が時間差 (100ms) に
+ * 届かないので同時押しでもなく、こ はタップ、み も続けてタップ */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,100)
+        DN_GAP(3,6,30)
+        UP_GAP(3,5,70)
+        UP_GAP(3,6,300)
+    >;
+};

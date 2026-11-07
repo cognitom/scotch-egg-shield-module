@@ -1,0 +1,13 @@
+#include "../../windmill.dtsi"
+
+/* v: こ↓0 み↓100 こ↑130 み↑400 → こ (windmill の BottomRow.v_x_tap_then_y_hold)。
+ * こ は短く離したのでタップ、み は 250ms でホールド (右Shift の押し離しだけ) */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,100)
+        DN_GAP(3,6,30)
+        UP_GAP(3,5,270)
+        UP_GAP(3,6,300)
+    >;
+};

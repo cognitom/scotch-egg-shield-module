@@ -1,0 +1,15 @@
+#include "../../windmill.dtsi"
+
+/* 両方離せば Shift も Shift 面も落ちる (windmill の ThumbShift.both_released_clears_shift)。
+ * その後の わ は「を」ではなく わ。こ↓0 み↓250 こ↑500 み↑620 わ↓740 わ↑860 */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,250)
+        DN_GAP(3,6,250)
+        UP_GAP(3,5,120)
+        UP_GAP(3,6,120)
+        DN_GAP(0,10,120)
+        UP_GAP(0,10,300)
+    >;
+};

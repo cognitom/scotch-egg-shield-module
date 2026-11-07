@@ -1,0 +1,14 @@
+#include "../../windmill.dtsi"
+
+/* こ↓0 み↓100 こ↑200 み↑349 → 半角スペース (windmill の
+ * BottomRow.thumb_pair_y_249ms_is_space)。後から押した み は 250ms 未満で離せば
+ * スペース。こ は離れているので Shift は出ない */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,100)
+        DN_GAP(3,6,100)
+        UP_GAP(3,5,149)
+        UP_GAP(3,6,300)
+    >;
+};

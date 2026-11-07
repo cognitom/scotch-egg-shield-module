@@ -1,0 +1,23 @@
+#include "../../windmill.dtsi"
+
+/* X↓0 Y↓20 Y↑70 わ↓100 わ↑130 X↑200 → スペース を (windmill の
+ * ThumbChordTest.space_then_x_stays_as_shift)。同時押しのスペースの後も X はホールドの
+ * まま続きに乗り、わ は Shift 面の「を」。こ→み と み→こ を続けて流す */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,20)
+        DN_GAP(3,6,50)
+        UP_GAP(3,6,30)
+        DN_GAP(0,10,30)
+        UP_GAP(0,10,70)
+        UP_GAP(3,5,300)
+
+        DN_GAP(3,6,20)
+        DN_GAP(3,5,50)
+        UP_GAP(3,5,30)
+        DN_GAP(0,10,30)
+        UP_GAP(0,10,70)
+        UP_GAP(3,6,300)
+    >;
+};

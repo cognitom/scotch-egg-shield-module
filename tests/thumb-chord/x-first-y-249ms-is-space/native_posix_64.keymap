@@ -1,0 +1,19 @@
+#include "../../windmill.dtsi"
+
+/* 境界。X↓0 Y↓50 X↑100 Y↑299 → スペース (windmill の
+ * ThumbChordTest.x_first_y_249ms_is_space)。Y を押してから 249ms で離せばスペース。
+ * こ→み と み→こ を続けて流す */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,50)
+        DN_GAP(3,6,50)
+        UP_GAP(3,5,199)
+        UP_GAP(3,6,300)
+
+        DN_GAP(3,6,50)
+        DN_GAP(3,5,50)
+        UP_GAP(3,6,199)
+        UP_GAP(3,5,300)
+    >;
+};

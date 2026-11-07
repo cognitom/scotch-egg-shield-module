@@ -1,0 +1,14 @@
+#include "../../windmill.dtsi"
+
+/* こ↓0 み↓50 み↑100 こ↑149 → 半角スペース (windmill の
+ * BottomRow.thumb_pair_boundary_149ms_is_chord_space)。こ が 150ms に届かなくても、
+ * 重なり (50ms) が時間差 (50ms) 以上なので同時押しで、み を離した 100ms で決まる */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,50)
+        DN_GAP(3,6,50)
+        UP_GAP(3,6,49)
+        UP_GAP(3,5,300)
+    >;
+};

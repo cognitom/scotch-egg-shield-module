@@ -1,0 +1,14 @@
+#include "../../windmill.dtsi"
+
+/* q: こ↓0 み↓200 み↑300 こ↑400 → 半角スペース (windmill の
+ * BottomRow.q_space_y_released_first_after_250ms)。み を離した 300ms で組が決まる。
+ * こ は押したままなので、スペースは左Shift を外して送り、戻す */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,200)
+        DN_GAP(3,6,100)
+        UP_GAP(3,6,100)
+        UP_GAP(3,5,300)
+    >;
+};

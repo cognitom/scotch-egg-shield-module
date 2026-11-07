@@ -1,0 +1,16 @@
+#include "../../windmill.dtsi"
+
+/* b: こ↓0 み↓20 わ↓40 わ↑60 み↑70 こ↑80 → こみわ (windmill の
+ * BottomRow.b_quick_roll_keeps_press_order)。最初の解放より前に わ を押したので
+ * 同時押しにならず、どれもタップで押した順に出る */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,20)
+        DN_GAP(3,6,20)
+        DN_GAP(0,10,20)
+        UP_GAP(0,10,10)
+        UP_GAP(3,6,10)
+        UP_GAP(3,5,300)
+    >;
+};

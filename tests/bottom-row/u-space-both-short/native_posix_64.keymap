@@ -1,0 +1,15 @@
+#include "../../windmill.dtsi"
+
+/* u: こ↓0 み↓100 み↑130 こ↑200 → 半角スペース (windmill の
+ * BottomRow.u_space_both_short)。み の解放ではなく、こ が 150ms に達した時点で組が
+ * 決まる (decide の こ hold age 150)。こ はホールドになり、スペースはその Shift を
+ * 外して送る */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,100)
+        DN_GAP(3,6,30)
+        UP_GAP(3,6,70)
+        UP_GAP(3,5,300)
+    >;
+};

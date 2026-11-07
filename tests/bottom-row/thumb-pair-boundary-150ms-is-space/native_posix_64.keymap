@@ -1,0 +1,15 @@
+#include "../../windmill.dtsi"
+
+/* こ↓0 み↓50 み↑100 こ↑150 → 半角スペース (windmill の
+ * BottomRow.thumb_pair_boundary_150ms_is_space)。同時押しで み の解放の時点で決まる。
+ * windmill のコメントの「こ が 150ms に達したスキャン」は同時押しの規則が入る前の
+ * 書き方で、どちらでも出るものは同じ */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,50)
+        DN_GAP(3,6,50)
+        UP_GAP(3,6,50)
+        UP_GAP(3,5,300)
+    >;
+};

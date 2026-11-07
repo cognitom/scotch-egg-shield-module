@@ -1,0 +1,14 @@
+#include "../../windmill.dtsi"
+
+/* g: こ↓0 み↓200 み↑230 こ↑260 → 半角スペース (windmill の
+ * BottomRow.g_partner_tap_is_space)。み を離した 230ms で組が決まり、押したままの こ は
+ * ホールドになる。スペースはその Shift を外して送り、戻す */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,200)
+        DN_GAP(3,6,30)
+        UP_GAP(3,6,30)
+        UP_GAP(3,5,300)
+    >;
+};

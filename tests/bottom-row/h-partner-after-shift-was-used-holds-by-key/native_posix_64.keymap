@@ -1,0 +1,19 @@
+#include "../../windmill.dtsi"
+
+/* h: こ↓0 あ↓200 あ↑230 み↓300 こ↑350 わ↓400 わ↑430 み↑470 → ぁを (windmill の
+ * BottomRow.h_partner_after_shift_was_used_holds_by_key)。み が決まるまで こ の解放も
+ * わ も待ち、み が 150ms (わ を押してから) でホールドに決まってから、こ の解放と
+ * 右Shift の「を」が出る */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,200)
+        DN_GAP(0,3,30)
+        UP_GAP(0,3,70)
+        DN_GAP(3,6,50)
+        UP_GAP(3,5,50)
+        DN_GAP(0,10,30)
+        UP_GAP(0,10,40)
+        UP_GAP(3,6,300)
+    >;
+};

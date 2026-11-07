@@ -1,0 +1,17 @@
+#include "../../windmill.dtsi"
+
+/* y: こ↓0 あ↓200 あ↑230 み↓300 こ↑350 み↑400 → ぁみ (windmill の
+ * BottomRow.y_partner_tap_after_shift_was_used_is_tap)。み を離した時点で こ は
+ * シフトとしてかかっているので組にならず、み は通常のタップ。こ の解放は み が
+ * 決まるまで待つ */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,200)
+        DN_GAP(0,3,30)
+        UP_GAP(0,3,70)
+        DN_GAP(3,6,50)
+        UP_GAP(3,5,50)
+        UP_GAP(3,6,300)
+    >;
+};
