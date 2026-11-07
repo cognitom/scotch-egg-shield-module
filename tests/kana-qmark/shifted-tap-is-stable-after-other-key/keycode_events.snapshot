@@ -1,0 +1,31 @@
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+decide: み hold age 150
+pressed: usage_page 0x07 keycode 0xE5 implicit_mods 0x00 explicit_mods 0x00
+wm_output +11ms hide 0x20 mods 0x00
+pressed: usage_page 0x07 keycode 0x09 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x09 implicit_mods 0x00 explicit_mods 0x00
+wm_output +33ms show 0x20 mods 0x20
+decide: も tap age 120
+wm_output +11ms hide 0x20 mods 0x00
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output +44ms show 0x20 mods 0x20
+pressed: usage_page 0x07 keycode 0x38 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x38 implicit_mods 0x00 explicit_mods 0x00
+wm_output +66ms hide 0x20 mods 0x00
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output +99ms show 0x20 mods 0x20
+decide: も tap age 120
+wm_output +11ms hide 0x20 mods 0x00
+pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
+wm_output +44ms show 0x20 mods 0x20
+pressed: usage_page 0x07 keycode 0x38 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x38 implicit_mods 0x00 explicit_mods 0x00
+wm_output +66ms hide 0x20 mods 0x00
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+wm_output +99ms show 0x20 mods 0x20
+released: usage_page 0x07 keycode 0xE5 implicit_mods 0x00 explicit_mods 0x00

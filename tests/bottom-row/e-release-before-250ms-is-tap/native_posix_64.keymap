@@ -1,0 +1,12 @@
+#include "../../windmill.dtsi"
+
+/* e: こ↓0 こ↑200 → こ (windmill の BottomRow.e_release_before_250ms_is_tap)。
+ * 離して初めてタップに決まり、押下と解放は続けて出る (BottomRow.tap_does_not_stay_down
+ * も同じ打ち方で、押しっぱなしでもリピートしないことを見ている) */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,200)
+        UP_GAP(3,5,300)
+    >;
+};

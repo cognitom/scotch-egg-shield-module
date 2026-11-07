@@ -1,0 +1,13 @@
+#include "../../windmill.dtsi"
+
+/* d: こ↓0 わ↓200 わ↑230 こ↑260 → を (windmill の BottomRow.d_key_after_150ms_holds_at_once)。
+ * 150ms を過ぎてから押した わ で、こ はその場でホールドに決まる */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,200)
+        DN_GAP(0,10,30)
+        UP_GAP(0,10,30)
+        UP_GAP(3,5,300)
+    >;
+};

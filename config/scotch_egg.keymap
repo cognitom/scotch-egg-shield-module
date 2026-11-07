@@ -10,8 +10,9 @@
  * 英数レイヤーのキーと文字以外のキー (Enter や矢印など) は素のキー (&kp) のまま。
  * ただし英数レイヤーの ; ' \ は &wm_alpha で、接続先が JIS のときだけ1キー1出力で送る。
  *
- * 「仮」と書いたキーは、windmill の処理を後の issue で移すまでの代わり。
- * - かなレイヤー最下段 (つ さ そ ひ こ み も ね) のタップ・ホールド: 6/9
+ * かなレイヤー最下段 (つ さ そ ひ こ み も ね) は &wm_bottom で、タップで かな、ホールドで
+ * Win / Alt / Fn / 記号 / Shift になる。150ms 未満で離せばタップ、250ms でホールド、
+ * 150ms 以上で別のキーを押せばホールド。こ / み の同時押しの半角スペース (親指の組) は 7/9。
  *
  * 左右の Fn と記号 (&wm_mo) は、左右のどちらを押しているかを覚え、両方離れるまで
  * レイヤーを下ろさない。左右の Fn を両方押している間だけ設定レイヤーが上がる。
@@ -23,62 +24,34 @@
 #include <dt-bindings/zmk/keys.h>
 
 / {
-    macros {
-        /* 仮 (6/9 で こ / み のタップ・ホールドに置き換える)。押している間だけ Shift と
-         * かなの Shift 面を上げる。タップでは何も出ない。こ は左Shift、み は右Shift */
-        kana_shift_l: kana_shift_l {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            display-name = "Kana Shift L";
-            wait-ms = <0>;
-            tap-ms = <0>;
-            bindings
-                = <&macro_press &kp LSHFT &mo LAYER_KANA_SHIFT>
-                , <&macro_pause_for_release>
-                , <&macro_release &mo LAYER_KANA_SHIFT &kp LSHFT>
-                ;
-        };
-
-        kana_shift_r: kana_shift_r {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            display-name = "Kana Shift R";
-            wait-ms = <0>;
-            tap-ms = <0>;
-            bindings
-                = <&macro_press &kp RSHFT &mo LAYER_KANA_SHIFT>
-                , <&macro_pause_for_release>
-                , <&macro_release &mo LAYER_KANA_SHIFT &kp RSHFT>
-                ;
-        };
-    };
-
     keymap {
         compatible = "zmk,keymap";
 
         /* 最下段の左端は MY_LCTL (タップで言語切替、ホールドで Ctrl + 英数レイヤー)。
-         * つ さ そ ひ こ み も ね は仮で、ホールドの役割だけを持ち、タップでは何も出ない。
-         * つ / さ (Win / Alt) は押している間、英数レイヤーを上げる。そ / ね は左右の Fn、
-         * ひ / も は左右の記号 (&wm_mo) */
+         * つ さ そ ひ こ み も ね (&wm_bottom) のホールドは、つ / さ が Win / Alt (押している間、
+         * 英数レイヤーを上げる)、そ / ね が左右の Fn、ひ / も が左右の記号、こ / み が
+         * 左右の Shift + Shift 面 */
         kana_layer {
             display-name = "Kana";
             bindings = <
 &kp ESC                 &wm_char KN_NU   &wm_char KN_FU   &wm_char KN_A    &wm_char KN_U    &wm_char KN_E    &wm_char KN_O    &wm_char KN_YA   &wm_char KN_YU   &wm_char KN_YO   &wm_char KN_WA   &kp RET
 &kp TAB                 &wm_char KN_TA   &wm_char KN_TE   &wm_char KN_I    &wm_char KN_SU   &wm_char KN_KA   &wm_char KN_N    &wm_char KN_NA   &wm_char KN_NI   &wm_char KN_RA   &wm_char KN_SE   &wm_char KN_DAKU
 &kp BSPC                &wm_char KN_CHI  &wm_char KN_TO   &wm_char KN_SHI  &wm_char KN_HA   &wm_char KN_KI   &wm_char KN_KU   &wm_char KN_MA   &wm_char KN_NO   &wm_char KN_RI   &wm_char KN_RE   &wm_char KN_KE
-&wm_lctl LCTRL MY_LANG  &wm_mod LGUI     &wm_mod LALT     &wm_mo WM_FN_L   &wm_mo WM_SYM_L  &kana_shift_l    &kana_shift_r    &wm_mo WM_SYM_R  &wm_mo WM_FN_R   &wm_char KN_RU   &wm_char KN_ME   &wm_char KN_RO
+&wm_lctl LCTRL MY_LANG  &wm_bottom KB_TSU  &wm_bottom KB_SA  &wm_bottom KB_SO  &wm_bottom KB_HI  &wm_bottom KB_KO  &wm_bottom KB_MI  &wm_bottom KB_MO  &wm_bottom KB_NE  &wm_char KN_RU  &wm_char KN_ME  &wm_char KN_RO
             >;
         };
 
-        /* 透過のキーは、下のかなを Shift を打ち消して出す。最下段の っ ？ 、 は仮で、
-         * タップだけを持つ (ホールドの役割は 6/9)。こ / み の位置 (空) は 7/9 */
+        /* 透過のキーは、下のかなを Shift を打ち消して出す。最下段 (っ 空 空 ？ 、) は
+         * かなレイヤーの同じ位置のキーと同じホールドの役割で、タップで出るものだけが
+         * 変わる。空 (こ / み の位置) は親指の組の半角スペースで、組は 7/9。組に
+         * ならないタップは こ / み のまま出る */
         kana_shift_layer {
             display-name = "Kana Shift";
             bindings = <
-&trans  &trans            &trans          &wm_char KN_XA   &wm_char KN_XU   &wm_char KN_XE   &wm_char KN_XO   &wm_char KN_XYA  &wm_char KN_XYU     &wm_char KN_XYO     &wm_char KN_WO        &trans
-&trans  &trans            &wm_char KN_HE  &wm_char KN_XI   &wm_char KN_MU   &trans           &trans           &wm_char KN_HO   &trans              &wm_char KN_LKAKKO  &wm_char KN_RKAKKO    &wm_char KN_HANDAKU
-&trans  &wm_char KN_XTSU  &trans          &trans           &trans           &trans           &trans           &trans           &wm_char KN_TOUTEN  &wm_char KN_KUTEN   &wm_char KN_NAKAGURO  &wm_char KN_CHOON
-&trans  &wm_char KB_XTSU  &trans          &trans           &trans           &trans           &trans           &wm_char KB_QUES &wm_char KB_TOUTEN  &wm_char KN_KUTEN   &wm_char KN_NAKAGURO  &trans
+&trans  &trans              &trans          &wm_char KN_XA   &wm_char KN_XU   &wm_char KN_XE      &wm_char KN_XO      &wm_char KN_XYA     &wm_char KN_XYU       &wm_char KN_XYO     &wm_char KN_WO        &trans
+&trans  &trans              &wm_char KN_HE  &wm_char KN_XI   &wm_char KN_MU   &trans              &trans              &wm_char KN_HO      &trans                &wm_char KN_LKAKKO  &wm_char KN_RKAKKO    &wm_char KN_HANDAKU
+&trans  &wm_char KN_XTSU    &trans          &trans           &trans           &trans              &trans              &trans              &wm_char KN_TOUTEN    &wm_char KN_KUTEN   &wm_char KN_NAKAGURO  &wm_char KN_CHOON
+&trans  &wm_bottom KB_XTSU  &trans          &trans           &trans           &wm_bottom KB_SPC   &wm_bottom KB_SPC   &wm_bottom KB_QUES  &wm_bottom KB_TOUTEN  &wm_char KN_KUTEN   &wm_char KN_NAKAGURO  &trans
             >;
         };
 

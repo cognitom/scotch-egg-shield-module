@@ -1,0 +1,11 @@
+description: |
+  windmill のかなレイヤー最下段のタップ・ホールド。引数は dt-bindings/windmill/keys.h の
+  KB_*。150ms 未満で離せばタップ、250ms でホールド、150ms 以上で別のキーを押せば
+  ホールド。未判定の間に押されたキーは待たせ、押した順に出す。
+  ホールドの役割はキーごとに決まっている (つ Win、さ Alt、そ / ね Fn、ひ / も 記号、
+  こ / み Shift + Shift 面)。Shift 面の最下段 (KB_XTSU など) は、かなレイヤーの同じ位置の
+  キーと同じ役割で、タップで出るものだけが変わる
+
+compatible: "zmk,behavior-wm-bottom"
+
+include: one_param.yaml

@@ -224,6 +224,46 @@ pressed: usage_page 0x07 keycode 0x34 implicit_mods 0x00 explicit_mods 0x00
 wm_output step: +0ms release 0x00070034
 released: usage_page 0x07 keycode 0x34 implicit_mods 0x00 explicit_mods 0x00
 wm_char released: position 35 key 43
+wm_output begin: output 0x0007001D alpha 0 held 0x00
+wm_output step: +0ms press 0x0007001D
+pressed: usage_page 0x07 keycode 0x1D implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x0007001D
+released: usage_page 0x07 keycode 0x1D implicit_mods 0x00 explicit_mods 0x00
+wm_output begin: output 0x0007001B alpha 0 held 0x00
+wm_output step: +0ms press 0x0007001B
+pressed: usage_page 0x07 keycode 0x1B implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x0007001B
+released: usage_page 0x07 keycode 0x1B implicit_mods 0x00 explicit_mods 0x00
+wm_output begin: output 0x00070006 alpha 0 held 0x00
+wm_output step: +0ms press 0x00070006
+pressed: usage_page 0x07 keycode 0x06 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070006
+released: usage_page 0x07 keycode 0x06 implicit_mods 0x00 explicit_mods 0x00
+wm_output begin: output 0x00070019 alpha 0 held 0x00
+wm_output step: +0ms press 0x00070019
+pressed: usage_page 0x07 keycode 0x19 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070019
+released: usage_page 0x07 keycode 0x19 implicit_mods 0x00 explicit_mods 0x00
+wm_output begin: output 0x00070005 alpha 0 held 0x00
+wm_output step: +0ms press 0x00070005
+pressed: usage_page 0x07 keycode 0x05 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070005
+released: usage_page 0x07 keycode 0x05 implicit_mods 0x00 explicit_mods 0x00
+wm_output begin: output 0x00070011 alpha 0 held 0x00
+wm_output step: +0ms press 0x00070011
+pressed: usage_page 0x07 keycode 0x11 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070011
+released: usage_page 0x07 keycode 0x11 implicit_mods 0x00 explicit_mods 0x00
+wm_output begin: output 0x00070010 alpha 0 held 0x00
+wm_output step: +0ms press 0x00070010
+pressed: usage_page 0x07 keycode 0x10 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070010
+released: usage_page 0x07 keycode 0x10 implicit_mods 0x00 explicit_mods 0x00
+wm_output begin: output 0x00070036 alpha 0 held 0x00
+wm_output step: +0ms press 0x00070036
+pressed: usage_page 0x07 keycode 0x36 implicit_mods 0x00 explicit_mods 0x00
+wm_output step: +0ms release 0x00070036
+released: usage_page 0x07 keycode 0x36 implicit_mods 0x00 explicit_mods 0x00
 wm_char pressed: position 45 key 44
 wm_output begin: output 0x00070037 alpha 0 held 0x00
 wm_output step: +0ms press 0x00070037

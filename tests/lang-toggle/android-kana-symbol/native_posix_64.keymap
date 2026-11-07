@@ -2,7 +2,7 @@
 
 /* Android でも、かなベースの記号レイヤーの数字は LANG2 / LANG1 で一時的に英数へ
  * 切り替えて送る (windmill の LangToggleAndroid.kana_symbol_still_uses_lng)。
- * 言語切替の変換 / 無変換と混ざらないこと。も (仮の &mo LAYER_SYM) をホールドする */
+ * 言語切替の変換 / 無変換と混ざらないこと。も (右の記号) をホールドする */
 &kscan {
     events = <
         CONF_TAP(1,2)

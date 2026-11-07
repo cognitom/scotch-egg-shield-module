@@ -48,6 +48,12 @@
             display-name = "Windmill Layer";
         };
 
+        /omit-if-no-ref/ wm_bottom: wm_bottom {
+            compatible = "zmk,behavior-wm-bottom";
+            #binding-cells = <1>;
+            display-name = "Windmill Bottom Row";
+        };
+
         /omit-if-no-ref/ wm_out: wm_out {
             compatible = "zmk,behavior-wm-out";
             #binding-cells = <1>;

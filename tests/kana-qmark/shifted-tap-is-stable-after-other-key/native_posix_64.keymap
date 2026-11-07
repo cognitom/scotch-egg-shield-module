@@ -1,0 +1,21 @@
+#include "../../windmill.dtsi"
+
+/* み↓0 は↓150 は↑270 も↓390 も↑510 も↓630 も↑750 み↑870 → は??
+ * (windmill の KanaQmark.shifted_tap_is_stable_after_other_key)。
+ *
+ * 実機で報告された は→も→も の再現 (windmill の PR #32)。「も」以外のキーを打った直後の
+ * 1打鍵目だけ半角「/」になっていた。1回目も2回目も同じ列になること。
+ * は の押下で み はホールドに決まる。は は Shift 面で透過なので、Shift を外して は のまま出る */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,6,150)
+        DN_GAP(2,4,120)
+        UP_GAP(2,4,120)
+        DN_GAP(3,7,120)
+        UP_GAP(3,7,120)
+        DN_GAP(3,7,120)
+        UP_GAP(3,7,120)
+        UP_GAP(3,6,300)
+    >;
+};

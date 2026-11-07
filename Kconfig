@@ -37,6 +37,12 @@ config ZMK_BEHAVIOR_WM_MO
     depends on DT_HAS_ZMK_BEHAVIOR_WM_MO_ENABLED
     select ZMK_WINDMILL
 
+config ZMK_BEHAVIOR_WM_BOTTOM
+    bool
+    default y
+    depends on DT_HAS_ZMK_BEHAVIOR_WM_BOTTOM_ENABLED
+    select ZMK_WINDMILL
+
 config ZMK_BEHAVIOR_WM_OUT
     bool
     default y

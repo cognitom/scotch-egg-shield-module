@@ -1,0 +1,11 @@
+#include "../../windmill.dtsi"
+
+/* f: こ↓0 こ↑300 → 何も出ない。左Shift の押し離しだけ
+ * (windmill の BottomRow.f_long_press_is_shift_only) */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,300)
+        UP_GAP(3,5,300)
+    >;
+};

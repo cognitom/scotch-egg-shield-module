@@ -1,0 +1,10 @@
+#include "../../windmill.dtsi"
+
+/* n: つ↓0 つ↑300 → Win の押し離し (windmill の BottomRow.n_long_press_is_gui_only) */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,1,300)
+        UP_GAP(3,1,300)
+    >;
+};

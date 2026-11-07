@@ -6,7 +6,7 @@
  * 記号レイヤーの「@」は JIS では単独の [ のキー (0x2F)、US では Shift+2 (0x1F)。
  * かなの Shift 面の「」は JIS では Shift+] と Shift+＼(0x32)、US (Windows) では
  * Shift+[ と Shift+] (0x2F 0x30)。
- * 「@」は ひ (仮の &mo LAYER_SYM)、「」は こ (仮の左Shift + Shift 面) をホールドする */
+ * 「@」は ひ (左の記号)、「」は こ (左Shift + Shift 面) をホールドする */
 #define AT ZMK_MOCK_PRESS(3,4,250) TAP(1,2) ZMK_MOCK_RELEASE(3,4,250)
 #define KAKKO ZMK_MOCK_PRESS(3,5,250) TAP(1,9) TAP(1,10) ZMK_MOCK_RELEASE(3,5,250)
 

@@ -1,0 +1,8 @@
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+decide: そ hold age 200
+decide: ね tap age 140
+pressed: usage_page 0x07 keycode 0x36 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x36 implicit_mods 0x00 explicit_mods 0x00
+pressed: usage_page 0x07 keycode 0x3A implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x3A implicit_mods 0x00 explicit_mods 0x00

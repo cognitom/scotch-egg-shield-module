@@ -1,0 +1,14 @@
+#include "../../windmill.dtsi"
+
+/* ひ↓0 こ↓200 ひ↑240 こ↑260 → ひこ (windmill の BottomRow.bottom_press_does_not_decide_earlier)。
+ * 最下段のキーの押下では、先に押された未判定のキーを判定しない。ひ は 200ms で こ が
+ * 押されてもホールドにならず、250ms 前に離せばタップ。こ も続けてタップで、押した順に出る */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,4,200)
+        DN_GAP(3,5,40)
+        UP_GAP(3,4,20)
+        UP_GAP(3,5,300)
+    >;
+};

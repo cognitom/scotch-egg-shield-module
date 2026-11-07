@@ -1,0 +1,18 @@
+#include "../../windmill.dtsi"
+
+/* j: ひ↓0 も↓100 た↓200 た↑230 も↑240 ひ↑250 → も!
+ * (windmill の BottomRow.j_sym_hold_then_partner_tap_then_key)。
+ * た の押下で ひ がホールド (記号レイヤー) に決まる。も は離してタップで、記号レイヤーの
+ * 同じ位置は透過なので も のまま出る。待っていた た は記号レイヤーの「!」で、かなベース
+ * なので英数に切り替えて送る */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,4,100)
+        DN_GAP(3,7,100)
+        DN_GAP(1,1,30)
+        UP_GAP(1,1,10)
+        UP_GAP(3,7,10)
+        UP_GAP(3,4,300)
+    >;
+};
