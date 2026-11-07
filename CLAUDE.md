@@ -106,3 +106,5 @@ bash scripts/release.sh --dry-run    # CHANGES.md へ書く内容だけ見て終
   issue で確認してから動く
 - **`CHANGES.md` は手で書かない。** リリースのたびに `release.sh` が生成する。
   PR のタイトルがそのまま履歴の1行になるので、タイトルは変更の中身が分かるように付ける
+- **`gh` は必ず `-R cognitom/scotch-egg-shield-module` を付ける。** このリポジトリは
+  omwegg/scotch-egg-shield-module の fork なので、付けないと fork 元の omwegg を相手にする
