@@ -26,14 +26,12 @@ windmill と違うところ (LED とダークモードが無い、設定レイ�
 
 ## 書き込み方
 
-ファームウェアは GitHub Actions の Build ワークフローが作る。
+ファームウェアは [リリース](https://github.com/cognitom/scotch-egg-shield-module/releases) に貼ってある。
 
-1. リポジトリの [Actions](https://github.com/cognitom/scotch-egg-shield-module/actions/workflows/build.yml) で、書き込みたいコミットの Build の実行を開く
-2. 下の Artifacts から `firmware` をダウンロードして展開する。中の
-   `scotch_egg-seeeduino_xiao_ble-zmk.uf2` を書き込む
-3. scotch-egg を USB でパソコンへ繋ぎ、XIAO をブートローダにする。初めてのときは XIAO の
-   リセットボタンをすばやく2回押す。windmill を書き込んだあとなら、左右の <kbd>Fn</kbd> を両方押しながら
-   <kbd>Enter</kbd> でもよい
+1. 書き込みたい版のリリースを開き、Assets から `scotch_egg-seeeduino_xiao_ble-zmk.uf2` をダウンロードする
+2. scotch-egg を USB でパソコンへ繋ぎ、XIAO をブートローダにする。初めてのときは、右端のキーの
+   外側の穴からピンを差して XIAO のリセットボタンを押す (2回すばやく)。windmill を書き込んだあとなら、
+   左右の <kbd>Fn</kbd> を両方押しながら <kbd>Enter</kbd> でもよい
 4. USB ドライブが現れるので、`.uf2` をそこへコピーする。コピーが終わると XIAO が再起動して、
    ドライブは消える
 

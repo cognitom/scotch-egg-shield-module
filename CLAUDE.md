@@ -27,7 +27,8 @@ scotch-egg (Seeed XIAO nRF52840、4x12 のオーソ配列、LED なし) の ZMK 
 | `tests/unit/` | ztest の単体テスト (`prj.conf` のあるディレクトリ)。native_posix の ZMK で回せないもの (BLE のプロファイルの切り替え) を、切り出した関数で見る |
 | `docs/check.md` | 実機確認の手順書。windmill の `tests/` のケースを打つキーと画面に出るべきものの組で並べ、冒頭に windmill の README との差分を置く。挙動やキーマップを変えたら合わせて直す |
 | `compose.agent.yaml` | ZMK を動かすコンテナ (`zmkfirmware/zmk-dev-arm:3.5`)。`zmk` サービスが常駐する |
-| `scripts/` | ビルド (`build.sh`) とテスト (`test.sh`)。`container/entrypoint.sh` はコンテナの起動処理、`bin/west` は shim が無い環境向けのラッパー |
+| `CHANGES.md` | 変更履歴。`scripts/release.sh` が書き足す |
+| `scripts/` | ビルド (`build.sh`)、テスト (`test.sh`)、リリース (`release.sh`)。`container/entrypoint.sh` はコンテナの起動処理、`bin/west` は shim が無い環境向けのラッパー |
 
 `.zmk/` (west の取得物とビルドの作業場所) と `output/` は生成物なのでコミットしない
 (`.gitignore` 済み)。
@@ -73,6 +74,24 @@ ZMK を上げるときは `config/west.yml` の `revision`、`.github/workflows/
 `wm_place_bottom_listener`)、ZMK の `app/CMakeLists.txt` の作りに頼っている。上げたら
 `tests/bottom-row/ctrl-then-thumb-is-ctrl-space` で並びを確かめる。
 
+## リリース
+
+`main` で `scripts/release.sh` を実行する。次のバージョン番号を決めて、
+`CHANGES.md` を書き足してコミット・プッシュし、タグを打つところまでやる。
+最初の版は `v0.1.0`。
+
+```bash
+bash scripts/release.sh              # パッチ版を上げる (v0.1.0 → v0.1.1)
+bash scripts/release.sh --minor      # マイナー版を上げる (v0.1.1 → v0.2.0)
+bash scripts/release.sh v1.0.0       # バージョンを直接指定する
+bash scripts/release.sh --dry-run    # CHANGES.md へ書く内容だけ見て終わる
+```
+
+書き足す中身は、前回のタグ以降に main へ入ったPRのリンクを並べただけ。
+`git log --first-parent` から拾うので、**PRのタイトルがそのまま履歴の1行になる**。
+タグを push すると Release ワークフロー (`.github/workflows/release.yml`) が
+テストとビルドを通して、GitHubのリリースへ `scotch_egg-seeeduino_xiao_ble-zmk.uf2` を貼る。
+
 ## 守ってほしいこと
 
 - **キー処理の変更にはテストを添え、ホストへ出るキーの列で固定する。**
@@ -85,3 +104,5 @@ ZMK を上げるときは `config/west.yml` の `revision`、`.github/workflows/
   コメントは「何をしているか」ではなく「なぜそうしたか」を書く
 - **キー配列そのものの変更は勝手に決めない。** 配置は作者の好みの問題なので、
   issue で確認してから動く
+- **`CHANGES.md` は手で書かない。** リリースのたびに `release.sh` が生成する。
+  PR のタイトルがそのまま履歴の1行になるので、タイトルは変更の中身が分かるように付ける
