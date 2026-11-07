@@ -1,0 +1,53 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build firmware
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      # west は compose.agent.yaml のコンテナの中で動かす (test.yml と同じ)
+      - name: Start ZMK container
+        run: docker compose -f compose.agent.yaml up -d --wait
+      - name: Show container logs
+        if: ${{ !cancelled() }}
+        run: docker compose -f compose.agent.yaml logs
+      - name: Put west on PATH
+        run: echo "$GITHUB_WORKSPACE/scripts/bin" >> "$GITHUB_PATH"
+      # リリースするファームウェアはテストを通したものに限る
+      - name: Run tests
+        run: bash scripts/test.sh
+      - name: Build firmware
+        run: bash scripts/build.sh
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: scotch-egg-firmware
+          path: output/*.uf2
+          if-no-files-found: error
+
+  release:
+    name: Create release
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: scotch-egg-firmware
+          path: output
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: output/scotch_egg-seeeduino_xiao_ble-zmk.uf2
+          fail_on_unmatched_files: true
