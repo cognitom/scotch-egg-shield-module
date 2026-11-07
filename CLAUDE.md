@@ -25,6 +25,7 @@ scotch-egg (Seeed XIAO nRF52840、4x12 のオーソ配列、LED なし) の ZMK 
 | `tests/` | ZMK 形式のテスト。1件1ディレクトリで `native_posix_64.keymap` `events.patterns` `keycode_events.snapshot` |
 | `tests/windmill.dtsi` | テスト用のキーマップ。`config/scotch_egg.keymap` と同じ並びを native_posix_64 で動かせる形で持ち、各テストが `#include` する |
 | `tests/unit/` | ztest の単体テスト (`prj.conf` のあるディレクトリ)。native_posix の ZMK で回せないもの (BLE のプロファイルの切り替え) を、切り出した関数で見る |
+| `docs/check.md` | 実機確認の手順書。windmill の `tests/` のケースを打つキーと画面に出るべきものの組で並べ、冒頭に windmill の README との差分を置く。挙動やキーマップを変えたら合わせて直す |
 | `compose.agent.yaml` | ZMK を動かすコンテナ (`zmkfirmware/zmk-dev-arm:3.5`)。`zmk` サービスが常駐する |
 | `scripts/` | ビルド (`build.sh`) とテスト (`test.sh`)。`container/entrypoint.sh` はコンテナの起動処理、`bin/west` は shim が無い環境向けのラッパー |
 
