@@ -1,0 +1,19 @@
+#include "../../windmill.dtsi"
+
+/* 設定レイヤーは左右の Fn を両方ホールドしている間だけ上がる。Fn が片方だけなら、
+ * 左右どちらでも Fn レイヤーのまま (windmill の ConfLayer.single_fn_stays_on_fn_layer)。
+ *
+ * どのレイヤーで解決されたかは、ホストへ出るキーで見る。MY_ANDR の位置は Fn レイヤー
+ * では F12 で、設定レイヤーでは何も出ずに OS が変わる。OS は最後の言語切替 (MY_LCTL の
+ * タップ) で見る。英数からのタップで、Windows は LANG1 (0x90)、Android は変換 (0x8A) */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,3,250)
+        TAP(1,2)
+        ZMK_MOCK_RELEASE(3,3,120)
+        ZMK_MOCK_PRESS(3,8,250)
+        TAP(1,2)
+        ZMK_MOCK_RELEASE(3,8,120)
+        TAP(3,0)
+    >;
+};

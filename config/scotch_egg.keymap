@@ -12,14 +12,15 @@
  *
  * 「仮」と書いたキーは、windmill の処理を後の issue で移すまでの代わり。
  * - かなレイヤー最下段 (つ さ そ ひ こ み も ね) のタップ・ホールド: 6/9
- * - 左右の Fn と設定レイヤー: 5/9
+ *
+ * 左右の Fn と記号 (&wm_mo) は、左右のどちらを押しているかを覚え、両方離れるまで
+ * レイヤーを下ろさない。左右の Fn を両方押している間だけ設定レイヤーが上がる。
  */
 
 #include <behaviors.dtsi>
 #include <behaviors/windmill.dtsi>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
-#include <dt-bindings/zmk/outputs.h>
 
 / {
     macros {
@@ -57,14 +58,15 @@
 
         /* 最下段の左端は MY_LCTL (タップで言語切替、ホールドで Ctrl + 英数レイヤー)。
          * つ さ そ ひ こ み も ね は仮で、ホールドの役割だけを持ち、タップでは何も出ない。
-         * つ / さ (Win / Alt) は押している間、英数レイヤーを上げる */
+         * つ / さ (Win / Alt) は押している間、英数レイヤーを上げる。そ / ね は左右の Fn、
+         * ひ / も は左右の記号 (&wm_mo) */
         kana_layer {
             display-name = "Kana";
             bindings = <
 &kp ESC                 &wm_char KN_NU   &wm_char KN_FU   &wm_char KN_A    &wm_char KN_U    &wm_char KN_E    &wm_char KN_O    &wm_char KN_YA   &wm_char KN_YU   &wm_char KN_YO   &wm_char KN_WA   &kp RET
 &kp TAB                 &wm_char KN_TA   &wm_char KN_TE   &wm_char KN_I    &wm_char KN_SU   &wm_char KN_KA   &wm_char KN_N    &wm_char KN_NA   &wm_char KN_NI   &wm_char KN_RA   &wm_char KN_SE   &wm_char KN_DAKU
 &kp BSPC                &wm_char KN_CHI  &wm_char KN_TO   &wm_char KN_SHI  &wm_char KN_HA   &wm_char KN_KI   &wm_char KN_KU   &wm_char KN_MA   &wm_char KN_NO   &wm_char KN_RI   &wm_char KN_RE   &wm_char KN_KE
-&wm_lctl LCTRL MY_LANG  &wm_mod LGUI     &wm_mod LALT     &mo LAYER_FN     &mo LAYER_SYM    &kana_shift_l    &kana_shift_r    &mo LAYER_SYM    &mo LAYER_FN     &wm_char KN_RU   &wm_char KN_ME   &wm_char KN_RO
+&wm_lctl LCTRL MY_LANG  &wm_mod LGUI     &wm_mod LALT     &wm_mo WM_FN_L   &wm_mo WM_SYM_L  &kana_shift_l    &kana_shift_r    &wm_mo WM_SYM_R  &wm_mo WM_FN_R   &wm_char KN_RU   &wm_char KN_ME   &wm_char KN_RO
             >;
         };
 
@@ -80,16 +82,16 @@
             >;
         };
 
-        /* 最下段の左右の Fn は仮。ZMK の既定の &mo を置いてある。
-         * Win / Alt は、Ctrl のホールドで英数レイヤーが上がったときにここで引かれる。
-         * そこでも数えないと、Ctrl を先に離した時点でかなへ落ちるので &wm_mod にする */
+        /* Win / Alt は、Ctrl のホールドで英数レイヤーが上がったときにここで引かれる。
+         * そこでも数えないと、Ctrl を先に離した時点でかなへ落ちるので &wm_mod にする。
+         * 左右の Fn は &wm_mo で、両方押している間は設定レイヤーが上がる */
         alpha_layer {
             display-name = "Alpha";
             bindings = <
-&trans  &kp Q         &kp W         &kp E         &kp R                  &kp T                  &kp Y                  &kp U                  &kp I         &kp O      &kp P            &trans
-&trans  &kp A         &kp S         &kp D         &kp F                  &kp G                  &kp H                  &kp J                  &kp K         &kp L      &wm_alpha SEMI   &wm_alpha SQT
-&trans  &kp Z         &kp X         &kp C         &kp V                  &kp B                  &kp N                  &kp M                  &kp COMMA     &kp DOT    &kp UP           &kp RIGHT
-&trans  &wm_mod LGUI  &wm_mod LALT  &mo LAYER_FN  &wm_lt LAYER_SYM BSLH  &wm_sands LSHFT SPACE  &wm_sands RSHFT SPACE  &wm_lt LAYER_SYM FSLH  &mo LAYER_FN  &kp K_APP  &kp LEFT         &kp DOWN
+&trans  &kp Q         &kp W         &kp E           &kp R                  &kp T                  &kp Y                  &kp U                  &kp I           &kp O      &kp P            &trans
+&trans  &kp A         &kp S         &kp D           &kp F                  &kp G                  &kp H                  &kp J                  &kp K           &kp L      &wm_alpha SEMI   &wm_alpha SQT
+&trans  &kp Z         &kp X         &kp C           &kp V                  &kp B                  &kp N                  &kp M                  &kp COMMA       &kp DOT    &kp UP           &kp RIGHT
+&trans  &wm_mod LGUI  &wm_mod LALT  &wm_mo WM_FN_L  &wm_lt LAYER_SYM BSLH  &wm_sands LSHFT SPACE  &wm_sands RSHFT SPACE  &wm_lt LAYER_SYM FSLH  &wm_mo WM_FN_R  &kp K_APP  &kp LEFT         &kp DOWN
             >;
         };
 
@@ -105,29 +107,33 @@
 
         /* 右上の MY_DARK (LED) は移さない。左下は MY_IME (Fn+Ctrl) で、ホストの IME だけを
          * 今のベースの側へ切り替える。
-         * 最下段の左右の Fn の位置は仮で、片方の Fn を押したままもう片方を押すと設定
-         * レイヤーが上がる (windmill の set_fn() は 5/9) */
+         * 最下段の左右の Fn の位置は透過にしておく。片方の Fn を押したままもう片方を
+         * 押すと、下のレイヤーの &wm_mo に落ちて設定レイヤーが上がる */
         fn_layer {
             display-name = "Fn";
             bindings = <
 &trans           &kp F1     &kp F2   &kp F3          &kp F4   &kp F5        &kp F6        &kp F7      &kp F8          &kp F9        &kp F10    &none
 &kp CAPS         &kp F11    &kp F12  &none           &none    &none         &none         &none       &none           &none         &none      &none
 &kp DEL          &kp PSCRN  &none    &none           &none    &kp C_BRI_DN  &kp C_BRI_UP  &kp C_MUTE  &kp C_VOL_DN    &kp C_VOL_UP  &kp UP     &kp RIGHT
-&wm_lang MY_IME  &trans     &trans   &mo LAYER_CONF  &trans   &trans        &trans        &trans      &mo LAYER_CONF  &trans        &kp LEFT   &kp DOWN
+&wm_lang MY_IME  &trans     &trans   &trans          &trans   &trans        &trans        &trans      &trans          &trans        &kp LEFT   &kp DOWN
             >;
         };
 
-        /* MY_WIN / MY_ANDR / MY_JIS / MY_US (&wm_host) は technik と同じ位置。いま
-         * 繋がっている接続先 (USB か、BLE のアクティブなプロファイル) のぶんだけを選ぶ。
-         * 接続先の切替と &bt BT_CLR、&studio_unlock の位置は仮 (配置は 5/9 で windmill の
-         * geonix41 に揃える)。Fn の位置は透過にしておくこと */
+        /* 左右の Fn を両方押している間だけ上がる。配置は windmill の geonix41 の LAYER_CONF
+         * に揃える。最上段の左から USB、BLE プロファイル 0〜3 (geonix41 の MD_USB /
+         * MD_BLE1〜3 / MD_24G の位置) で、送り先の切替とプロファイルの選択を1キーで行う。
+         * MY_WIN / MY_ANDR / MY_JIS / MY_US (&wm_host) は、いま繋がっている接続先 (USB か、
+         * BLE のアクティブなプロファイル) のぶんだけを選ぶ。
+         * geonix41 に無い &bt BT_CLR (最上段の右から2つ目) と &studio_unlock (2段目の
+         * 右端) は ZMK のぶん。
+         * Fn の位置は透過にしておくこと (src/layer.c 参照) */
         conf_layer {
             display-name = "Config";
             bindings = <
-&out OUT_USB  &bt BT_SEL 0     &bt BT_SEL 1      &bt BT_SEL 2  &bt BT_SEL 3  &none  &none  &none  &none   &none  &bt BT_CLR  &bootloader
-&none         &wm_host MY_WIN  &wm_host MY_ANDR  &none         &none         &none  &none  &none  &none   &none  &none       &studio_unlock
-&none         &wm_host MY_JIS  &wm_host MY_US    &none         &none         &none  &none  &none  &none   &none  &none       &none
-&none         &none            &none             &trans        &none         &none  &none  &none  &trans  &none  &none       &none
+&wm_out WM_USB  &wm_out WM_BLE_0  &wm_out WM_BLE_1  &wm_out WM_BLE_2  &wm_out WM_BLE_3  &none  &none  &none  &none   &none  &bt BT_CLR  &bootloader
+&none           &wm_host MY_WIN   &wm_host MY_ANDR  &none             &none             &none  &none  &none  &none   &none  &none       &studio_unlock
+&none           &wm_host MY_JIS   &wm_host MY_US    &none             &none             &none  &none  &none  &none   &none  &none       &none
+&none           &none             &none             &trans            &none             &none  &none  &none  &trans  &none  &none       &none
             >;
         };
     };

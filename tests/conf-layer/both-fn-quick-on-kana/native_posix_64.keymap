@@ -1,0 +1,22 @@
+#include "../../windmill.dtsi"
+
+/* かなベースで、両方の Fn (そ / ね) を押してすぐ設定キーを叩いても設定レイヤーで
+ * 解決され、「そ」「ね」も出ない (windmill の
+ * ConfLayerKanaInterrupt.both_fn_confirmed_by_interrupt と同じ叩き方)。
+ *
+ * windmill では そ / ね のホールドが別キーの割り込みで決まる経路を見ている。その判定は
+ * 6/9 で移すもので、いまの そ / ね は押した時点で Fn になる。ここでは叩き方の結果
+ * (設定レイヤーで OS が Android になる) を固定しておき、6/9 でも同じに保つ。
+ * 言語切替はかなからのタップで、Android の英数へは無変換 (0x8B) */
+&kscan {
+    events = <
+        TO_KANA
+        ZMK_MOCK_PRESS(3,3,20)
+        ZMK_MOCK_PRESS(3,8,20)
+        ZMK_MOCK_PRESS(1,2,20)
+        ZMK_MOCK_RELEASE(1,2,150)
+        ZMK_MOCK_RELEASE(3,8,10)
+        ZMK_MOCK_RELEASE(3,3,250)
+        TAP(3,0)
+    >;
+};

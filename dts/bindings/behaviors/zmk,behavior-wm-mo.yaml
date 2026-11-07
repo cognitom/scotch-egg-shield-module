@@ -1,0 +1,9 @@
+description: |
+  windmill の左右の Fn と記号レイヤーのキー。引数は dt-bindings/windmill/layers.h の
+  WM_FN_L / WM_FN_R / WM_SYM_L / WM_SYM_R。押している間そのレイヤーを上げ、左右を
+  1ビットずつ覚えて、両方離れるまで下ろさない。左右の Fn を両方押している間は
+  設定レイヤーも上げる
+
+compatible: "zmk,behavior-wm-mo"
+
+include: one_param.yaml

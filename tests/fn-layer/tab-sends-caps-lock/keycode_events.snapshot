@@ -1,0 +1,11 @@
+layer_changed: layer 2 state 1
+wm_mo pressed: position 39 param 0
+layer_changed: layer 4 state 1
+pressed: usage_page 0x07 keycode 0x39 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x39 implicit_mods 0x00 explicit_mods 0x00
+pressed: usage_page 0x07 keycode 0x39 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x39 implicit_mods 0x00 explicit_mods 0x00
+wm_mo released: position 39 param 0
+layer_changed: layer 4 state 0
+pressed: usage_page 0x07 keycode 0x2B implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x2B implicit_mods 0x00 explicit_mods 0x00

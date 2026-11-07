@@ -16,6 +16,7 @@
 
 #include <zephyr/ztest.h>
 
+#include <dt-bindings/windmill/host.h>
 #include <dt-bindings/zmk/keys.h>
 
 #include <windmill/host_config.h>
@@ -78,6 +79,34 @@ ZTEST(host_endpoint, test_usb_and_four_ble_profiles) {
 ZTEST(host_endpoint, test_profile_out_of_range_falls_back_to_usb) {
     zassert_equal(wm_host_from_endpoint(ble(WM_HOST_BLE_COUNT)), WM_HOST_USB);
     zassert_equal(wm_host_from_endpoint(ble(-1)), WM_HOST_USB);
+}
+
+/* &wm_out が切り替える先。USB は USB、WM_BLE_n は BLE プロファイル n で、
+ * 切り替えた先の設定がそのキーの接続先のものとして読まれる (往復して元に戻る) */
+ZTEST(host_endpoint, test_out_key_selects_its_host) {
+    zassert_equal(WM_USB, WM_HOST_USB);
+    zassert_equal(WM_BLE_0, WM_HOST_BLE_FIRST);
+    zassert_equal(WM_BLE_3, WM_HOST_BLE_FIRST + WM_HOST_BLE_COUNT - 1);
+
+    const struct zmk_endpoint_instance out_usb = wm_host_endpoint(WM_USB);
+    zassert_equal(out_usb.transport, ZMK_TRANSPORT_USB);
+
+    const uint8_t bles[] = {WM_BLE_0, WM_BLE_1, WM_BLE_2, WM_BLE_3};
+    for (int i = 0; i < ARRAY_SIZE(bles); ++i) {
+        const struct zmk_endpoint_instance out = wm_host_endpoint(bles[i]);
+        zassert_equal(out.transport, ZMK_TRANSPORT_BLE, "profile %d", i);
+        zassert_equal(out.ble.profile_index, i);
+    }
+
+    for (int host = 0; host < WM_HOST_COUNT; ++host) {
+        zassert_equal(wm_host_from_endpoint(wm_host_endpoint(host)), host, "host %d", host);
+    }
+}
+
+/* 範囲外の引数は USB へ倒し、無いプロファイルを選ばない */
+ZTEST(host_endpoint, test_out_key_out_of_range_is_usb) {
+    zassert_equal(wm_host_endpoint(WM_HOST_COUNT).transport, ZMK_TRANSPORT_USB);
+    zassert_equal(wm_host_endpoint(0xFF).transport, ZMK_TRANSPORT_USB);
 }
 
 /*

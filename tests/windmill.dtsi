@@ -4,8 +4,9 @@
  * native_posix_64.keymap から #include "../../windmill.dtsi" で読み、kscan の
  * events だけを足す。
  *
- * 設定レイヤーの &bt / &out / &bootloader / &studio_unlock は native_posix_64 では
- * 使えないので &none にしてある。それ以外は配置を変えたら両方直すこと。
+ * 設定レイヤーの &wm_out / &bt / &bootloader / &studio_unlock は native_posix_64 では
+ * 使えない (BLE も USB も無い) ので &none にしてある。それ以外は配置を変えたら両方
+ * 直すこと。
  *
  * 起動のたびに英数ベースから始まる (windmill の reset_default_layer())。かなで始める
  * テストは、先に TO_KANA で MY_LCTL をタップする。
@@ -13,12 +14,14 @@
  * 位置 (行, 列) とキー:
  *   かな    0,1 ぬ  1,4 す  1,7 な  1,9 ら  2,4 は  2,8 の
  *   最下段  3,0 MY_LCTL (タップで言語切替、ホールドで Ctrl + 英数レイヤー)
- *           3,1 つ = Win (仮)  3,2 さ = Alt (仮)  3,4 ひ = 記号 (仮)
+ *           3,1 つ = Win (仮)  3,2 さ = Alt (仮)  3,3 そ = 左の Fn (仮)
+ *           3,4 ひ = 左の記号 (仮)
  *           3,5 こ = 左Shift + Shift 面 (仮)  3,6 み = 右Shift + Shift 面 (仮)
- *           3,7 も = 記号 (仮)
- *   英数    0,1 q  1,10 ;  1,11 '  2,8 ,  2,9 .  3,1 Win  3,2 Alt
- *           3,4 LT(記号, \)  3,5 左の SandS  3,6 右の SandS  3,7 LT(記号, /)
- *   Fn      3,0 MY_IME (3,3 で Fn を上げたまま叩く。FN_TAP を使う)
+ *           3,7 も = 右の記号 (仮)  3,8 ね = 右の Fn (仮)
+ *   英数    0,1 q  1,1 a  1,10 ;  1,11 '  2,8 ,  2,9 .  3,1 Win  3,2 Alt  3,3 左の Fn
+ *           3,4 LT(記号, \)  3,5 左の SandS  3,6 右の SandS  3,7 LT(記号, /)  3,8 右の Fn
+ *   Fn      0,0 Esc (透過)  0,1〜0,10 F1〜F10  1,0 Caps Lock  1,1 F11  1,2 F12
+ *           3,0 MY_IME (3,3 で Fn を上げたまま叩く。FN_TAP を使う)
  *   設定    1,1 MY_WIN  1,2 MY_ANDR  2,1 MY_JIS  2,2 MY_US
  *           (3,3 で Fn を上げたまま 3,8 を押すと上がる。CONF_TAP を使う)
  */
@@ -85,7 +88,7 @@
 &kp ESC                 &wm_char KN_NU   &wm_char KN_FU   &wm_char KN_A    &wm_char KN_U    &wm_char KN_E    &wm_char KN_O    &wm_char KN_YA   &wm_char KN_YU   &wm_char KN_YO   &wm_char KN_WA   &kp RET
 &kp TAB                 &wm_char KN_TA   &wm_char KN_TE   &wm_char KN_I    &wm_char KN_SU   &wm_char KN_KA   &wm_char KN_N    &wm_char KN_NA   &wm_char KN_NI   &wm_char KN_RA   &wm_char KN_SE   &wm_char KN_DAKU
 &kp BSPC                &wm_char KN_CHI  &wm_char KN_TO   &wm_char KN_SHI  &wm_char KN_HA   &wm_char KN_KI   &wm_char KN_KU   &wm_char KN_MA   &wm_char KN_NO   &wm_char KN_RI   &wm_char KN_RE   &wm_char KN_KE
-&wm_lctl LCTRL MY_LANG  &wm_mod LGUI     &wm_mod LALT     &mo LAYER_FN     &mo LAYER_SYM    &kana_shift_l    &kana_shift_r    &mo LAYER_SYM    &mo LAYER_FN     &wm_char KN_RU   &wm_char KN_ME   &wm_char KN_RO
+&wm_lctl LCTRL MY_LANG  &wm_mod LGUI     &wm_mod LALT     &wm_mo WM_FN_L   &wm_mo WM_SYM_L  &kana_shift_l    &kana_shift_r    &wm_mo WM_SYM_R  &wm_mo WM_FN_R   &wm_char KN_RU   &wm_char KN_ME   &wm_char KN_RO
             >;
         };
 
@@ -100,10 +103,10 @@
 
         alpha_layer {
             bindings = <
-&trans  &kp Q         &kp W         &kp E         &kp R                  &kp T                  &kp Y                  &kp U                  &kp I         &kp O      &kp P            &trans
-&trans  &kp A         &kp S         &kp D         &kp F                  &kp G                  &kp H                  &kp J                  &kp K         &kp L      &wm_alpha SEMI   &wm_alpha SQT
-&trans  &kp Z         &kp X         &kp C         &kp V                  &kp B                  &kp N                  &kp M                  &kp COMMA     &kp DOT    &kp UP           &kp RIGHT
-&trans  &wm_mod LGUI  &wm_mod LALT  &mo LAYER_FN  &wm_lt LAYER_SYM BSLH  &wm_sands LSHFT SPACE  &wm_sands RSHFT SPACE  &wm_lt LAYER_SYM FSLH  &mo LAYER_FN  &kp K_APP  &kp LEFT         &kp DOWN
+&trans  &kp Q         &kp W         &kp E           &kp R                  &kp T                  &kp Y                  &kp U                  &kp I           &kp O      &kp P            &trans
+&trans  &kp A         &kp S         &kp D           &kp F                  &kp G                  &kp H                  &kp J                  &kp K           &kp L      &wm_alpha SEMI   &wm_alpha SQT
+&trans  &kp Z         &kp X         &kp C           &kp V                  &kp B                  &kp N                  &kp M                  &kp COMMA       &kp DOT    &kp UP           &kp RIGHT
+&trans  &wm_mod LGUI  &wm_mod LALT  &wm_mo WM_FN_L  &wm_lt LAYER_SYM BSLH  &wm_sands LSHFT SPACE  &wm_sands RSHFT SPACE  &wm_lt LAYER_SYM FSLH  &wm_mo WM_FN_R  &kp K_APP  &kp LEFT         &kp DOWN
             >;
         };
 
@@ -121,7 +124,7 @@
 &trans           &kp F1     &kp F2   &kp F3          &kp F4   &kp F5        &kp F6        &kp F7      &kp F8          &kp F9        &kp F10    &none
 &kp CAPS         &kp F11    &kp F12  &none           &none    &none         &none         &none       &none           &none         &none      &none
 &kp DEL          &kp PSCRN  &none    &none           &none    &kp C_BRI_DN  &kp C_BRI_UP  &kp C_MUTE  &kp C_VOL_DN    &kp C_VOL_UP  &kp UP     &kp RIGHT
-&wm_lang MY_IME  &trans     &trans   &mo LAYER_CONF  &trans   &trans        &trans        &trans      &mo LAYER_CONF  &trans        &kp LEFT   &kp DOWN
+&wm_lang MY_IME  &trans     &trans   &trans          &trans   &trans        &trans        &trans      &trans          &trans        &kp LEFT   &kp DOWN
             >;
         };
 

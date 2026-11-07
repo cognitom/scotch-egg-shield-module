@@ -1,0 +1,14 @@
+#include "../../windmill.dtsi"
+
+/* Fn+Tab は Caps Lock (windmill の FnLayer.fn_tab_sends_caps_lock_each_time)。オンも
+ * オフも同じキーで、状態を持つのはホスト側。押すたびに同じキーを送るだけで、Fn を
+ * 離せば Tab に戻る */
+&kscan {
+    events = <
+        ZMK_MOCK_PRESS(3,3,250)
+        TAP(1,0)
+        TAP(1,0)
+        ZMK_MOCK_RELEASE(3,3,120)
+        TAP(1,0)
+    >;
+};

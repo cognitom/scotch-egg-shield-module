@@ -13,4 +13,12 @@
 #define LAYER_ALPHA 2      /* 英数 */
 #define LAYER_SYM 3        /* 数字・記号 */
 #define LAYER_FN 4         /* ファンクション・メディア */
-#define LAYER_CONF 5       /* 設定 */
+#define LAYER_CONF 5       /* 設定。左右の Fn を両方ホールドしている間だけ */
+
+/* &wm_mo の引数。Fn と記号レイヤーは左右に1つずつあり、どちらを押しているかを
+ * 1ビットずつ覚える (windmill の set_fn() / set_sym())。ZMK の &mo はレイヤーの
+ * 参照カウントを持たず、先に離したほうがまだ押している側のぶんまで落とすため */
+#define WM_FN_L 0  /* 左の Fn */
+#define WM_FN_R 1  /* 右の Fn */
+#define WM_SYM_L 2 /* 左の記号 */
+#define WM_SYM_R 3 /* 右の記号 */

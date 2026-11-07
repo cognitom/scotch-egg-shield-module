@@ -1,0 +1,8 @@
+description: |
+  windmill の接続先を選ぶキー (geonix41 の MD_USB / MD_BLE1〜3 / MD_24G)。引数は
+  dt-bindings/windmill/host.h の WM_USB / WM_BLE_0〜3。送り先の切替とプロファイルの
+  選択を1キーで行い、USB が繋がっていても押した接続先へ移る
+
+compatible: "zmk,behavior-wm-out"
+
+include: one_param.yaml

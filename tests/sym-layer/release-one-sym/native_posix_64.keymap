@@ -1,0 +1,19 @@
+#include "../../windmill.dtsi"
+
+/* かなレイヤーの記号 (ひ / も の位置) も左右1ビットずつ覚える (windmill の set_sym())。
+ * 両方押してから左を離しても記号レイヤーに残り、右も離せばかなへ戻る。
+ * &mo のままだと、左の解放で右を押しているのに記号レイヤーごと落ちる。
+ *
+ * 1 の位置を叩く。記号レイヤーでは 1 を英数に切り替えて送り (LANG2, 1, LANG1)、
+ * かなでは ぬ (1 の位置、0x1E) */
+&kscan {
+    events = <
+        TO_KANA
+        ZMK_MOCK_PRESS(3,4,50)
+        ZMK_MOCK_PRESS(3,7,50)
+        ZMK_MOCK_RELEASE(3,4,50)
+        TAP(0,1)
+        ZMK_MOCK_RELEASE(3,7,50)
+        TAP(0,1)
+    >;
+};

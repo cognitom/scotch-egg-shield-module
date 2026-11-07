@@ -1,0 +1,15 @@
+#include "../../windmill.dtsi"
+
+/* かなベースでも、左右の Fn (そ / ね の位置) を両方押している間は設定レイヤー
+ * (windmill の ConfLayerKana.both_fn_reach_conf_layer)。MY_ANDR を叩いてもホストへは
+ * 何も出ない。
+ *
+ * windmill のテストは英数へ戻してから言語切替を叩くが、ここではベースを外から
+ * 動かせないので、かなからのタップで見る。Android の英数へは無変換 (0x8B) */
+&kscan {
+    events = <
+        TO_KANA
+        CONF_TAP(1,2)
+        TAP(3,0)
+    >;
+};
