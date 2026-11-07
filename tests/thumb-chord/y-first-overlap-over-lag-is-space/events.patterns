@@ -1,0 +1,4 @@
+s/.*hid_listener_keycode_//p
+s/.*wm_bottom_decide: /decide: /p
+s/.*judge_thumb_chord: /chord: /p
+s/.*wm_output_step: /wm_output /p

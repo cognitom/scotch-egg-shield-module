@@ -1,0 +1,18 @@
+#include "../../windmill.dtsi"
+
+/* 境界 (重なり = 時間差)。X↓0 Y↓50 Y↑100 X↑120 → スペース (windmill の
+ * ThumbChordTest.y_first_overlap_equals_lag_is_space)。こ→み と み→こ を続けて流す */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,50)
+        DN_GAP(3,6,50)
+        UP_GAP(3,6,20)
+        UP_GAP(3,5,300)
+
+        DN_GAP(3,6,50)
+        DN_GAP(3,5,50)
+        UP_GAP(3,5,20)
+        UP_GAP(3,6,300)
+    >;
+};

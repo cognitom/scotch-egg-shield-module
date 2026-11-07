@@ -1,0 +1,19 @@
+#include "../../windmill.dtsi"
+
+/* X↓0 Y↓50 X↑100 Y↑400 → X のタップ、Y はホールド (windmill の
+ * ThumbChordTest.x_first_y_reaches_hold)。Y が 250ms に達した 300ms の時点で組が解け、
+ * X がタップに決まる (decide の X tap age 300)。こ→み と み→こ を続けて流す */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,50)
+        DN_GAP(3,6,50)
+        UP_GAP(3,5,300)
+        UP_GAP(3,6,300)
+
+        DN_GAP(3,6,50)
+        DN_GAP(3,5,50)
+        UP_GAP(3,6,300)
+        UP_GAP(3,5,300)
+    >;
+};

@@ -1,0 +1,24 @@
+#include "../../windmill.dtsi"
+
+/* X↓0 Y↓20 Y↑30 Y↓40 Y↑100 X↑120 → X Y Y (windmill の
+ * ThumbChordTest.repress_after_failed_first_release_is_not_chord)。最初の解放で
+ * 外れたら、同じ X のまま Y を押し直しても同時押しにしない。こ→み と み→こ を
+ * 続けて流す */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,20)
+        DN_GAP(3,6,10)
+        UP_GAP(3,6,10)
+        DN_GAP(3,6,60)
+        UP_GAP(3,6,20)
+        UP_GAP(3,5,300)
+
+        DN_GAP(3,6,20)
+        DN_GAP(3,5,10)
+        UP_GAP(3,5,10)
+        DN_GAP(3,5,60)
+        UP_GAP(3,5,20)
+        UP_GAP(3,6,300)
+    >;
+};

@@ -1,0 +1,18 @@
+#include "../../windmill.dtsi"
+
+/* 半角スペースの前に Shift を外すレポートが1本独立していて、スペースとの間が空いて
+ * いること (windmill の ThumbShift.space_drops_shift_in_its_own_report)。
+ * こ↓0 み↓100 み↑200 こ↑250。み を離した時点で組が決まり、こ はホールドに決まって
+ * 左Shift を出し、スペースのために外す (wm_output の hide)。外してからスペースまで、
+ * スペースから戻す (show) までは IME_WAIT_MS 以上 (+ms の差)。Shift の上げ下げと
+ * スペースが続けて届くと、IME が Shift の乗ったスペースとして解釈する
+ * (windmill の issue #36) */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,100)
+        DN_GAP(3,6,100)
+        UP_GAP(3,6,50)
+        UP_GAP(3,5,300)
+    >;
+};

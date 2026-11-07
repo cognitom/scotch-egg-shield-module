@@ -1,0 +1,14 @@
+#include "../../windmill.dtsi"
+
+/* x: こ↓0 み↓100 こ↑300 み↑400 → 何も出ない (windmill の BottomRow.x_both_hold)。
+ * どちらも 250ms でホールド。こ の解放は み が決まるまで待ち、両方の Shift が重なって
+ * から左が外れる */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,100)
+        DN_GAP(3,6,200)
+        UP_GAP(3,5,100)
+        UP_GAP(3,6,300)
+    >;
+};

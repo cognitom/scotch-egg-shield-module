@@ -1,0 +1,36 @@
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+chord: lag 20 overlap 10 chord 0
+decide: み tap age 20
+chord: lag 40 overlap 60 chord 0
+decide: こ tap age 120
+decide: み tap age 80
+wm_output +0ms press 0x00070005
+pressed: usage_page 0x07 keycode 0x05 implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms release 0x00070005
+released: usage_page 0x07 keycode 0x05 implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms press 0x00070011
+pressed: usage_page 0x07 keycode 0x11 implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms release 0x00070011
+released: usage_page 0x07 keycode 0x11 implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms press 0x00070011
+pressed: usage_page 0x07 keycode 0x11 implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms release 0x00070011
+released: usage_page 0x07 keycode 0x11 implicit_mods 0x00 explicit_mods 0x00
+chord: lag 20 overlap 10 chord 0
+decide: こ tap age 20
+chord: lag 40 overlap 60 chord 0
+decide: み tap age 120
+decide: こ tap age 80
+wm_output +0ms press 0x00070011
+pressed: usage_page 0x07 keycode 0x11 implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms release 0x00070011
+released: usage_page 0x07 keycode 0x11 implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms press 0x00070005
+pressed: usage_page 0x07 keycode 0x05 implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms release 0x00070005
+released: usage_page 0x07 keycode 0x05 implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms press 0x00070005
+pressed: usage_page 0x07 keycode 0x05 implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms release 0x00070005
+released: usage_page 0x07 keycode 0x05 implicit_mods 0x00 explicit_mods 0x00

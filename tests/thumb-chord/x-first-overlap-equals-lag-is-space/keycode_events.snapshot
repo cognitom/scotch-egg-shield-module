@@ -1,0 +1,16 @@
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+chord: lag 50 overlap 50 chord 1
+decide: こ space age 140
+decide: み nothing age 90
+wm_output +0ms press 0x0007002C
+pressed: usage_page 0x07 keycode 0x2C implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms release 0x0007002C
+released: usage_page 0x07 keycode 0x2C implicit_mods 0x00 explicit_mods 0x00
+chord: lag 50 overlap 50 chord 1
+decide: み space age 140
+decide: こ nothing age 90
+wm_output +0ms press 0x0007002C
+pressed: usage_page 0x07 keycode 0x2C implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms release 0x0007002C
+released: usage_page 0x07 keycode 0x2C implicit_mods 0x00 explicit_mods 0x00

@@ -1,0 +1,19 @@
+#include "../../windmill.dtsi"
+
+/* 境界。X↓0 Y↓50 X↑100 Y↑300 → X のタップ、Y はホールド (windmill の
+ * ThumbChordTest.x_first_y_250ms_is_hold)。Y が 250ms ちょうどでホールドに決まる。
+ * こ→み と み→こ を続けて流す */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,50)
+        DN_GAP(3,6,50)
+        UP_GAP(3,5,200)
+        UP_GAP(3,6,300)
+
+        DN_GAP(3,6,50)
+        DN_GAP(3,5,50)
+        UP_GAP(3,6,200)
+        UP_GAP(3,5,300)
+    >;
+};

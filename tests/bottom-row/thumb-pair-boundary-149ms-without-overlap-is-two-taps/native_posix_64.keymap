@@ -1,0 +1,14 @@
+#include "../../windmill.dtsi"
+
+/* こ↓0 み↓100 み↑130 こ↑149 → こみ (windmill の
+ * BottomRow.thumb_pair_boundary_149ms_without_overlap_is_two_taps)。重なり (30ms) が
+ * 時間差 (100ms) に届かず、こ を 150ms 前に離したので、それぞれのタップのまま */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,100)
+        DN_GAP(3,6,30)
+        UP_GAP(3,6,19)
+        UP_GAP(3,5,300)
+    >;
+};

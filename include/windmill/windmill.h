@@ -73,3 +73,8 @@ bool wm_is_alpha_output(uint32_t key);
  * 間に IME_WAIT_MS を挟むのでブロックせず、順番待ちに積んで返る。前の文字を送り
  * 終えてから次を送るので、続けて押しても混ざらない */
 int wm_send_output(uint32_t output, bool alpha);
+
+/* wm_send_output() と同じだが、順番が来てから wait_ms 待って送り始める。直前に
+ * windmill の外で修飾を下ろしたとき (親指の組のスペースの前に Shift のホールドを
+ * 下ろす) に、そのレポートと文字の間を空けるため */
+int wm_send_output_after_wait(uint32_t output, bool alpha, uint8_t wait_ms);

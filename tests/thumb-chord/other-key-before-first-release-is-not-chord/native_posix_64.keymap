@@ -1,0 +1,23 @@
+#include "../../windmill.dtsi"
+
+/* X↓0 Y↓20 わ↓40 わ↑60 Y↑70 X↑80 → X Y わ (windmill の
+ * ThumbChordTest.other_key_before_first_release_is_not_chord)。最初の解放より前に
+ * ほかのキーを押したので同時押しにならない。こ→み と み→こ を続けて流す */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,20)
+        DN_GAP(3,6,20)
+        DN_GAP(0,10,20)
+        UP_GAP(0,10,10)
+        UP_GAP(3,6,10)
+        UP_GAP(3,5,300)
+
+        DN_GAP(3,6,20)
+        DN_GAP(3,5,20)
+        DN_GAP(0,10,20)
+        UP_GAP(0,10,10)
+        UP_GAP(3,5,10)
+        UP_GAP(3,6,300)
+    >;
+};

@@ -1,0 +1,17 @@
+#include "../../windmill.dtsi"
+
+/* a: こ↓0 み↓100 わ↓200 わ↑230 み↑240 こ↑250 → みを (windmill の
+ * BottomRow.a_shift_then_partner_tap_then_key)。わ の押下で こ がホールドに決まって
+ * シフトとしてかかるので、み は組にならない。Shift 面の 空 の位置から み として出て、
+ * わ は Shift 面の「を」 */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,100)
+        DN_GAP(3,6,100)
+        DN_GAP(0,10,30)
+        UP_GAP(0,10,10)
+        UP_GAP(3,6,10)
+        UP_GAP(3,5,300)
+    >;
+};

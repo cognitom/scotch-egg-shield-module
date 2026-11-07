@@ -1,0 +1,20 @@
+#include "../../windmill.dtsi"
+
+/* X↓0 Y↓20 Y↑70 X↑80 → スペース (windmill の ThumbChordTest.y_first_overlap_over_lag_is_space)。
+ * 左右で同じになることを見るため、こ→み と み→こ を続けて流す (windmill の
+ * thumb_chords[] と同じ)。Y を先に離したので、その時点でスペースに決まり、X は
+ * ホールドとして残る */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,20)
+        DN_GAP(3,6,50)
+        UP_GAP(3,6,10)
+        UP_GAP(3,5,300)
+
+        DN_GAP(3,6,20)
+        DN_GAP(3,5,50)
+        UP_GAP(3,5,10)
+        UP_GAP(3,6,300)
+    >;
+};

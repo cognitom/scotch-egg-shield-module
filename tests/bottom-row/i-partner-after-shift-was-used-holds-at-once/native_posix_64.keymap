@@ -1,0 +1,18 @@
+#include "../../windmill.dtsi"
+
+/* i: こ↓0 あ↓200 あ↑230 み↓300 こ↑350 わ↓500 わ↑530 み↑550 → ぁを (windmill の
+ * BottomRow.i_partner_after_shift_was_used_holds_at_once)。わ を押した時点で み は
+ * 150ms を過ぎているので、その場でホールドに決まる */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,200)
+        DN_GAP(0,3,30)
+        UP_GAP(0,3,70)
+        DN_GAP(3,6,50)
+        UP_GAP(3,5,150)
+        DN_GAP(0,10,30)
+        UP_GAP(0,10,20)
+        UP_GAP(3,6,300)
+    >;
+};

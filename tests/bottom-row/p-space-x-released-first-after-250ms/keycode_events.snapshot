@@ -1,0 +1,10 @@
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+decide: こ hold age 250
+pressed: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+decide: み space age 200
+released: usage_page 0x07 keycode 0xE1 implicit_mods 0x00 explicit_mods 0x00
+wm_output +11ms press 0x0007002C
+pressed: usage_page 0x07 keycode 0x2C implicit_mods 0x00 explicit_mods 0x00
+wm_output +11ms release 0x0007002C
+released: usage_page 0x07 keycode 0x2C implicit_mods 0x00 explicit_mods 0x00

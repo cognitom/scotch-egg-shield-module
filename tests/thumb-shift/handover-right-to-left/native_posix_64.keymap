@@ -1,0 +1,16 @@
+#include "../../windmill.dtsi"
+
+/* み を押したまま こ を押し、み を先に離す (windmill の
+ * ThumbShift.handover_right_to_left_keeps_shift)。左右を入れ替えても同じく Shift は
+ * 途切れない。み↓0 こ↓250 み↑500 わ↓620 わ↑740 こ↑860 */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,6,250)
+        DN_GAP(3,5,250)
+        UP_GAP(3,6,120)
+        DN_GAP(0,10,120)
+        UP_GAP(0,10,120)
+        UP_GAP(3,5,300)
+    >;
+};

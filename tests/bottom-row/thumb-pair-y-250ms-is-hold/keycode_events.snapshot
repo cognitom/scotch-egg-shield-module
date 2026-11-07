@@ -1,0 +1,11 @@
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+chord: lag 100 overlap 100 chord 0
+decide: み hold age 250
+decide: こ tap age 350
+wm_output +0ms press 0x00070005
+pressed: usage_page 0x07 keycode 0x05 implicit_mods 0x00 explicit_mods 0x00
+wm_output +0ms release 0x00070005
+released: usage_page 0x07 keycode 0x05 implicit_mods 0x00 explicit_mods 0x00
+pressed: usage_page 0x07 keycode 0xE5 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0xE5 implicit_mods 0x00 explicit_mods 0x00

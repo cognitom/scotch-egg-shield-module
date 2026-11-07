@@ -1,0 +1,16 @@
+#include "../../windmill.dtsi"
+
+/* ab: こ↓0 み↓200 み↑230 わ↓300 わ↑330 こ↑400 → 半角スペース、を (windmill の
+ * BottomRow.ab_space_stays_when_shift_used_later)。決まったスペースは、後から こ が
+ * シフトとしてかかっても取り消さない */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,200)
+        DN_GAP(3,6,30)
+        UP_GAP(3,6,70)
+        DN_GAP(0,10,30)
+        UP_GAP(0,10,70)
+        UP_GAP(3,5,300)
+    >;
+};
