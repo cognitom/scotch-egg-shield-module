@@ -1,0 +1,14 @@
+#include "../../windmill.dtsi"
+
+/* こ↓0 わ↓100 わ↑130 こ↑200 → を (windmill の BottomRow.no_report_while_waiting)。
+ * 未判定の こ を押してから 150ms 未満に押した わ は、こ が決まるまでホストへ何も出さない。
+ * わ を離しても出ず、こ が 150ms でホールドに決まった (decide の行) 後にまとめて出る */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,100)
+        DN_GAP(0,10,30)
+        UP_GAP(0,10,70)
+        UP_GAP(3,5,300)
+    >;
+};

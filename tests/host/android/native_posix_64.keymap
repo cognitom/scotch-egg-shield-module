@@ -9,7 +9,7 @@
  * Shift+＼(0x32) のまま。
  *
  * JIS のまま Android にし、US にし、Windows に戻す。OS と配列は別々に持つので、
- * 片方を変えてももう片方は動かない。こ (仮の左Shift + Shift 面) をホールドする */
+ * 片方を変えてももう片方は動かない。こ (左Shift + Shift 面) をホールドする */
 #define KAKKO ZMK_MOCK_PRESS(3,5,250) TAP(1,9) TAP(1,10) ZMK_MOCK_RELEASE(3,5,250)
 
 &kscan {

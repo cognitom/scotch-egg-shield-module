@@ -11,6 +11,7 @@ released: usage_page 0x07 keycode 0x8A implicit_mods 0x00 explicit_mods 0x00
 layer_changed: layer 2 state 0
 layer_changed: layer 3 state 1
 wm_char pressed: position 1 key 67
+wm_char released: position 1 key 67
 wm_output begin: output 0x0007001E alpha 1 held 0x00
 wm_output step: +0ms press 0x00070091
 pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
@@ -24,5 +25,4 @@ wm_output step: +22ms press 0x00070090
 pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
 wm_output step: +22ms release 0x00070090
 released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
-wm_char released: position 1 key 67
 layer_changed: layer 3 state 0

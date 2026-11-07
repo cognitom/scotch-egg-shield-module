@@ -1,8 +1,7 @@
 #include "../../windmill.dtsi"
 
-/* Win (つ) を短く押して離しても、かなへ戻る (windmill の HoldLayer.tap_stays_on_kana)。
- * windmill ではタップで「つ」(z) が出るが、つ のタップ・ホールドは 6/9 なので、いまは
- * Win の押し離しが出る。続く ぬ がかなの 1 で出ることを見る */
+/* Win (つ) を短く押して離せばタップで「つ」(z) が出て、かなのまま
+ * (windmill の HoldLayer.tap_stays_on_kana)。続く ぬ がかなの 1 で出ることを見る */
 &kscan {
     events = <
         TO_KANA

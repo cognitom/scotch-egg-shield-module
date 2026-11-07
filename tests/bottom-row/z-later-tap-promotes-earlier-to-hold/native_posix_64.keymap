@@ -1,0 +1,14 @@
+#include "../../windmill.dtsi"
+
+/* z: ひ↓0 こ↓200 こ↑230 ひ↑260 → | (windmill の BottomRow.z_later_tap_promotes_earlier_to_hold)。
+ * こ がタップに決まった時点で、先に押して 150ms を過ぎた ひ はホールド (記号レイヤー) に
+ * なる。こ のタップは出す時点のレイヤーで引き直し、記号レイヤーの「|」(JIS) になる */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,4,200)
+        DN_GAP(3,5,30)
+        UP_GAP(3,5,30)
+        UP_GAP(3,4,300)
+    >;
+};

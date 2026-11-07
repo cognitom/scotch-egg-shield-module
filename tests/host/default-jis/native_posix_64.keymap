@@ -5,7 +5,7 @@
  *
  * 配列は記号レイヤーの「@」で見る。JIS では単独の [ のキー (0x2F)。
  * OS は「」で見る。US 配列でしか OS で変わらないので、JIS ではどちらも同じ
- * (Shift+] と Shift+＼(0x32))。こ (仮の左Shift + Shift 面) をホールドする */
+ * (Shift+] と Shift+＼(0x32))。こ (左Shift + Shift 面) をホールドする */
 &kscan {
     events = <
         CONF_TAP(2,1)

@@ -1,0 +1,21 @@
+#include "../../windmill.dtsi"
+
+/* m: そ↓0 ね↓50 (MY_ANDR)↓300 ↑330 ね↑340 そ↑350 → 設定レイヤーの MY_ANDR
+ * (windmill の BottomRow.m_both_fn_hold_reach_conf_layer)。
+ * そ と ね がどちらもホールド (左右の Fn) になれば設定レイヤーが上がる。「そ」「ね」も、
+ * MY_ANDR の位置のかな (て) も出ない。
+ *
+ * windmill は Android にしてから MY_WIN で戻すが、ここは起動のたびに Windows なので、
+ * MY_ANDR を叩いて MY_LCTL のタップが Android の英数 (無変換 0x8B) になることで見る */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,3,50)
+        DN_GAP(3,8,250)
+        DN_GAP(1,2,30)
+        UP_GAP(1,2,10)
+        UP_GAP(3,8,10)
+        UP_GAP(3,3,300)
+        TAP(3,0)
+    >;
+};

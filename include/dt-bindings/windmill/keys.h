@@ -11,8 +11,9 @@
 
 #pragma once
 
-/* かなレイヤー最下段のタップ。タップ・ホールドの判定は 6/9 で入れる。
- * いまは出力表の行だけで、キーマップの最下段は仮の素のキー */
+/* かなレイヤー最下段のタップ。&wm_bottom の引数で、ホールドの役割は
+ * src/behaviors/behavior_wm_bottom.c の bottom_keys[] が決める。並びを変えないこと
+ * (KB_TSU 〜 KB_NE を番号として使う) */
 #define KB_TSU 0 /* つ */
 #define KB_SA 1  /* さ */
 #define KB_SO 2  /* そ */
@@ -22,7 +23,8 @@
 #define KB_MO 6  /* も */
 #define KB_NE 7  /* ね */
 
-/* Shift 面の最下段のタップ */
+/* Shift 面の最下段のタップ。これも &wm_bottom の引数で、ホールドの役割は
+ * かなレイヤーの同じ位置のキーのもの */
 #define KB_XTSU 8    /* っ */
 #define KB_SPC 9     /* 空 親指の組の半角スペース (7/9) */
 #define KB_QUES 10   /* ？ 半角。英数に切り替えて送り、かなに戻す */

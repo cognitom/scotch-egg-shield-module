@@ -1,6 +1,6 @@
 #include "../../windmill.dtsi"
 
-/* Alt (さ、仮で &wm_mod LALT) も Win と同じ (windmill の HoldLayer.alt_hold_switches_to_alpha_and_back) */
+/* Alt (さ のホールド) も Win と同じ (windmill の HoldLayer.alt_hold_switches_to_alpha_and_back) */
 &kscan {
     events = <
         TO_KANA

@@ -1,0 +1,13 @@
+#include "../../windmill.dtsi"
+
+/* こ↓0 わ↓150 わ↑180 こ↑200 → を (windmill の BottomRow.key_at_150ms_holds_at_once)。
+ * 150ms ちょうどに押したキーは、待たずにその場で こ をホールドに決める (decide の age) */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,150)
+        DN_GAP(0,10,30)
+        UP_GAP(0,10,20)
+        UP_GAP(3,5,300)
+    >;
+};

@@ -3,7 +3,7 @@
 /* かなベースで記号レイヤーのキーを全部叩く (windmill の
  * KeyOutputJis.sym_layer_on_kana_wraps_with_ime_switch)。かな入力のままでは打てないので、
  * 1打鍵ごとに英数 (LANG2) へ切り替えて送り、かな (LANG1) へ戻す。
- * ひ (仮の &mo LAYER_SYM) をホールドする */
+ * ひ (左の記号) をホールドする */
 &kscan {
     events = <
         TO_KANA

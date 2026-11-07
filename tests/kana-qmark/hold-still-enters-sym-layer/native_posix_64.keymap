@@ -1,0 +1,14 @@
+#include "../../windmill.dtsi"
+
+/* も↓0 ぬ↓50 ぬ↑110 も↑170 → 1 (windmill の KanaQmark.hold_still_enters_sym_layer)。
+ * も をホールドすれば記号レイヤーに乗る。150ms 未満で押した ぬ の位置は、も が 150ms で
+ * ホールドに決まってから記号レイヤーの 1 として出る。かなベースなので英数に切り替えて送る */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,7,50)
+        DN_GAP(0,1,60)
+        UP_GAP(0,1,60)
+        UP_GAP(3,7,300)
+    >;
+};

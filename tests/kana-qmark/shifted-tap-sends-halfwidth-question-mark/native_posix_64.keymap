@@ -1,0 +1,21 @@
+#include "../../windmill.dtsi"
+
+/* み↓0 も↓150 も↑270 み↑390 → 半角「?」
+ * (windmill の KanaQmark.shifted_tap_sends_halfwidth_question_mark)。
+ *
+ * も のタップで、先に押して 150ms を過ぎた み がホールド (右Shift + Shift 面) に決まり、
+ * も は Shift 面の「？」(KB_QUES) になる。英数に切り替えて Shift+/ を送り、かなへ戻す。
+ * 要点は2つ (windmill の issue #17、#18)。
+ *
+ * - LANG2 / LANG1 に Shift が乗っていないこと。乗っていると IME がモードを切り替えない
+ * - 「?」の Shift が、外した右Shift と同じものであること (explicit_mods 0x20)。左Shift を
+ *   足すと修飾が入れ替わって見え、実機で半角「/」が出る */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,6,150)
+        DN_GAP(3,7,120)
+        UP_GAP(3,7,120)
+        UP_GAP(3,6,300)
+    >;
+};

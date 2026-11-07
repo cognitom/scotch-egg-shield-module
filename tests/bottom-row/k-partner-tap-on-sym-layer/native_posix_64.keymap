@@ -1,0 +1,14 @@
+#include "../../windmill.dtsi"
+
+/* k: ひ↓0 も↓300 も↑350 ひ↑400 → も (windmill の BottomRow.k_partner_tap_on_sym_layer)。
+ * ひ は 250ms でホールド (記号レイヤー)。も は記号レイヤーでも最下段のキー (透過) なので
+ * タップ・ホールドの判定を通り、タップで も が出る */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,4,300)
+        DN_GAP(3,7,50)
+        UP_GAP(3,7,50)
+        UP_GAP(3,4,300)
+    >;
+};

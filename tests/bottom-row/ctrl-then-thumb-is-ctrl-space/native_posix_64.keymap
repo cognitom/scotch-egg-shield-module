@@ -1,0 +1,19 @@
+#include "../../windmill.dtsi"
+
+/* MY_LCTL↓0 こ↓50 こ↑100 MY_LCTL↑300 → Ctrl+Space。windmill の移植元には無い、ZMK の
+ * listener の並びを見るテスト。
+ *
+ * windmill では QMK の tap-hold が判定を済ませたイベントだけが最下段の判定に届く。
+ * こ の押下で MY_LCTL が先にホールド (Ctrl + 英数レイヤー) に決まり、こ は英数レイヤーの
+ * SandS として引かれ、タップでスペースになる。最下段の listener が hold-tap より前に
+ * 並ぶと、こ を最下段のキーとして持ってしまい、MY_LCTL は 200ms までホールドにならず、
+ * こ のタップ (b) が Ctrl 無しで出る */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,0,50)
+        DN_GAP(3,5,50)
+        UP_GAP(3,5,200)
+        UP_GAP(3,0,300)
+    >;
+};

@@ -1,0 +1,17 @@
+#include "../../windmill.dtsi"
+
+/* l: そ↓0 ね↓100 ぬ↓200 ぬ↑230 ね↑240 そ↑250 → ねF1
+ * (windmill の BottomRow.l_fn_hold_then_partner_tap_then_key)。
+ * ぬ の押下で そ がホールド (左の Fn) に決まる。ね はタップで、待っていた ぬ は Fn レイヤーの
+ * F1。ね はホールドにならないので、設定レイヤーには上がらない */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,3,100)
+        DN_GAP(3,8,100)
+        DN_GAP(0,1,30)
+        UP_GAP(0,1,10)
+        UP_GAP(3,8,10)
+        UP_GAP(3,3,300)
+    >;
+};

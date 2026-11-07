@@ -1,0 +1,11 @@
+#include "../../windmill.dtsi"
+
+/* こ↓0 こ↑250 → 左Shift の押し離しだけ (windmill の BottomRow.hold_boundary_250ms_is_hold)。
+ * 単独の長押しは 250ms ちょうどでホールド */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,250)
+        UP_GAP(3,5,300)
+    >;
+};

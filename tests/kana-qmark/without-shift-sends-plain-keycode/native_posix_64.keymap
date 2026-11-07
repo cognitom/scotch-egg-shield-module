@@ -1,0 +1,11 @@
+#include "../../windmill.dtsi"
+
+/* Shift なしで も をタップすれば、そのまま も (m) が出る
+ * (windmill の KanaQmark.without_shift_sends_plain_keycode) */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,7,120)
+        UP_GAP(3,7,120)
+    >;
+};

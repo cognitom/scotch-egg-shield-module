@@ -1,0 +1,17 @@
+#include "../../windmill.dtsi"
+
+/* こ↓0 あ↓20 わ↓40 あ↑60 わ↑80 こ↑100 → こあわ
+ * (windmill の BottomRow.waiting_keys_keep_press_order)。
+ * こ を 150ms 未満で離したのでタップ。待っていたキーは押した順に、こ → あ → わ と出る。
+ * あ と わ は1キー1出力なので、押している間の重なりは出ない */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,20)
+        DN_GAP(0,3,20)
+        DN_GAP(0,10,20)
+        UP_GAP(0,3,20)
+        UP_GAP(0,10,20)
+        UP_GAP(3,5,300)
+    >;
+};

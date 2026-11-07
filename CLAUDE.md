@@ -68,6 +68,9 @@ bash scripts/build.sh   # seeeduino_xiao_ble + scotch_egg を output/ に出す
 
 ZMK を上げるときは `config/west.yml` の `revision`、`.github/workflows/build.yml` の
 `@` の版、`compose.agent.yaml` のイメージ (Zephyr の版) を揃える。
+最下段の listener は hold-tap より後、keymap より前に並べていて (`CMakeLists.txt` の
+`wm_place_bottom_listener`)、ZMK の `app/CMakeLists.txt` の作りに頼っている。上げたら
+`tests/bottom-row/ctrl-then-thumb-is-ctrl-space` で並びを確かめる。
 
 ## 守ってほしいこと
 

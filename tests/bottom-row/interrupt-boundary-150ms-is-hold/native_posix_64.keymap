@@ -1,0 +1,13 @@
+#include "../../windmill.dtsi"
+
+/* こ↓0 わ↓100 わ↑120 こ↑150 → を (windmill の BottomRow.interrupt_boundary_150ms_is_hold)。
+ * 後から別のキーを押していれば、150ms ちょうどでホールド */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,100)
+        DN_GAP(0,10,20)
+        UP_GAP(0,10,30)
+        UP_GAP(3,5,300)
+    >;
+};

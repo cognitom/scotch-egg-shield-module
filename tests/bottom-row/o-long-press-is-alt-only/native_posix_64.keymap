@@ -1,0 +1,10 @@
+#include "../../windmill.dtsi"
+
+/* o: さ↓0 さ↑300 → Alt の押し離し (windmill の BottomRow.o_long_press_is_alt_only) */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,2,300)
+        UP_GAP(3,2,300)
+    >;
+};

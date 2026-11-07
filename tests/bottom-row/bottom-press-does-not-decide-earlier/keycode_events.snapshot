@@ -1,0 +1,8 @@
+pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
+decide: ひ tap age 240
+pressed: usage_page 0x07 keycode 0x19 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x19 implicit_mods 0x00 explicit_mods 0x00
+decide: こ tap age 60
+pressed: usage_page 0x07 keycode 0x05 implicit_mods 0x00 explicit_mods 0x00
+released: usage_page 0x07 keycode 0x05 implicit_mods 0x00 explicit_mods 0x00

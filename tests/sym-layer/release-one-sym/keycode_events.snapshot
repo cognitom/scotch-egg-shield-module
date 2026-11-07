@@ -3,17 +3,13 @@ wm_lang send: kana 1 keycode 0x00070090
 pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
 released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
 layer_changed: layer 2 state 0
-wm_mo pressed: position 40 param 2
 layer_changed: layer 3 state 1
-wm_mo pressed: position 43 param 3
-wm_mo released: position 40 param 2
 pressed: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
 released: usage_page 0x07 keycode 0x91 implicit_mods 0x00 explicit_mods 0x00
 pressed: usage_page 0x07 keycode 0x1E implicit_mods 0x00 explicit_mods 0x00
 released: usage_page 0x07 keycode 0x1E implicit_mods 0x00 explicit_mods 0x00
 pressed: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
 released: usage_page 0x07 keycode 0x90 implicit_mods 0x00 explicit_mods 0x00
-wm_mo released: position 43 param 3
 layer_changed: layer 3 state 0
 pressed: usage_page 0x07 keycode 0x1E implicit_mods 0x00 explicit_mods 0x00
 released: usage_page 0x07 keycode 0x1E implicit_mods 0x00 explicit_mods 0x00

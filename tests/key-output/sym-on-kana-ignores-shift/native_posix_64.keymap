@@ -1,6 +1,6 @@
 #include "../../windmill.dtsi"
 
-/* かなベースで こ (仮で左Shift + Shift 面) を押したまま ひ をホールドしても同じ
+/* かなベースで こ (ホールドで左Shift + Shift 面) を押したまま ひ をホールドしても同じ
  * (windmill の KeyOutputJis.sym_layer_on_kana_ignores_shift)。英数/かなの切り替えの
  * キーに Shift が乗らないよう、切り替えの前に左Shift を隠し、最後に戻す。
  * こ の位置 (記号レイヤーでは「|」) は押したままなので叩かない */

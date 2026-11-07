@@ -1,0 +1,13 @@
+#include "../../windmill.dtsi"
+
+/* こ↓0 わ↓100 わ↑120 こ↑149 → こわ (windmill の BottomRow.interrupt_boundary_149ms_is_tap)。
+ * 後から別のキーを押していても、150ms に届く前に離せばタップ */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,100)
+        DN_GAP(0,10,20)
+        UP_GAP(0,10,29)
+        UP_GAP(3,5,300)
+    >;
+};

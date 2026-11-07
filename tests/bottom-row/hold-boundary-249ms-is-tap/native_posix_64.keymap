@@ -1,0 +1,10 @@
+#include "../../windmill.dtsi"
+
+/* こ↓0 こ↑249 → こ (windmill の BottomRow.hold_boundary_249ms_is_tap) */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,249)
+        UP_GAP(3,5,300)
+    >;
+};

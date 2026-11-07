@@ -1,0 +1,14 @@
+#include "../../windmill.dtsi"
+
+/* c: こ↓0 わ↓100 わ↑130 こ↑160 → を (windmill の BottomRow.c_key_within_150ms_waits_then_shifted)。
+ * わ は こ が決まるまで待ち、150ms で こ がホールド (左Shift + Shift 面) に決まってから
+ * Shift 面の「を」として出る */
+&kscan {
+    events = <
+        TO_KANA
+        DN_GAP(3,5,100)
+        DN_GAP(0,10,30)
+        UP_GAP(0,10,30)
+        UP_GAP(3,5,300)
+    >;
+};
