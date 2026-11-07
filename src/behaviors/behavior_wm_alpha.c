@@ -7,6 +7,9 @@
  * 1キー1出力で送る (windmill の issue #80)。Shift の要否が US と食い違うので
  * wm_send_output() に打ち消させ、そのぶんリピートしない。
  *
+ * ピリオド (DOT) は、接続先が Android で Win を押しているときだけ横取りし、Alt+. に
+ * 読み替えて送り切る (windmill の process_android_gui_dot()。src/android.c)。
+ *
  * それ以外 (US のとき、表に無いキー) は &kp と同じく押し離しを流す。LT のタップ側にも
  * 置けるよう、表に無いキーも受ける
  */
@@ -17,6 +20,7 @@
 #include <drivers/behavior.h>
 #include <zephyr/logging/log.h>
 
+#include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/modifiers.h>
 
 #include <zmk/behavior.h>
@@ -75,6 +79,12 @@ static int on_wm_alpha_binding_pressed(struct zmk_behavior_binding *binding,
 
     if (event.position < ZMK_KEYMAP_LEN) {
         intercepted[event.position] = false;
+    }
+    if (binding->param1 == DOT && wm_android_gui_dot()) {
+        if (event.position < ZMK_KEYMAP_LEN) {
+            intercepted[event.position] = true;
+        }
+        return ZMK_BEHAVIOR_OPAQUE;
     }
     for (size_t i = 0; jis && i < ARRAY_SIZE(jis_alpha_symbols); ++i) {
         if (jis_alpha_symbols[i].keycode != binding->param1) {

@@ -19,7 +19,9 @@ released: usage_page 0x07 keycode 0x1F implicit_mods 0x00 explicit_mods 0x00
 wm_alpha released: position 23 keycode 0x00070034
 pressed: usage_page 0x07 keycode 0x36 implicit_mods 0x00 explicit_mods 0x00
 released: usage_page 0x07 keycode 0x36 implicit_mods 0x00 explicit_mods 0x00
+wm_alpha pressed: position 33 keycode 0x00070037 jis 1
 pressed: usage_page 0x07 keycode 0x37 implicit_mods 0x00 explicit_mods 0x00
+wm_alpha released: position 33 keycode 0x00070037
 released: usage_page 0x07 keycode 0x37 implicit_mods 0x00 explicit_mods 0x00
 hold_tap 40 decided tap
 wm_alpha pressed: position 40 keycode 0x00070031 jis 1

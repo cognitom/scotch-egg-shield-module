@@ -1,0 +1,13 @@
+#include "../../windmill.dtsi"
+
+/* Win を押していなければ、Android でもピリオドはそのまま。Alt+. も素通し
+ * (windmill の AndroidMods.dot_without_gui_is_sent_as_is) */
+&kscan {
+    events = <
+        CONF_TAP(1,2)
+        TAP(2,9)
+        ZMK_MOCK_PRESS(3,2,10)
+        TAP(2,9)
+        ZMK_MOCK_RELEASE(3,2,120)
+    >;
+};

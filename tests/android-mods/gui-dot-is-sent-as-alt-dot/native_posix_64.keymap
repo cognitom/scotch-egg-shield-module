@@ -1,0 +1,18 @@
+#include "../../windmill.dtsi"
+
+/* Android では Win+. を Alt+. として出す。Win を押したまま続けて打てば、そのたびに出る。
+ * 読み替えのあとも Win は押されたままなので、他のショートカットへ続けられる
+ * (windmill の AndroidMods.gui_dot_is_sent_as_alt_dot)。
+ *
+ * 1回ぶんは、右Ctrl の空打ち、Win を外す、Alt+.、Win を押し直す、右Ctrl の空打ち。
+ * 空打ちで Win を「単独で押して離した」形にしない。ピリオドを離すときは何も出ない */
+&kscan {
+    events = <
+        CONF_TAP(1,2)
+        ZMK_MOCK_PRESS(3,1,50)
+        TAP(2,9)
+        TAP(2,9)
+        TAP(0,1)
+        ZMK_MOCK_RELEASE(3,1,120)
+    >;
+};

@@ -14,6 +14,9 @@
  * キーコードに引き直すことがあり、Ctrl はホストへ出ている修飾を見て下ろしていた。ZMK は
  * 解放を押したときのレイヤーの behavior へ送り、hold-tap もホールドに決めた behavior へ
  * 送るので、解放を待てば足りる
+ *
+ * 接続先が Android のときは、Win を押している間の Alt、Alt を押している間の Win を
+ * 出さない (windmill の process_android_gui_alt()。src/android.c)
  */
 
 #define DT_DRV_COMPAT zmk_behavior_wm_mod
@@ -65,11 +68,22 @@ static uint8_t mod_bit(uint32_t keycode) {
     return 1 << (id - HID_USAGE_KEY_KEYBOARD_LEFTCONTROL);
 }
 
+/* Android で押下を握りつぶした修飾 (MOD_* のビット)。先に押したほうを離しても出さない。
+ * 出すと押した覚えの無い修飾が遅れて効く (windmill の android_blocked_mods) */
+static uint8_t android_blocked;
+
 static int on_wm_mod_binding_pressed(struct zmk_behavior_binding *binding,
                                      struct zmk_behavior_binding_event event) {
     const uint8_t mod = mod_bit(binding->param1);
     LOG_DBG("position %d keycode 0x%08X kana %d", event.position, binding->param1,
             wm_is_kana_base());
+
+    /* 英数レイヤーを上げるより先に見る。握りつぶした修飾でレイヤーを上げると、
+     * 下ろす機会を失う */
+    if (mod && wm_android_blocks_mod(mod)) {
+        android_blocked |= mod;
+        return ZMK_BEHAVIOR_OPAQUE;
+    }
 
     if (mod && wm_is_kana_base()) {
         wm_hold_layer_on(mod);
@@ -81,9 +95,16 @@ static int on_wm_mod_binding_released(struct zmk_behavior_binding *binding,
                                       struct zmk_behavior_binding_event event) {
     LOG_DBG("position %d keycode 0x%08X", event.position, binding->param1);
 
+    /* 押している間に設定を変えても、握りつぶしたものの解放は消費する */
+    const uint8_t mod = mod_bit(binding->param1);
+    if (android_blocked & mod) {
+        android_blocked &= ~mod;
+        return ZMK_BEHAVIOR_OPAQUE;
+    }
+
     const int ret =
         raise_zmk_keycode_state_changed_from_encoded(binding->param1, false, event.timestamp);
-    wm_hold_layer_off(mod_bit(binding->param1));
+    wm_hold_layer_off(mod);
     return ret;
 }
 

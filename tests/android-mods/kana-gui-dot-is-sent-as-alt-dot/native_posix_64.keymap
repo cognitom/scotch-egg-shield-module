@@ -1,0 +1,19 @@
+#include "../../windmill.dtsi"
+
+/* かなレイヤーでも同じ。つ のホールドで英数レイヤーが上がり、り (2,9) の位置が
+ * ピリオドになる。Win をいったん外しても英数レイヤーは下がらず (続く ぬ の位置が Q)、
+ * つ を離せばかなへ戻る (windmill の AndroidMods.kana_gui_dot_is_sent_as_alt_dot)。
+ *
+ * り は つ を押して 150ms 未満で押すので、つ が 150ms でホールドに決まるまで待つ */
+&kscan {
+    events = <
+        CONF_TAP(1,2)
+        TO_KANA
+        ZMK_MOCK_PRESS(3,1,10)
+        ZMK_MOCK_PRESS(2,9,160)
+        ZMK_MOCK_RELEASE(2,9,50)
+        TAP(0,1)
+        ZMK_MOCK_RELEASE(3,1,120)
+        TAP(0,1)
+    >;
+};

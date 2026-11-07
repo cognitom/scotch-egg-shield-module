@@ -1,0 +1,9 @@
+layer_changed: layer 2 state 1
+wm_mod pressed: position 37 keycode 0x000700E3 kana 0
+pressed: usage_page 0x07 keycode 0xE3 implicit_mods 0x00 explicit_mods 0x00
+wm_alpha pressed: position 33 keycode 0x00070037 jis 1
+pressed: usage_page 0x07 keycode 0x37 implicit_mods 0x00 explicit_mods 0x00
+wm_alpha released: position 33 keycode 0x00070037
+released: usage_page 0x07 keycode 0x37 implicit_mods 0x00 explicit_mods 0x00
+wm_mod released: position 37 keycode 0x000700E3
+released: usage_page 0x07 keycode 0xE3 implicit_mods 0x00 explicit_mods 0x00
