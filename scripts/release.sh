@@ -92,6 +92,11 @@ fi
 repo_url=$(git remote get-url origin)
 repo_url=${repo_url%.git}
 repo_url=${repo_url/git@github.com:/https://github.com/}
+# fork 元 (omwegg) で入った PR も履歴に残っている。番号はそちらのリポジトリの
+# ものなので、このリポジトリの pull/N へリンクすると別物に飛ぶ。
+# マージコミットの "from <owner>/<branch>" の owner で見分けて飛ばす
+repo_owner=${repo_url#https://github.com/}
+repo_owner=${repo_owner%%/*}
 
 if [ -n "$latest_tag" ]; then
   range="${latest_tag}..HEAD"
@@ -114,6 +119,11 @@ while IFS= read -r sha; do
     'Merge pull request #'[0-9]*)
       number=${subject#'Merge pull request #'}
       number=${number%% *}
+      head_owner=${subject#*' from '}
+      head_owner=${head_owner%%/*}
+      if [ "$head_owner" != "$repo_owner" ]; then
+        continue
+      fi
       title=$(git log -1 --format=%b "$sha" | sed -n '1p')
       ;;
     *'(#'[0-9]*')')
